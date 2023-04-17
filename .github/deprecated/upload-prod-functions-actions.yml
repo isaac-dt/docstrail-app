@@ -1,11 +1,8 @@
 name: prod-upload-functions
 run-name: Upload PROD changes
 on:
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - "shared-proto"
+  release:
+    types: [published]
 jobs:
   upload-functions-to-prod:
     runs-on: ubuntu-latest
