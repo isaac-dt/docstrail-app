@@ -1,0 +1,324 @@
+button[dt-black-button] {
+  background-color: black;
+  padding: 8px 14px;
+  border-radius: 4px;
+  font-family: "Helvetica";
+  font-size: 15px;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+}
+button[dt-black-button]:hover:enabled {
+  background-color: #222;
+}
+
+button[dt-white-button] {
+  background-color: white;
+  padding: 8px 14px;
+  border-radius: 4px;
+  font-family: "Helvetica";
+  font-size: 15px;
+  border: 1px solid #ddd;
+  color: inherit;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+}
+button[dt-white-button]:hover:enabled {
+  border: 1px solid #888;
+}
+button[disabled] {
+  opacity: 0.5;
+}
+
+button[dt-button] {
+  background: none;
+  border: none;
+  padding: 0;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  font-family: inherit;
+  font-size: inherit;
+  color: #007185;
+}
+button[dt-button]:hover {
+  color: #025867;
+}
+
+button[dt-default] {
+  background: none;
+  border: none;
+  padding: 0;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  font-family: inherit;
+  font-size: inherit;
+  color: #444;
+}
+button[dt-default]:hover {
+  color: #000;
+}
+
+button[dt-round-button] {
+  background: none;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  font-family: inherit;
+  font-size: inherit;
+  color: #007185;
+  font-weight: 900;
+  border: 2px solid #007185;
+  border-radius: 80px;
+  padding: 6px 12px 6px 8px;
+}
+button[dt-round-button]:hover {
+  border: 2px solid #025867;
+  color: #025867;
+}
+
+button[dt-square-button] {
+  background: none;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  font-family: inherit;
+  font-size: inherit;
+  color: #007185;
+  // font-weight: 900;
+  border: 2px solid #007185;
+  border-radius: 6px;
+  padding: 3px 12px 3px 8px;
+}
+button[dt-square-button]:hover {
+  border: 2px solid #025867;
+  color: #025867;
+}
+
+button[dt-square-fill-button] {
+  background: none;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  font-family: inherit;
+  font-size: inherit;
+  color: white;
+  font-weight: 900;
+  border: 2px solid #007185;
+  background-color: #007185;
+  border-radius: 6px;
+  padding: 3px 12px 3px 8px;
+}
+button[dt-square-fill-button]:hover {
+  background-color: #025867;
+}
+
+button[dt-round-fill-button] {
+  background-color: #007185;
+  text-decoration: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-family: inherit;
+  font-size: inherit;
+  color: white;
+  font-weight: 900;
+  border: 2px solid #007185;
+  border-radius: 80px;
+  padding: 6px 12px 6px 8px;
+}
+button[dt-round-fill-button]:hover {
+  background-color: #025867;
+}
+
+.dt-menu {
+  table {
+    border-spacing: 0;
+  }
+  tr {
+    .setting-link {
+      opacity: 0.6;
+    }
+    .setting-link:hover {
+      opacity: 1;
+    }
+  }
+}
+
+hr:not([vertical]) {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #eee;
+  margin: 0;
+  padding: 0;
+}
+
+// Usage: <hr vertical size="[number]px" />
+hr[vertical] {
+  width: 0px;
+  border: 0;
+  border-left: 1px solid #eee;
+}
+
+*[hidden] {
+  visibility: hidden;
+}
+
+input[dt-table] {
+  padding: 4px 0px;
+  padding-left: 4px;
+  outline: none;
+}
+input[dt-table]:not(:hover):not(:focus) {
+  border: 2px solid transparent;
+}
+
+.chip-lg {
+  cursor: pointer;
+  background-color: white;
+  box-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.05), 0 1px 4px hsla(0, 0%, 0%, 0.05),
+    0 2px 8px hsla(0, 0%, 0%, 0.05);
+  border: 1px solid rgb(0, 0, 0, 0.07);
+  color: #444;
+  border-radius: 8px;
+  padding: 3px 12px;
+}
+.chip-lg:hover {
+  box-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.06), 0 2px 6px hsla(0, 0%, 0%, 0.06),
+    0 3px 8px hsla(0, 0%, 0%, 0.09);
+}
+.chip {
+  @extend .chip-lg;
+  font-size: 0.9em;
+  padding: 4px 12px;
+}
+
+.chip-round {
+  @extend .chip-lg;
+  font-size: 0.9em;
+  padding: 4px 12px;
+  border-radius: 80px;
+}
+
+.chip-red-lg {
+  @extend .chip-lg;
+  color: rgba(199, 0, 56, 0.941);
+  background-color: rgba(199, 0, 56, 0.161);
+  border: 1px solid rgba(199, 0, 56, 0.161);
+}
+
+.chip-red {
+  @extend .chip-red-lg;
+  font-size: 0.9em;
+  padding: 2px 12px;
+}
+
+.mat-drawer:not(.mat-drawer-side) {
+  box-shadow: 0 0 0 0 !important;
+  border-left: 1px solid #ddd;
+}
+
+a[dt-link] {
+  color: #007185;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+a[dt-default] {
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+}
+a[dt-default]:link {
+  color: black;
+}
+a[dt-default]:visited {
+  color: black;
+}
+a[dt-default]:hover {
+  color: black;
+}
+a[dt-default]:active {
+  color: black;
+}
+
+/* Custom select dropdown */
+.select {
+  position: relative;
+}
+.selectLabel {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.4rem;
+}
+.selectWrapper {
+  position: relative;
+}
+.selectCustom {
+  position: relative;
+  width: 22rem;
+  height: 4rem;
+}
+.selectCustom-trigger {
+  font-size: 1.6rem;
+  background-color: #fff;
+  border: 1px solid #6f6f6f;
+  border-radius: 0.4rem;
+  cursor: pointer;
+}
+.selectCustom-trigger {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  padding: 0.7rem 0.8rem;
+}
+.selectCustom-trigger::after {
+  content: "▾";
+  position: absolute;
+  top: 0;
+  line-height: 3.8rem;
+  right: 0.8rem;
+}
+.selectCustom-trigger:hover {
+  border-color: #8c00ff;
+}
+.selectCustom-options {
+  position: absolute;
+  top: calc(3.8rem + 0.8rem);
+  left: 0;
+  width: 100%;
+  border: 1px solid #6f6f6f;
+  border-radius: 0.4rem;
+  background-color: #fff;
+  box-shadow: 0 0 4px #e9e1f8;
+  z-index: 1;
+  padding: 0.8rem 0;
+  display: none;
+}
+.selectCustom.isActive .selectCustom-options {
+  display: block;
+}
+.selectCustom-option {
+  position: relative;
+  padding: 0.8rem;
+}
+.selectCustom-option:hover {
+  background-color: #f7ecff;
+}
+.selectCustom-option:not(:last-of-type)::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0.8rem;
+  width: calc(100% - 1.6rem);
+  border-bottom: 1px solid #d3d3d3;
+}
+/* Custom select dropdown */

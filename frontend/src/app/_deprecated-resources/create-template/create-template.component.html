@@ -1,0 +1,59 @@
+<div class="container full-height full-width flex-column gap-2xl">
+  <div class="flex flex-justify-space-between pad-lg flex-align-center">
+    <button mat-icon-button (click)="navToTemplateList()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+
+    <button mat-icon-button (click)="navToTemplateList()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="flex-grow-1 flex main-content flex-column gap-2xl">
+    <div class="flex flex-center gap-md" style="margin-left: -90px">
+      <!-- <div class="flex flex-center">
+        <div class="flex flex-justify-end gift-container">
+        </div>
+      </div> -->
+      <img class="gift" src="../../../assets/gift.png" />
+
+      <div class="flex-column gap-md flex-justify-center">
+        <span class="mat-headline-2">Create a new proposal</span>
+        <span class="mat-body-1">How would you like to proceed?</span>
+      </div>
+    </div>
+
+    <div class="flex gap-xl flex-justify-center">
+      <div class="flex-column gap-md flex-center">
+        <div
+          class="box build-template flex flex-center"
+          (click)="navToBuildTemplate()">
+          <span class="flex flex-center">
+            <mat-icon class="material-symbols-outlined lg">add</mat-icon>
+          </span>
+        </div>
+        <span class="mat-subtitle-2">Create Proposal</span>
+        <span class="mat-caption text-gray">Create from scratch</span>
+      </div>
+      <div
+        class="flex-column gap-md flex-center"
+        (click)="navToImportTemplate()">
+        <div class="box build-template flex flex-center">
+          <span class="flex flex-center favorite">
+            <mat-icon class="material-symbols-outlined lg">auto_fix</mat-icon>
+          </span>
+        </div>
+        <span class="mat-subtitle-2">From DocsTrail</span>
+        <span class="mat-caption text-gray">Common templates</span>
+      </div>
+      <div class="flex-column gap-md flex-center">
+        <div class="box build-template flex flex-center">
+          <span class="flex flex-center">
+            <mat-icon class="material-symbols-outlined lg">sms</mat-icon>
+          </span>
+        </div>
+        <span class="mat-subtitle-2">Not sure</span>
+        <span class="mat-caption text-gray">Get help</span>
+      </div>
+    </div>
+  </div>
+</div>

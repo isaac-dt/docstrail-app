@@ -1,0 +1,61 @@
+@import "../../../atoms.scss";
+
+.review-container {
+  --header-heihgt: 109px;
+  --resize_handle: 9px;
+  --jgraph-padding-left: 10px;
+  --jgraph-left: 60px; //230px;
+  --jgraph-width: 212px;
+
+  position: absolute;
+  z-index: 1;
+  left: var(--jgraph-left);
+  top: 109px;
+  width: calc(
+    var(--jgraph-padding-left) + var(--jgraph-width) + var(--resize_handle)
+  );
+  bottom: 0px;
+  right: 0px;
+  top: var(--header-heihgt);
+  height: calc(100vh - var(--header-heihgt));
+  background-color: white;
+  border-right: 1px solid #eee;
+}
+
+.reviewer-card {
+  box-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.05), 0 1px 4px hsla(0, 0%, 0%, 0.05),
+    0 2px 8px hsla(0, 0%, 0%, 0.05);
+  border-radius: 4px;
+}
+
+// .green-border {
+//   border: 1px solid $color-green;
+// }
+
+// .red-border {
+//   border: 1px solid $color-red;
+// }
+
+// .black-border {
+// border: 1px solid #333;
+// }
+
+span.font-sm {
+  font-size: 0.9em;
+}
+
+.empty-state {
+  font-size: 1.1em;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.activity-chip {
+  font-family: arial;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 80px;
+  color: #444;
+  // background-color: #f4f4f4;
+  font-size: 0.9em;
+  cursor: pointer;
+}

@@ -1,0 +1,16 @@
+syntax = "proto3";
+package join;
+
+import "operation/package/package.proto";
+import "catalog/open-definition/open-definition.proto";
+
+/* Next Id: 3 */
+message JoinPackageOpenDefinitionRequest {
+  string package_id = 1;
+  string open_definition_id = 2;
+}
+/* Next Id: 3 */
+message JoinPackageOpenDefinitionResponse {
+  operation.package.Package package = 1;
+  catalog.open_definition.OpenDefinition open_definition = 2;
+}

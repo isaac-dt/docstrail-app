@@ -1,0 +1,41 @@
+syntax = "proto3";
+package common;
+
+import "google/protobuf/struct.proto";
+
+/* Structure for JSON https responses.
+ * Next Id: 4 */
+message JsonResponse {
+  google.protobuf.Value data = 1;
+  AppError error = 3;
+}
+
+/* App Error structure.
+ * Next Id: 3 */
+message AppError {
+  google.protobuf.Value details = 1;
+  ErrorCode errorCode = 2; 
+}
+
+/* Codified app errors.
+ * Next Id: 3 */
+enum ErrorCode {
+  INVALID_DATA = 0;
+  NOT_FOUND_IN_DB = 1;
+  DUPLICATE_ENTRY = 2;
+  MISSING_PERMISSION = 3;
+  UNKNOWN = 4;
+}
+
+/* The data stored in JWT auth token.
+ * Next Id: 3 */
+message AuthData {
+  JwtUserData user = 1;
+}
+
+message JwtUserData {
+  string id = 1;
+  string email = 2;
+  string full_name = 3;
+  bool is_email_verified = 4;
+}

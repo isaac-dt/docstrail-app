@@ -1,0 +1,264 @@
+<div class="bg-white full-height full-width flex-column">
+  <div
+    class="flex flex-justify-space-between pad-lg flex-align-center border-bottom">
+    <div class="flex gap-lg flex-align-center">
+      <button mat-icon-button (click)="navToCreateTemplate()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <span class="mat-headline-3">Create Template</span>
+    </div>
+
+    <button mat-icon-button (click)="navToTemplateList()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="full-height flex-column pad-h-lg gap-2xl">
+    <mat-drawer-container
+      class="bg-white full-height full-width"
+      [hasBackdrop]="false">
+      <mat-drawer [opened]="true" position="end" #drawer mode="side">
+        <ng-template [ngTemplateOutlet]="formSummary"></ng-template>
+      </mat-drawer>
+      <mat-drawer-content class="bg-white">
+        <ng-template [ngTemplateOutlet]="formContainer"></ng-template>
+      </mat-drawer-content>
+    </mat-drawer-container>
+
+    <!-- Template form builder -->
+    <ng-template #formContainer>
+      <div class="bg-white flex-column gap-2xl pad-top-xl">
+        <div class="flex-column">
+          <div class="flex-column gap-md pad-h-lg">
+            <!-- Trigger Section - Container -->
+            <div class="flex flex-align-start gap-lg">
+              <div class="flex flex-align-center gap-sm width-110">
+                <mat-icon>schedule</mat-icon>
+                <span class="white-space-nowrap mat-body-strong">event</span>
+              </div>
+              <div class="flex-column gap-md">
+                <div class="flex flex-align-center">
+                  <button
+                    *ngIf="!isEditSection('trigger')"
+                    dt-button
+                    (click)="setEditSection('trigger')">
+                    Edit
+                  </button>
+                  <button
+                    *ngIf="isEditSection('trigger')"
+                    dt-button
+                    (click)="closeEditSection(); clearTriggerSection()">
+                    Close
+                  </button>
+                  <mat-icon class="hidden">schedule</mat-icon>
+                </div>
+                <ng-template
+                  *ngIf="!isEditSection('trigger')"
+                  [ngTemplateOutlet]="triggerReadSection"></ng-template>
+                <ng-template
+                  *ngIf="isEditSection('trigger')"
+                  [ngTemplateOutlet]="triggerEditSection"></ng-template>
+              </div>
+            </div>
+
+            <hr />
+
+            <!-- Package Section - Readonly -->
+            <div class="flex flex-align-start gap-lg">
+              <div class="flex flex-align-center gap-sm width-110">
+                <mat-icon>redeem</mat-icon>
+                <span class="white-space-nowrap mat-body-strong">Package</span>
+              </div>
+              <div class="flex-column gap-md">
+                <div class="flex flex-align-center">
+                  <button dt-button (click)="setEditSection('package')">
+                    Edit
+                  </button>
+                  <mat-icon class="hidden">redeem</mat-icon>
+                </div>
+                <div>
+                  <span class="text-gray">Empty</span>
+                </div>
+              </div>
+            </div>
+
+            <hr />
+
+            <!-- Targets Section - Readonly -->
+            <div class="flex flex-align-start gap-lg">
+              <div class="flex flex-align-center gap-sm width-110">
+                <mat-icon class="material-symbols-outlined">
+                  location_on
+                </mat-icon>
+                <span class="white-space-nowrap mat-body-strong">Targets</span>
+              </div>
+              <div class="flex-column gap-md">
+                <div class="flex flex-align-center">
+                  <button dt-button (click)="setEditSection('targets')">
+                    Edit
+                  </button>
+                  <mat-icon class="hidden">location_on</mat-icon>
+                </div>
+                <div>
+                  <span class="text-gray">None</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>
+
+<!-- Trigger Section - Edit -->
+<ng-template #triggerReadSection>
+  <div>
+    <span
+      *ngIf="!trigger.expectedDeliveryDate; else triggerEvent"
+      class="text-gray">
+      None
+    </span>
+    <ng-template #triggerEvent>
+      <div
+        *ngIf="
+          trigger.expectedDeliveryDate?.$case === 'scheduledEvent';
+          else specialEvent
+        ">
+        <span class="chip flex gap-xs flex-align-center">
+          <mat-icon class="sm">event_repeat</mat-icon>
+          <span>Every</span>
+          <span class="mat-subtitle-2">
+            {{ pendingTriggerForm.get("scheduledMonth")?.value }}
+          </span>
+          <span class="mat-subtitle-2">
+            {{ pendingTriggerForm.get("scheduledDay")?.value }}
+          </span>
+        </span>
+      </div>
+      <ng-template #specialEvent>
+        <span
+          *ngIf="
+            pendingTriggerForm.get('eventType')?.value ===
+            SpecialEvent.BIRTH_MONTH
+          "
+          class="chip flex flex-align-center gap-xs">
+          <mat-icon class="sm material-symbols-outlined">celebration</mat-icon>
+          Birth month
+        </span>
+        <span
+          *ngIf="
+            pendingTriggerForm.get('eventType')?.value === SpecialEvent.NEW_HIRE
+          "
+          class="chip flex flex-align-center gap-xs">
+          <mat-icon class="sm material-symbols-outlined">celebration</mat-icon>
+          New hire
+        </span>
+        <span
+          *ngIf="
+            pendingTriggerForm.get('eventType')?.value ===
+            SpecialEvent.WORK_ANNIVERSARY
+          "
+          class="chip flex flex-align-center gap-xs">
+          <mat-icon class="sm material-symbols-outlined">celebration</mat-icon>
+          Work anniversary
+        </span>
+      </ng-template>
+    </ng-template>
+  </div>
+</ng-template>
+<!-- Trigger Section - Edit -->
+<ng-template #triggerEditSection>
+  <form [formGroup]="pendingTriggerForm" (onSubmit)="$event.preventDefault()">
+    <div class="border pad-v-md width-200">
+      <mat-radio-group
+        formControlName="eventType"
+        aria-label="Select an option"
+        class="flex-column">
+        <div class="calendar-container">
+          <mat-radio-button value="scheduledEvent">
+            <div class="flex-column gap-md">
+              <span class="title">Custom repeat</span>
+              <div class="marg-bottom-md flex gap-sm">
+                <select #monthInput formControlName="scheduledMonth">
+                  <option
+                    *ngFor="let month of getMonthsInYear()"
+                    [ngValue]="month">
+                    {{ month }}
+                  </option>
+                </select>
+                <select #dayInput formControlName="scheduledDay">
+                  <option
+                    *ngFor="let day of getDaysInTriggerMonth()"
+                    [ngValue]="day">
+                    {{ day }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </mat-radio-button>
+        </div>
+
+        <mat-radio-button [value]="SpecialEvent.BIRTH_MONTH">
+          Birth month
+        </mat-radio-button>
+        <mat-radio-button [value]="SpecialEvent.NEW_HIRE">
+          New hire
+        </mat-radio-button>
+        <mat-radio-button [value]="SpecialEvent.WORK_ANNIVERSARY">
+          Work anniversary
+        </mat-radio-button>
+      </mat-radio-group>
+      <hr />
+      <button
+        class="marg-left-md"
+        dt-black-button
+        (click)="saveTrigger(); closeEditSection()">
+        Save event
+      </button>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #packageEditSection>
+  <div>event edit section</div>
+</ng-template>
+
+<ng-template #targetsEditSection>
+  <div>targets edit section</div>
+</ng-template>
+
+<!-- Template form summary  -->
+<ng-template #formSummary>
+  <div class="form-summary bg-white full-height flex-column pad-left-lg gap-xl">
+    <div class="flex pad-top-lg">
+      <span class="mat-subtitle-2 flex flex-align-center gap-md">
+        <span>Template Summary</span>
+        <!-- <span class="text-gray">(Year)</span> -->
+      </span>
+    </div>
+    <div class="flex-column gap-md">
+      <div class="flex flex-justify-space-between">
+        <span class="mat-body-2">Items in Package</span>
+        <span class="mat-body-2">0</span>
+      </div>
+      <div class="flex flex-justify-space-between">
+        <span class="mat-body-2">Addresses</span>
+        <span class="mat-body-2">0</span>
+      </div>
+      <hr />
+      <div class="flex flex-justify-space-between">
+        <span class="mat-body-2 flex flex-align-center gap-md">
+          <span>Cost total</span>
+          <!-- <span class="text-gray">(Year)</span> -->
+        </span>
+        <span class="mat-subtitle-2">$ 0.00</span>
+      </div>
+      <button
+        class="marg-top-lg"
+        dt-black-button
+        (click)="submitTemplateForm()">
+        Create template
+      </button>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,31 @@
+syntax = "proto3";
+package operation.template;
+
+import "google/protobuf/wrappers.proto";
+import "operation/bundle/bundle.proto";
+import "operation/template/template.proto";
+import "operation/package/package.proto";
+import "operation/trigger/trigger.proto";
+import "operation/target/target.proto";
+
+/* Next Id: 5 */
+ message WriteTemplateRequest {
+  google.protobuf.StringValue name = 1;
+  google.protobuf.StringValue description = 2;
+  google.protobuf.StringValue bundle_id = 4;
+}
+
+/* Next Id: 6 */
+message GetTemplateResponse {
+  operation.template.Template template = 1;
+  operation.bundle.Bundle bundle = 2;
+  repeated operation.package.Package packages = 3;
+  repeated operation.trigger.Trigger triggers = 4;
+  repeated operation.target.Target targets = 5;
+}
+
+/* Next Id: 3 */
+message ListTemplateResponse {
+  repeated operation.template.Template templates = 1;
+  int32 match_count = 2;
+}

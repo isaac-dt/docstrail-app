@@ -1,0 +1,20 @@
+name: prod-upload-functions
+run-name: Upload dev changes
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "shared-proto"
+jobs:
+  upload-functions-to-dev:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "14"
+      - name: deploy microservices to dimetrail-dev
+        run: npx firebase-tools deploy --only functions --project=dev --non-interactive --debug
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

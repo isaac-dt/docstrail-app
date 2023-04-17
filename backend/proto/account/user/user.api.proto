@@ -1,0 +1,34 @@
+syntax = "proto3";
+package account.user;
+
+import "google/protobuf/wrappers.proto";
+import "account/user/user.proto";
+import "account/team/team.proto";
+// import "account/user/address.proto";
+import "account/client/client.proto";
+// import "account/job-role/job-role.proto";
+
+/* Next Id: 11 */
+message WriteUserRequest {
+  google.protobuf.Int32Value id = 1;
+  google.protobuf.StringValue full_name = 2;
+  google.protobuf.StringValue team_id = 5;
+  google.protobuf.StringValue role = 6;
+  google.protobuf.StringValue photoUrl = 9;
+  google.protobuf.StringValue email = 10;
+}
+
+/* Next Id: 6 */
+message GetUserResponse {
+  account.user.User user = 1;
+  account.team.Team team = 2;
+  account.client.Client client = 3;
+  // repeated account.user.UserAddress addresses = 4;
+  // repeated account.job_role.JobRole job_roles = 5;
+}
+
+/* Next Id: 3 */
+message ListUserResponse {
+  repeated account.user.User users = 1;
+  int32 match_count = 2;
+}

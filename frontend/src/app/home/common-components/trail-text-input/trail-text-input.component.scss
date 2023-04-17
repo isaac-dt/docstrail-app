@@ -1,0 +1,47 @@
+@import "../../../atoms.scss";
+
+:host {
+  --chevron-indent: 30px;
+}
+
+textarea {
+  width: calc(100% - var(--chevron-indent));
+  min-height: 15px;
+  height: 15px;
+  max-width: 800px;
+  padding: 8px 14px 4px 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #444;
+  line-height: 25px;
+  border: none;
+  outline: none;
+  resize: none;
+  border-bottom: 2px solid transparent;
+}
+
+.shadow {
+  box-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.05), 0 1px 4px hsla(0, 0%, 0%, 0.05),
+    0 2px 8px hsla(0, 0%, 0%, 0.05);
+}
+
+.input-border {
+  border: 1px solid #ddd;
+  border-radius: 6px; //4px;
+}
+
+.input-border.required-error {
+  border: 1px solid $color-red;
+  border-radius: 4px;
+}
+
+// textarea:hover,
+// textarea:focus {
+// box-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.06), 0 2px 6px hsla(0, 0%, 0%, 0.06),
+//   0 3px 8px hsla(0, 0%, 0%, 0.09);
+// border: 1px solid #bbb;
+// padding-bottom: 4px;
+// }
+
+.label {
+  color: #555;
+}

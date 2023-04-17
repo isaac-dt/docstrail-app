@@ -1,0 +1,103 @@
+<div class="container flex-column full-height pad-h-lg">
+  <div
+    class="flex flex-align-center border-bottom-strong flex-justify-space-between">
+    <div class="pad-v-lg pad-top-xl flex-column gap-sm">
+      <span class="mat-headline-3">Proposals</span>
+      <span class="mat-body-2 text-gray marg-left-2">Proposals owned</span>
+    </div>
+    <!-- <div class="flex flex-align-center gap-md">
+      <button class="create-new" dt-white-button (click)="navToCreatePackage()">
+        <div class="flex flex-align-center gap-xs">
+          <mat-icon class="">add</mat-icon>
+          <span>Create</span>
+        </div>
+      </button>
+    </div> -->
+  </div>
+  <mat-drawer-container
+    class="container full-height full-width"
+    [hasBackdrop]="false">
+    <mat-drawer [opened]="false" position="end" #drawer mode="side">
+      <app-template-details (close)="drawer.toggle()"></app-template-details>
+    </mat-drawer>
+    <mat-drawer-content>
+      <ng-template [ngTemplateOutlet]="mainContent"></ng-template>
+    </mat-drawer-content>
+  </mat-drawer-container>
+
+  <ng-template #mainContent>
+    <div class="pad-v-lg pad-top-none flex-column gap-xl">
+      <div class="header flex-column gap-lg">
+        <div class="flex">
+          <div class="flex flex-align-center gap-xs cursor-pointer">
+            <mat-icon>add</mat-icon>
+            <span>Add Filter</span>
+          </div>
+        </div>
+        <table class="full-width templates">
+          <ng-template [ngTemplateOutlet]="tableHeaders"></ng-template>
+          <ng-template #tableHeaders>
+            <tr class="title-row">
+              <th>
+                <div>
+                  <span class="mat-subtitle-2">Name</span>
+                  <span class="mat-caption">Identifier</span>
+                </div>
+              </th>
+              <th>
+                <div>
+                  <span class="mat-subtitle-2">Items</span>
+                  <span class="mat-caption">Products</span>
+                </div>
+              </th>
+              <th>
+                <div>
+                  <span class="mat-subtitle-2">Templates</span>
+                  <span class="mat-caption">Usage</span>
+                </div>
+              </th>
+              <th>
+                <div>
+                  <span class="mat-subtitle-2">Owner</span>
+                  <span class="mat-caption">Email</span>
+                </div>
+              </th>
+            </tr>
+          </ng-template>
+          <tr *ngFor="let template of packages" class="template-list">
+            <td class="name">
+              <div
+                class="flex flex-align-center flex-justify-space-between gap-sm">
+                <div class="flex flex-align-center gap-md">
+                  <span>Another name</span>
+                </div>
+                <div class="action-buttons flex flex-align-center gap-lg">
+                  <div class="button flex flex-align-center">
+                    <!-- <mat-icon class="sm material-symbols-outlined">
+                      pause_circle
+                    </mat-icon> -->
+                    <span>Pause</span>
+                  </div>
+                  <div class="button flex flex-align-center">
+                    <!-- <mat-icon class="sm material-symbols-outlined">
+                      remove_circle
+                    </mat-icon> -->
+                    <span>Delete</span>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td><span class="chip">Few target</span></td>
+            <td>
+              <div class="flex flex-align-center">
+                <mat-icon class="sm">attach_money</mat-icon>
+                <span>{{ "5" | currency : "" : "" }}</span>
+              </div>
+            </td>
+            <td><span class="chip">kabuika@outlook.com</span></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </ng-template>
+</div>

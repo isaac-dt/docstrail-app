@@ -1,0 +1,23 @@
+syntax = "proto3";
+package account.user;
+
+import "account/user/user.proto";
+import "account/client/client.proto";
+import "account/team/team.proto";
+import "google/protobuf/wrappers.proto";
+
+/* Next Id: 6 */
+message WriteOrgSignupRequest {
+  google.protobuf.StringValue client_name = 1;
+  account.user.UserRole user_role = 2;
+  google.protobuf.StringValue user_full_name = 3;
+  google.protobuf.StringValue photo_url = 4;
+  google.protobuf.StringValue email = 5;
+}
+
+/* Next Id: 4 */
+message GetOrgSignupResponse {
+  account.user.User user = 1;
+  account.team.Team team = 2;
+  account.client.Client client = 3;
+}

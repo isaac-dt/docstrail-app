@@ -1,0 +1,28 @@
+syntax = "proto3";
+package account.user;
+
+import "account/user/user.proto";
+import "account/user/address.proto";
+import "google/protobuf/wrappers.proto";
+
+/* Next Id: 7 */
+message WriteUserAddressRequest {
+  google.protobuf.StringValue street = 1;
+  google.protobuf.StringValue unit = 2;
+  google.protobuf.StringValue city = 3;
+  google.protobuf.StringValue zip = 4;
+  google.protobuf.Int32Value country_code = 5;
+  google.protobuf.StringValue userId = 6;
+}
+
+/* Next Id: 3 */
+message GetUserAddressResponse {
+  account.user.UserAddress address = 1;
+  account.user.User user = 2;
+}
+
+/* Next Id: 3 */
+message ListUserAddressResponse {
+  repeated account.user.UserAddress addresses = 1;
+  int32 match_count = 2;
+}

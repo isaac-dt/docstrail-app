@@ -1,0 +1,16 @@
+syntax = "proto3";
+package trail.proposal;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+/* Proposal data. */
+ message Proposal {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  google.protobuf.Timestamp deleted_at = 4;
+  google.protobuf.StringValue created_by = 5;
+  google.protobuf.StringValue diagram_xml = 6;
+  google.protobuf.StringValue name = 7;
+}

@@ -1,0 +1,15 @@
+syntax = "proto3";
+package operation.target;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+/* Aggregate of the users associated to a Template.
+ * Next Id: 6 */
+ message Target {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  google.protobuf.StringValue name = 4;
+  string client_id = 5;
+}

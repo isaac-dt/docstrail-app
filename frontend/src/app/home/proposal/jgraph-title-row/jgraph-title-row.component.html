@@ -1,0 +1,311 @@
+<ng-container
+  *ngIf="{
+    selectedProposalInfo: selectedProposalInfo$ | async,
+    isReviewer: isCurrentUserReviewer$ | async,
+    isOwner: isCurrentUserOwner$ | async,
+    currentUserEndReviewId: currentUserEndReviewId$ | async,
+    isReviewMode: isProposalReviewMode$ | async,
+    hasOwnerEndedReview: hasOwnerEndedReview$ | async,
+    currentUserPendingReviewId: currentUserPendingReviewId$ | async,
+    currentUserReview: currentUserReview$ | async,
+    selectedProposalReviewers: selectedProposalReviewers$ | async,
+    hasReviewerApproved: hasReviewerApproved$ | async,
+    isCreatePage: isCreatePage$ | async,
+    isSaving: isSaving$ | async
+  } as asyncData">
+  <div class="flex flex-justify-space-between">
+    <div class="flex gap-md flex-align-center">
+      <div
+        class="title"
+        [class.pad-top-review-title]="asyncData.isReviewMode === true">
+        <button dt-default (click)="openRenameProposal()">
+          <span
+            *ngIf="asyncData.selectedProposalInfo && !asyncData.isCreatePage">
+            {{ asyncData.selectedProposalInfo.proposal.name | titlecase }}
+          </span>
+          <span *ngIf="asyncData.isCreatePage"> Untitled proposal </span>
+        </button>
+      </div>
+      <div
+        class="mat-subtitle-2 proposal-status"
+        [class.pad-top-review-title]="asyncData.isReviewMode === true"
+        *ngIf="asyncData.selectedProposalReviewers !== undefined">
+        <span *ngIf="asyncData.hasReviewerApproved; else pendingStatuses">
+          REVIEWED
+        </span>
+        <ng-template #pendingStatuses>
+          <span
+            matTooltip="Add reviewers"
+            *ngIf="!asyncData.selectedProposalReviewers?.length">
+            DRAFT
+          </span>
+          <span
+            matTooltip="Get a review"
+            *ngIf="
+              asyncData.selectedProposalReviewers?.length &&
+              !asyncData.hasOwnerEndedReview
+            ">
+            IN REVIEW
+          </span>
+          <span
+            *ngIf="
+              asyncData.selectedProposalReviewers?.length &&
+              asyncData.hasOwnerEndedReview
+            ">
+            NO REVIEWS
+          </span>
+        </ng-template>
+      </div>
+      <div
+        class="account-details flex flex-align-center gap-lg"
+        *ngIf="isProposalReviewMode$ | async">
+        <mat-icon
+          *ngIf="asyncData.hasOwnerEndedReview"
+          class="material-symbols-outlined sm">
+          lock
+        </mat-icon>
+      </div>
+      <div class="flex gap-xs flex-align-center" *ngIf="asyncData.isSaving">
+        <mat-icon>autorenew</mat-icon>
+        <span class="text-gray font-sm">Saving...</span>
+      </div>
+    </div>
+
+    <div class="account-details flex gap-lg">
+      <button *ngIf="asyncData.isReviewMode" dt-button (click)="refresh()">
+        <div class="flex flex-align-center">
+          <mat-icon>refresh</mat-icon>
+        </div>
+      </button>
+
+      <button
+        class="height-sm"
+        dt-square-button
+        *ngIf="
+          !(
+            (asyncData.isOwner && asyncData.currentUserEndReviewId) ||
+            (asyncData.isReviewer && asyncData.hasOwnerEndedReview) ||
+            asyncData.currentUserEndReviewId === undefined
+          ) &&
+          asyncData.isReviewMode === true &&
+          (asyncData.isOwner || asyncData.isReviewer)
+        "
+        (click)="toggleProposalViewMode(asyncData.isReviewMode)">
+        <div
+          class="proposal-view-mode flex flex-align-center gap-xs flex-justify-center">
+          <div
+            class="flex flex-align-center gap-xs"
+            *ngIf="asyncData.isReviewMode">
+            <mat-icon class="xs">edit</mat-icon>
+            <span *ngIf="asyncData.isOwner">Edit</span>
+            <span *ngIf="asyncData.isReviewer">Suggest</span>
+          </div>
+        </div>
+      </button>
+
+      <app-share-proposal *ngIf="!asyncData.isCreatePage"></app-share-proposal>
+
+      <ng-container *ngIf="isProposalReviewMode$ | async">
+        <ng-container *ngIf="asyncData.isOwner === true">
+          <button
+            class="height-sm"
+            [matMenuTriggerFor]="ownerReviewMenu"
+            *ngIf="
+              asyncData.currentUserEndReviewId === null &&
+              asyncData.selectedProposalReviewers?.length
+            "
+            dt-round-fill-button>
+            <div
+              class="proposal-view-mode flex flex-align-center gap-xs flex-justify-center">
+              <mat-icon class="sm material-symbols-outlined">
+                lock_open
+              </mat-icon>
+              <span>End Review</span>
+            </div>
+          </button>
+          <button
+            class="height-sm"
+            *ngIf="asyncData.currentUserEndReviewId"
+            (click)="
+              submitOwnerReview(
+                asyncData.selectedProposalInfo!.proposal,
+                ReviewStatus.PENDING,
+                asyncData.currentUserEndReviewId
+              )
+            "
+            dt-round-fill-button>
+            <div
+              class="proposal-view-mode flex flex-align-center gap-xs flex-justify-center">
+              <mat-icon class="sm material-symbols-outlined"> lock </mat-icon>
+              <span>Re-open Review</span>
+            </div>
+          </button>
+        </ng-container>
+
+        <ng-container
+          *ngIf="
+            asyncData.isReviewer === true &&
+            !(
+              (asyncData.isReviewer && asyncData.hasOwnerEndedReview) ||
+              asyncData.hasOwnerEndedReview === undefined
+            )
+          ">
+          <ng-container
+            *ngIf="
+              asyncData.currentUserReview?.status === ReviewStatus.PENDING ||
+              asyncData.currentUserReview === undefined
+            ">
+            <button
+              class="height-sm"
+              dt-round-fill-button
+              [matMenuTriggerFor]="reviewerReviewMenu">
+              <div
+                class="proposal-view-mode flex flex-align-center gap-xs flex-justify-center mat-subtitle-2">
+                <mat-icon class="sm material-symbols-outlined"> add </mat-icon>
+                <span>Add review </span>
+              </div>
+            </button>
+          </ng-container>
+          <button
+            class="review"
+            (click)="
+              submitReviewerReview(
+                asyncData.selectedProposalInfo!.proposal,
+                ReviewStatus.PENDING,
+                asyncData.currentUserReview?.id
+              )
+            "
+            *ngIf="
+              asyncData.currentUserReview?.status === ReviewStatus.HOLD ||
+              asyncData.currentUserReview?.status === ReviewStatus.LGTM
+            "
+            class="height-sm"
+            dt-round-fill-button>
+            <div
+              class="proposal-view-mode flex flex-align-center gap-xs flex-justify-center mat-subtitle-2">
+              <mat-icon class="sm material-symbols-outlined"> close </mat-icon>
+              <span>Cancel my review</span>
+            </div>
+          </button>
+        </ng-container>
+      </ng-container>
+
+      <ng-container
+        *ngIf="!(asyncData.isReviewer && asyncData.hasOwnerEndedReview)">
+        <button
+          dt-round-fill-button
+          class="height-sm"
+          *ngIf="
+            asyncData.isReviewMode === false &&
+            (asyncData.isOwner || asyncData.isReviewer)
+          "
+          (click)="toggleProposalViewMode(asyncData.isReviewMode)">
+          <div class="flex flex-align-center gap-xs">
+            <mat-icon class="sm material-symbols-outlined">
+              arrow_forward
+            </mat-icon>
+            <span *ngIf="!asyncData.selectedProposalReviewers?.length">
+              Start Review
+            </span>
+            <span *ngIf="asyncData.selectedProposalReviewers?.length">
+              Continue Review
+            </span>
+          </div>
+        </button>
+      </ng-container>
+      <app-account-details *ngIf="dtUser$ | async"></app-account-details>
+    </div>
+  </div>
+
+  <mat-menu #ownerReviewMenu="matMenu">
+    <ng-container *ngIf="selectedProposalInfo$ | async as proposalInfo">
+      <div
+        (click)="$event.stopPropagation()"
+        *ngIf="dtUser$ | async as user"
+        class="flex-column gap-sm marg-top-sm mat-menu">
+        <div class="flex flex-align-center gap-sm">
+          <app-user-avatar [user]="user" [sizePx]="25"></app-user-avatar>
+          <span class="mat-subtitle-2">{{ user.fullName | titlecase }}</span>
+        </div>
+        <app-trail-text-area
+          class="marg-top-sm font-md"
+          (click)="$event.stopPropagation()"
+          (onEmitInputContext)="saveEndReviewTextAreaContext($event)"
+          [shadow]="false"
+          placeholder="Type comments ..."></app-trail-text-area>
+        <div class="full-width flex flex-justify-end">
+          <div class="flex gap-lg pad-md">
+            <button
+              (click)="
+                submitOwnerReview(
+                  proposalInfo.proposal,
+                  ReviewStatus.END_REVIEW,
+                  asyncData.currentUserPendingReviewId
+                )
+              "
+              dt-button>
+              <div class="flex flex-align-center gap-xs">
+                <mat-icon class="xs material-symbols-outlined">
+                  arrow_forward
+                </mat-icon>
+                <span class="mat-subtitle-2">End review</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </mat-menu>
+
+  <mat-menu #reviewerReviewMenu="matMenu">
+    <ng-container *ngIf="selectedProposalInfo$ | async as proposalInfo">
+      <div
+        (click)="$event.stopPropagation()"
+        *ngIf="dtUser$ | async as user"
+        class="flex-column gap-sm marg-top-sm mat-menu">
+        <div class="flex flex-align-center gap-sm">
+          <app-user-avatar [user]="user" [sizePx]="25"></app-user-avatar>
+          <span class="mat-subtitle-2">{{ user.fullName | titlecase }}</span>
+        </div>
+        <app-trail-text-area
+          class="marg-top-sm font-md"
+          (click)="$event.stopPropagation()"
+          (onEmitInputContext)="saveReviewerReviewTextAreaContext($event)"
+          [shadow]="false"
+          placeholder="Type comments ..."></app-trail-text-area>
+        <div class="full-width flex flex-justify-end">
+          <div class="flex gap-lg pad-md">
+            <button
+              dt-button
+              (click)="
+                submitReviewerReview(
+                  proposalInfo.proposal,
+                  ReviewStatus.HOLD,
+                  asyncData.currentUserPendingReviewId
+                )
+              ">
+              <div class="flex flex-align-center gap-xs">
+                <mat-icon class="xs">pause_circle</mat-icon>
+                <span class="mat-subtitle-2">Hold off</span>
+              </div>
+            </button>
+            <button
+              dt-button
+              (click)="
+                submitReviewerReview(
+                  asyncData.selectedProposalInfo!.proposal,
+                  ReviewStatus.LGTM,
+                  asyncData.currentUserReview?.id
+                )
+              ">
+              <div class="flex flex-align-center gap-xs">
+                <mat-icon class="xs">thumb_up</mat-icon>
+                <span class="mat-subtitle-2">Let's try it</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </mat-menu>
+</ng-container>

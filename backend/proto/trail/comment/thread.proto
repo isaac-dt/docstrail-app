@@ -1,0 +1,37 @@
+syntax = "proto3";
+package trail.comment;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+/* Comment Thread data. */
+ message CommentThread {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  google.protobuf.Timestamp deleted_at = 4;
+  google.protobuf.StringValue proposal_id = 5;
+  google.protobuf.StringValue created_by = 6;
+  GraphScreenshot screenshot = 7;
+  google.protobuf.StringValue diagram_xml = 8;
+  Type type = 9;
+  google.protobuf.BoolValue is_resolved = 10;
+
+  enum Type {
+    UNKNOWN_TYPE = 0;
+    QUESTION = 1;
+    SUGGESTION = 2;
+    NOTE = 3;
+  }
+
+  message GraphScreenshot {
+    google.protobuf.StringValue image_container_outer_html = 1;
+    google.protobuf.Int32Value image_container_width = 2;
+    google.protobuf.Int32Value image_container_height = 3;
+    google.protobuf.StringValue image_outer_html = 4;
+    google.protobuf.Int32Value image_width = 5;
+    google.protobuf.Int32Value image_height = 6;
+    google.protobuf.Int32Value image_margin_left = 7;
+    google.protobuf.Int32Value image_margin_top = 8;
+  }
+}

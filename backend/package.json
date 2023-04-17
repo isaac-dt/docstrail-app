@@ -1,0 +1,41 @@
+{
+  "name": "usvc-profile",
+  "scripts": {
+    "lint": "eslint --ext .js,.ts .",
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log",
+    "proto": "which protoc && protoc --plugin=node_modules/ts-proto/protoc-gen-ts_proto --ts_proto_out=./src/generated/types --proto_path=./proto --ts_proto_opt=oneof=unions --ts_proto_opt=env=node --ts_proto_opt=outputEncodeMethods=false --ts_proto_opt=stringEnums=true --ts_proto_opt=outputTypeRegistry=true --ts_proto_opt=fileSuffix=.pb --ts_proto_opt=useMapType=true --ts_proto_opt=outputJsonMethods=true --ts_proto_opt=useReadonlyTypes=true $(find ./proto -iname \"*.proto\")"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "@dimetrail/firebase": "^1.1.10",
+    "@types/validator": "^13.7.8",
+    "body-parser": "^1.20.1",
+    "core-js": "^3.25.5",
+    "eslint-config-prettier": "^8.5.0",
+    "firebase-admin": "^10.3.0",
+    "firebase-functions": "^3.18.0",
+    "protobufjs": "^7.1.2",
+    "protobufjs-cli": "^1.0.2",
+    "validator": "^13.7.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.12.0",
+    "@typescript-eslint/parser": "^5.12.0",
+    "eslint": "^8.9.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-import": "^2.25.4",
+    "firebase-functions-test": "^0.2.0",
+    "ts-proto": "1.130.0",
+    "typescript": "^4.5.4"
+  },
+  "private": true
+}

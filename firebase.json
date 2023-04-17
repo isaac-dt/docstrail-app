@@ -1,0 +1,27 @@
+{
+  "functions": [
+    {
+      "source": "backend",
+      "codebase": "backend",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log"
+      ],
+      "predeploy": [
+        "npm --prefix ./backend install",
+        "npm --prefix ./backend run lint",
+        "npm --prefix ./backend run build"
+      ]
+    }
+  ],
+  "emulators": {
+    "functions": {
+      "port": 5001
+    },
+    "ui": {
+      "enabled": true
+    }
+  }
+}

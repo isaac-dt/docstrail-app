@@ -1,0 +1,20 @@
+syntax = "proto3";
+package account.root;
+
+import "account/job-role/job-role.proto";
+import "account/client/client.proto";
+import "account/root/root.proto";
+import "catalog/open-definition/open-definition.proto";
+import "catalog/core-definition/core-definition.proto";
+import "catalog/distribution/company.proto";
+
+/* Used for fetching a single root. 
+ * Next Id: 7 */
+message GetRootResponse {
+  account.root.Root root = 1;
+  repeated account.client.Client clients = 2;
+  repeated account.job_role.JobRole job_roles = 3;
+  repeated catalog.open_definition.OpenDefinition open_definitions = 4;
+  repeated catalog.core_definition.CoreDefinition core_definitions = 5;
+  repeated catalog.distribution.Company companies = 6;
+}

@@ -1,0 +1,21 @@
+.doc-toggle {
+  position: absolute;
+  margin-top: -30px;
+  margin-left: 118px;
+  color: #999;
+  border: 1px solid #eee;
+  background-color: #fff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  mat-icon {
+    transform: translateY(2px);
+  }
+}
+.doc-toggle:not(.is-doc-visible) {
+  @extend .doc-toggle;
+  border: 1px solid #ccc;
+  mat-icon {
+    transform: translate(-6px, 2px);
+  }
+}

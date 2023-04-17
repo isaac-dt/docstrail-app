@@ -1,0 +1,23 @@
+syntax = "proto3";
+package catalog.open_definition;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+/* A full Description of an product and its attributes.
+ * Example: "Shirt with the logo Company at the center" or "blue pen".
+ * Next Id: 11 */
+ message OpenDefinition {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  string name = 4;
+  string description = 5;
+  google.protobuf.StringValue image_url = 6;
+  oneof parent {
+    string client_id = 7;
+    string root_id = 8;
+  }
+  string core_definition_id = 9;
+  bool is_tangible = 10;
+}

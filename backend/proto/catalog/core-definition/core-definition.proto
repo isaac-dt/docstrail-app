@@ -1,0 +1,30 @@
+syntax = "proto3";
+package catalog.core_definition;
+
+import "google/protobuf/timestamp.proto";
+
+/* Abstraction of one or more OpenDefinition entries.
+ * Every OpenDefinition must map to one CoreDefinition, which are set by system admins only.
+ * Example: OpenDefinition("shirt with a freedom flag") maps to CoreDefinition("shirt with logo").
+ * This entity lives at the root level.
+ * A rule of thumb on what could be a Core Definition: anything we can build an inventory of.
+ * Next Id: 8 */
+ message CoreDefinition {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  string name = 4;
+  string description = 5;
+  CoreDefinitionCategory category = 6;
+  string root_id = 7;
+}
+
+/* While OpenDefinition and CoreDefinition describe objects, ProductCategory categorizes objects.
+ * Next Id: 7 */
+enum CoreDefinitionCategory {
+  OFFICE = 0;
+  CLOTHING = 2;
+  FOOD = 3;
+  ELECTRONICS = 5;
+  E_GIFT = 6;
+}

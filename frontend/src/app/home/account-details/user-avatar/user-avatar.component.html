@@ -1,0 +1,20 @@
+<div
+  *ngIf="avatarColor$ | async as avatarColor"
+  id="account-menu-avatar"
+  [style.width.px]="sizePx"
+  [style.height.px]="sizePx"
+  [style.backgroundColor]="avatarColor"
+  class="avatar-container flex flex-center gap-lg">
+  <div *ngIf="!user.photoUrl; else showPhoto" class="flex flex-justify-start">
+    <span class="name-initials">{{ getFullNameInitials(user.fullName) }}</span>
+  </div>
+  <ng-template #showPhoto>
+    <img
+      class="profile"
+      [style.width.px]="sizePx"
+      [style.height.px]="sizePx"
+      [src]="user.photoUrl"
+      alt="user profile photo"
+      referrerpolicy="no-referrer" />
+  </ng-template>
+</div>

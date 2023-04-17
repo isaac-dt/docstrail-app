@@ -1,0 +1,18 @@
+syntax = "proto3";
+package shared;
+
+import "google/protobuf/timestamp.proto";
+
+/* The price of a product
+ * Next Id: 4 */
+message Price {
+  google.protobuf.Timestamp date = 1;
+  float amount = 2;
+  Currency currency = 3;
+}
+
+/* Allowed monetary currencies.
+ * Next Id: 1 */
+enum Currency {
+  USD = 0;
+}

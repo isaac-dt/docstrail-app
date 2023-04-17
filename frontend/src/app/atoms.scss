@@ -1,0 +1,494 @@
+// Standard Sizes.
+$xs: 4px;
+$sm: 8px;
+$md: 12px;
+$lg: 24px;
+$xl: 32px;
+$xl2: 48px;
+$xl3: 82px;
+// Standard Sizes End.
+
+// Standard Colors
+$background-color: white;
+$border-color: #eee;
+$border-color-strong: #ddd;
+$opacity-disabled: 0.5;
+$color-default: #444;
+$color-yellow: rgb(241, 181, 1);
+$color-green: green;
+$color-red: rgb(199, 0, 57);
+$color-app-blue: rgb(0, 89, 222);
+$color-link: #007185;
+$color-dt: #007185;
+// Standard Colors End.
+
+.bg-white {
+  background-color: white;
+}
+
+.bg-green {
+  background-color: $color-green;
+}
+
+.bg-gray {
+  background-color: #eee;
+}
+
+.border {
+  border: 1px solid $border-color;
+  border-radius: $sm;
+}
+
+.border-left {
+  border-left: 1px solid $border-color;
+}
+
+.border-left-strong {
+  border-left: 1px solid $border-color-strong;
+}
+
+.border-right {
+  border-right: 1px solid $border-color;
+}
+
+.border-right-strong {
+  border-right: 1px solid $border-color-strong;
+}
+
+.border-bottom {
+  border-bottom: 1px solid $border-color;
+}
+
+.border-bottom-strong {
+  border-bottom: 1px solid $border-color-strong;
+}
+
+.border-top {
+  border-top: 1px solid $border-color;
+}
+
+.border-top-strong {
+  border-top: 1px solid $border-color-strong;
+}
+
+button.height-sm {
+  height: 35px;
+  font-size: 0.9em;
+}
+
+button.tall,
+button.height-lg {
+  min-height: 50px;
+}
+
+button.no-pad {
+  padding: 0;
+}
+
+.color-default {
+  color: $color-default;
+}
+
+.color-green {
+  color: $color-green;
+}
+
+.color-yellow {
+  color: $color-yellow;
+}
+
+.color-red {
+  color: $color-red;
+}
+
+.color-dt {
+  color: $color-dt;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+mat-icon.xxs {
+  transform: scale(0.3);
+}
+
+mat-icon.xs {
+  transform: scale(0.7);
+}
+
+mat-icon.sm {
+  transform: scale(0.8);
+}
+
+mat-icon.lg {
+  transform: scale(1.3);
+}
+
+.display-none {
+  display: none;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  @extend .flex;
+  flex-direction: column;
+}
+
+.flex-grow-1 {
+  flex-grow: 1;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-center {
+  @extend .flex-align-center;
+  @extend .flex-justify-center;
+}
+
+.flex-align-center {
+  align-items: center;
+}
+
+.flex-align-end {
+  align-items: end;
+}
+
+.flex-align-start {
+  align-items: start;
+}
+
+.flex-align-end {
+  align-items: end;
+}
+
+.flex-align-items-stretch {
+  align-items: stretch;
+}
+
+.flex-align-self-center {
+  align-self: center;
+}
+
+.flex-align-self-start {
+  align-self: start;
+}
+
+.flex-justify-start {
+  justify-content: start;
+}
+
+.flex-justify-space-between {
+  justify-content: space-between;
+}
+
+.flex-justify-space-around {
+  justify-content: space-around;
+}
+
+.flex-justify-center {
+  justify-content: center;
+}
+
+.flex-justify-end {
+  justify-content: end;
+}
+
+.flex-justify-self-center {
+  justify-self: center;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.gap-xs {
+  gap: $xs;
+}
+
+.gap-sm {
+  gap: $sm;
+}
+
+.gap-md {
+  gap: $md;
+}
+
+.gap-lg {
+  gap: $lg;
+}
+
+.gap-xl {
+  gap: $xl;
+}
+
+.gap-2xl {
+  gap: $xl2;
+}
+
+.gap-3xl {
+  gap: $xl3;
+}
+
+.visibility-hidden {
+  visibility: hidden;
+}
+
+.marg-0 {
+  margin: 0;
+}
+
+.marg-md {
+  margin: $md;
+}
+
+.marg-v-sm {
+  margin-top: $sm;
+  margin-bottom: $sm;
+}
+
+.marg-v-lg {
+  margin-top: $lg;
+  margin-bottom: $lg;
+}
+
+.marg-top-sm {
+  margin-top: $sm;
+}
+
+.marg-top-md {
+  margin-top: $md;
+}
+
+.marg-top-lg {
+  margin-top: $lg;
+}
+
+.marg-top-2xl {
+  margin-top: $xl2;
+}
+
+.marg-bottom-md {
+  margin-bottom: $md;
+}
+
+.marg-left-md {
+  margin-left: $md;
+}
+
+.marg-right-md {
+  margin-right: $md;
+}
+
+.opacity-disabled {
+  opacity: $opacity-disabled;
+}
+
+.overflow-scroll {
+  overflow: scroll;
+}
+.overflow-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.overflow-y-scroll {
+  overflow-y: scroll;
+}
+.overflow-y-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.overflow-x-scroll {
+  overflow-x: scroll;
+}
+.overflow-x-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.overflow-auto {
+  overflow: auto;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.color-gray,
+.text-gray,
+.text-grey {
+  color: #888;
+}
+
+.text-app-blue {
+  opacity: 1;
+  color: $color-app-blue;
+}
+
+.text-align-left {
+  text-align: left;
+}
+
+.pad-xs {
+  padding: $xs;
+}
+
+.pad-sm {
+  padding: $sm;
+}
+
+.pad-md {
+  padding: $md;
+}
+
+.pad-lg {
+  padding: $lg;
+}
+
+.pad-2xl {
+  padding: $xl2;
+}
+
+.pad-h-md {
+  padding-left: $md;
+  padding-right: $md;
+}
+
+.pad-h-sm {
+  padding-left: $sm;
+  padding-right: $sm;
+}
+
+.pad-h-lg {
+  padding-left: $lg;
+  padding-right: $lg;
+}
+
+.pad-h-xl {
+  padding-left: $xl;
+  padding-right: $xl;
+}
+
+.pad-v-xs {
+  padding-top: $xs;
+  padding-bottom: $xs;
+}
+
+.pad-v-sm {
+  padding-top: $sm;
+  padding-bottom: $sm;
+}
+
+.pad-v-md {
+  padding-top: $md;
+  padding-bottom: $md;
+}
+
+.pad-v-lg {
+  padding-top: $lg;
+  padding-bottom: $lg;
+}
+
+.pad-bottom-sm {
+  padding-bottom: $sm;
+}
+
+.pad-bottom-md {
+  padding-bottom: $md;
+}
+
+.pad-bottom-lg {
+  padding-bottom: $lg;
+}
+
+.pad-bottom-xl {
+  padding-bottom: $xl;
+}
+
+.pad-left-xs {
+  padding-left: $xs;
+}
+
+.pad-left-sm {
+  padding-left: $sm;
+}
+
+.pad-left-md {
+  padding-left: $md;
+}
+
+.pad-left-lg {
+  padding-left: $lg;
+}
+
+.pad-left-xl {
+  padding-left: $xl;
+}
+
+.pad-right-sm {
+  padding-right: $sm;
+}
+
+.pad-right-md {
+  padding-right: $md;
+}
+
+.pad-right-lg {
+  padding-right: $lg;
+}
+
+.pad-right-xl {
+  padding-right: $xl;
+}
+
+.pad-top-none {
+  padding-top: none;
+}
+
+.pad-top-sm {
+  padding-top: $sm;
+}
+
+.pad-top-md {
+  padding-top: $md;
+}
+
+.pad-top-lg {
+  padding-top: $lg;
+}
+
+.pad-top-xl {
+  padding-top: $xl;
+}
+
+.pad-top-2xl {
+  padding-top: $xl2;
+}
+
+.white-space-nowrap {
+  white-space: nowrap;
+}
+
+/* For easy imports. */
+// .pin-scrollbar ::-webkit-scrollbar {
+//   -webkit-appearance: none;
+//   width: 7px;
+// }
+
+// .pin-scrollbar ::-webkit-scrollbar-thumb {
+//   border-radius: 4px;
+//   background-color: rgba(0, 0, 0, 0.3);
+//   box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+// }

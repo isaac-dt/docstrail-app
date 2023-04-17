@@ -1,0 +1,39 @@
+<ng-container
+  *ngIf="{
+    isReviewMode: isProposalReviewMode$ | async,
+    selectedProposalCommentThreads: selectedProposalCommentThreads$ | async,
+    usersRegistry: usersRegistry$ | async
+  } as asyncData">
+  <div
+    class="review-container flex-column overflow-y-scroll"
+    *ngIf="asyncData.isReviewMode !== false">
+    <div
+      *ngIf="asyncData.isReviewMode === true"
+      class="flex-column gap-md pad-lg">
+      <div class="flex flex-align-center flex-justify-space-between gap-md">
+        <div class="flex flex-align-center gap-md">
+          <span class="mat-subtitle-2">Comments</span>
+          <span class="mat-caption text-gray">
+            ({{ asyncData.selectedProposalCommentThreads?.length ?? 0 }})
+          </span>
+        </div>
+        <button dt-button (click)="draftCommentIsVisibleFn(true)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      <app-draft-comment
+        (onToggleButtonEmitted)="
+          setDraftCommentIsVisibleFn($event)
+        "></app-draft-comment>
+      <ng-container *ngIf="usersRegistry$ | async as usersRegistry">
+        <ng-container
+          *ngFor="let thread of asyncData.selectedProposalCommentThreads">
+          <app-old-comment
+            [thread]="thread"
+            [creator]="getThreadCreator(thread, usersRegistry)">
+          </app-old-comment>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>

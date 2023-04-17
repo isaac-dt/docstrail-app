@@ -1,0 +1,28 @@
+syntax = "proto3";
+package trail.proposal;
+
+import "google/protobuf/wrappers.proto";
+import "trail/proposal/review.proto";
+import "trail/proposal/proposal.proto";
+import "account/user/user.proto";
+
+/* Used for POST, PUT, and PATCH. */
+ message WriteProposalReviewRequest{
+  google.protobuf.StringValue proposal_id = 1;
+  trail.proposal.ProposalReview.Status status = 2;
+  google.protobuf.StringValue note = 3;
+}
+
+/* Used for fetching a single item. */
+message GetProposalReviewResponse {
+  trail.proposal.ProposalReview proposal_review = 1;
+  trail.proposal.Proposal proposal = 2;
+  account.user.User creator = 3;
+}
+
+/* Used for Listing items. */
+message ListProposalReviewResponse {
+  repeated trail.proposal.ProposalReview proposal_reviews = 1;
+  repeated account.user.User creators = 2;
+  int32 match_count = 3;
+}

@@ -1,0 +1,15 @@
+<div class="container flex-column full-height pad-h-lg">
+  <!-- <div
+    class="flex flex-justify-space-between flex-align-center border-bottom-strong pad-v-sm"> -->
+  <div class="flex flex-justify-space-between flex-align-center pad-v-sm">
+    <!-- <app-search-bar class="visibility-hidden"></app-search-bar> -->
+    <div class="flex flex-align-center gap-sm">
+      <mat-icon class="md"> home </mat-icon>
+      <span class="mat-subtitle-1">Dashboard</span>
+    </div>
+    <app-account-details></app-account-details>
+  </div>
+  <div class="flex-grow-1 overflow-y-scroll">
+    <ng-content></ng-content>
+  </div>
+</div>

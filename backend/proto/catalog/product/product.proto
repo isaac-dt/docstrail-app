@@ -1,0 +1,22 @@
+syntax = "proto3";
+package catalog.product;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "shared.proto";
+
+/* Details for a physically obtainable, specific product.
+ * Example: deatils for a red pen with its amazon.com link.
+ * Next Id: 11 */
+ message Product {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  string name = 4;
+  string description = 5;
+  google.protobuf.StringValue web_link = 6;
+  google.protobuf.StringValue image_url = 7;
+  string distribution_outlet_id = 8;
+  string open_definition_id = 9;
+  shared.Price price = 10;
+}

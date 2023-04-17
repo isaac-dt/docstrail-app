@@ -1,0 +1,39 @@
+<ng-container
+  *ngIf="{ proposalInfos: proposalInfosSharedWithMe$ | async } as asyncData">
+  <div class="container flex-column gap-2xl full-height pad-h-lg">
+    <div class="flex flex-justify-space-between flex-align-center pad-v-sm">
+      <!-- <app-search-bar class="visibility-hidden"></app-search-bar> -->
+      <div class="flex flex-align-center gap-sm">
+        <mat-icon class="md"> inbox </mat-icon>
+        <span class="mat-subtitle-1">Shared with me</span>
+      </div>
+      <app-account-details></app-account-details>
+    </div>
+    <div class="flex-column gap-md">
+      <table>
+        <tr>
+          <th class="created-col">Created</th>
+          <th>Name</th>
+        </tr>
+        <tr
+          (click)="loadProposal(proposalInfo.proposal!)"
+          [class.border-bottom-strong]="last"
+          class="data border-top-strong pad-lgcursor-pointer"
+          *ngFor="let proposalInfo of asyncData.proposalInfos; let last = last">
+          <td class="created-col"
+            ><span>{{
+              getTime(proposalInfo.proposal.createdAt) | amTimeAgo
+            }}</span></td
+          >
+          <td class="pad-v-md">
+            {{ proposalInfo.proposal.name }}
+          </td>
+        </tr>
+      </table>
+
+      <span *ngIf="asyncData.proposalInfos?.length === 0">
+        You have no proposals.
+      </span>
+    </div>
+  </div>
+</ng-container>

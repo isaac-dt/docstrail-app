@@ -1,0 +1,35 @@
+syntax = "proto3";
+package catalog.distribution;
+
+import "catalog/core-definition/core-definition.proto";
+import "catalog/distribution/distribution.proto";
+import "catalog/distribution/company.proto";
+import "catalog/product/product.proto";
+import "catalog/distribution/address.proto";
+import "google/protobuf/wrappers.proto";
+
+/* Next Id: 8 */
+ message WriteDistributionOutletRequest {
+  google.protobuf.StringValue name = 1;
+  google.protobuf.StringValue company_id = 2;
+  google.protobuf.StringValue physical_address_id = 3;
+  google.protobuf.StringValue web_address = 4;
+  google.protobuf.StringValue customer_service_phone_number = 5;
+  google.protobuf.StringValue customer_service_email = 6;
+  catalog.distribution.DistributionMethod distribution_method = 7;
+}
+
+/* Next Id: 7 */
+message GetDistributionOutletResponse {
+  catalog.distribution.DistributionOutlet distribution_outlet = 1;
+  catalog.distribution.Company company = 2;
+  catalog.distribution.OutletAddress physical_address = 3;
+  repeated catalog.core_definition.CoreDefinition core_definitions = 4;
+  repeated catalog.product.Product products = 6;
+}
+
+/* Next Id: 3 */
+message ListDistributionOutletResponse {
+  repeated catalog.distribution.DistributionOutlet distribution_outlets = 1;
+  int32 match_count = 2;
+}

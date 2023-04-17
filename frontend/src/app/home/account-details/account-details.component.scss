@@ -1,0 +1,30 @@
+.org-name {
+  opacity: 0.7;
+  font-size: 0.8em;
+}
+
+img.profile {
+  display: inline-block;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.avatar-container {
+  background-color: #ff914d;
+  color: white;
+  border-radius: 50%;
+  font-size: 0.95em;
+  font-weight: 900;
+}
+
+.account-menu {
+  padding: 16px 24px;
+  width: 250px;
+}
+
+.name {
+  font-size: 0.9em;
+}
+.action {
+  font-size: 0.9em;
+}

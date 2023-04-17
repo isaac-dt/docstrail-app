@@ -1,0 +1,229 @@
+@use "../../../atoms.scss" as *;
+
+.form-summary {
+  width: 300px;
+}
+
+img.gift {
+  height: 70px;
+  width: 70px;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+tr td {
+  padding: $md;
+  padding-right: 0;
+  // border-bottom: 1px solid #eee;
+  font-size: 0.92em;
+  width: 150px;
+}
+
+tr:hover {
+  // background-color: rgb(0, 0, 0, 0.05);
+  text-decoration: underline;
+}
+
+.pad-left-10 {
+  padding-left: 10px;
+}
+
+.box {
+  width: 110px;
+  height: 110px;
+  border: 2px solid rgb(0, 0, 0, 0.03);
+  background-color: rgb(0, 0, 0, 0.01);
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.box:hover {
+  border: 2px solid rgb(0, 0, 0, 0.3);
+}
+
+.box span {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  color: #555;
+  padding: 10px;
+  font-weight: 900;
+  font-size: 2em;
+}
+
+form button[mat-icon-button],
+form button[mat-button] {
+  // background-color: rgb(0, 0, 0, 0.01);
+  // border: 1px solid rgb(0, 0, 0, 0.3);
+  font-family: "Geneva";
+  letter-spacing: inherit;
+  // color: $color-app-blue;
+}
+
+.trigger {
+  border: 1px solid $border-color;
+  @extend .pad-md;
+  border-radius: $sm;
+}
+
+.width-110 {
+  width: 110px;
+}
+
+.width-200 {
+  width: 250px;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.calendar-container ::ng-deep .mat-mdc-radio-button .mdc-form-field {
+  align-items: start;
+}
+
+.calendar-container .title {
+  margin-top: 10px;
+}
+
+select {
+  cursor: pointer;
+}
+
+.filters {
+  width: 120px;
+  // border-right: 1px solid red;
+}
+
+.product {
+  border: 1px solid #f5f5f5;
+  border-radius: 4px;
+  height: 350px;
+  width: 180px;
+  .name {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1.2em;
+  }
+  .description {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+  }
+  .image {
+    background-color: #f7f7f7;
+    height: 200px;
+  }
+  .currency {
+    vertical-align: super;
+    font-size: 0.9em;
+  }
+
+  .amount {
+    font-size: 1.5em;
+  }
+
+  .cents {
+    vertical-align: super;
+    font-size: 0.8em;
+  }
+}
+
+.align-items-stretch {
+  align-items: stretch;
+}
+
+.price {
+  transform: translateY(-10px);
+}
+
+.badge {
+  font-size: 0.8em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  // color: white;
+  text-align: center;
+}
+
+.badge-active {
+  @extend .badge;
+  color: $color-app-blue;
+  border: 1px solid $color-app-blue;
+}
+
+.money-slider {
+  z-index: 99;
+  $scale: 0.7;
+  padding-left: 12px;
+  .multiple-money {
+    width: 50px;
+    mat-icon:nth-child(1) {
+      transform: scale($scale);
+    }
+    mat-icon:nth-child(2) {
+      transform: translateX(-7px) scale($scale);
+    }
+    mat-icon:nth-child(3) {
+      transform: translateX(-14px) scale($scale);
+    }
+  }
+
+  mat-icon.money {
+    width: 25px;
+    transform: scale($scale);
+  }
+}
+
+.event-description {
+  // // width: 400px;
+  // font-size: 0.99em;
+  // background-color: #fafafa;
+  // // border: 1px solid #eee;
+  // padding: 12px;
+  padding-left: 3px;
+  // border-radius: 4px;
+  color: #333;
+  // line-height: 1.6em;
+}
+
+.package-button {
+  @extend .pad-xs;
+  @extend .pad-h-sm;
+}
+
+.add-custom-date {
+  .mat-icon-button {
+    border: 1px solid red !important;
+  }
+}
+
+.price-filter {
+  padding-top: 16px;
+  padding-bottom: 22px;
+  position: fixed;
+  bottom: -4px;
+  background-color: white;
+  border-radius: $sm;
+  z-index: 99;
+  mat-slider {
+    width: 200px;
+  }
+}
+
+.ship-to {
+  margin-left: 1px;
+}

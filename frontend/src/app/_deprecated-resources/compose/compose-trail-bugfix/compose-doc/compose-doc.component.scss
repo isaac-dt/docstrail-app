@@ -1,0 +1,102 @@
+@import "../../../../atoms.scss";
+
+.container {
+  // padding: 16px;
+  // width: 40vw; //21cm;
+  background-color: white;
+}
+.page[size="A4"] {
+  padding-top: 0px;
+  background: white;
+  width: 21cm;
+  min-height: 29.7cm;
+  .content {
+    padding-top: 40px;
+    padding-bottom: 2cm;
+    font-family: Arial, Helvetica, sans-serif !important;
+  }
+
+  // box-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.06), 0 2px 6px hsla(0, 0%, 0%, 0.06),
+  //   0 3px 8px hsla(0, 0%, 0%, 0.09);
+}
+
+@media print {
+  .page[size="A4"] {
+    .content {
+      font-size: 13pt !important;
+      padding: 0;
+      margin: 0;
+      section#header {
+        margin-left: -10px;
+        margin-right: 0;
+        padding-right: 0;
+        padding-left: 0;
+      }
+      section#meta {
+        margin-left: 5px;
+        margin-right: 0;
+        padding-right: 0;
+        // padding: 0;
+      }
+      section#body {
+        margin-left: 0;
+        margin-right: 0;
+        padding-right: 0;
+      }
+    }
+  }
+}
+
+section#header {
+  gap: 14px;
+  height: 70px;
+  background-color: #fff;
+  margin-left: 1.7cm;
+  // box-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.06), 0 2px 6px hsla(0, 0%, 0%, 0.06),
+  //   0 3px 8px hsla(0, 0%, 0%, 0.09);
+  // margin-right: 32px;
+  // color: white;
+  // padding: 34px 12px 12px 30px;
+  // border-radius: 4px;
+  border-top-right-radius: 4px 4px;
+  border-bottom-right-radius: 4px 4px;
+  .missing {
+    color: #111;
+  }
+  #org {
+    margin-left: 13px;
+  }
+}
+
+section#meta {
+  color: #444;
+  padding: 14px 12px 12px 12px;
+  margin-top: 20px;
+  margin-left: 2cm;
+  min-height: 105px;
+  border-left: 6px solid #888;
+  .label {
+    white-space: nowrap;
+    color: #777;
+    width: 0;
+    padding-right: 10px;
+  }
+}
+
+section#body {
+  margin-top: 1cm;
+  font-size: 11pt;
+  line-height: 20pt;
+  margin-right: 2cm;
+  margin-left: 2cm;
+  .missing {
+    @extend .text-gray;
+  }
+}
+
+.missing {
+  background-color: #eee;
+  padding: 4px 12px;
+  border-radius: 80px;
+  width: fit-content;
+}

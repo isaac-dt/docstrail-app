@@ -1,0 +1,98 @@
+<div id="show-in-print" class="container">
+  <div class="page" size="A4">
+    <div *ngIf="!!docBuilder" class="content">
+      <ng-container
+        *ngIf="{
+          org: (dtOrg$ | async)?.name,
+          title: docBuilder.getTitle(),
+          summary: docBuilder.getSummary(),
+          author: (dtUser$ | async)?.fullName,
+          created: docBuilder.getCreatedAt(),
+          updated: docBuilder.getUpdatedAt(),
+          shareLink: docBuilder.getShareLink(),
+          background: docBuilder.getBackground(),
+          engImpact: docBuilder.getEngImpact(),
+          backgroundResources: docBuilder.getBackgroundResources(),
+          userImpact: docBuilder.getUserImpact()
+        } as data">
+        <section id="header" class="flex-column mat-headline-2">
+          <span id="title" class="missing">{{
+            data.title ?? "Proposal Title"
+          }}</span>
+          <span id="org" class="mat-subtitle-2">{{
+            (data.org | titlecase) ?? "Org"
+          }}</span>
+        </section>
+
+        <section id="meta" class="flex-column gap-md">
+          <table>
+            <tr>
+              <td class="label">Summary</td>
+              <td>{{ data.summary || "No summary created yet." }}</td>
+            </tr>
+            <tr>
+              <td class="label">Author</td>
+              <td>{{ data.author | titlecase }}</td>
+            </tr>
+            <tr>
+              <td class="label">Reviewers</td>
+              <td>None</td>
+            </tr>
+            <tr>
+              <td class="label">Status</td>
+              <td><b>Draft</b> | In Review | Final</td>
+            </tr>
+            <tr>
+              <td class="label">Created</td>
+              <td>{{ data.created }}</td>
+            </tr>
+            <tr>
+              <td class="label">Last Updated</td>
+              <td>{{ data.created }}</td>
+            </tr>
+            <tr>
+              <td class="label">Share Link</td>
+              <td>{{ data.shareLink || "None" }}</td>
+            </tr>
+          </table>
+        </section>
+
+        <section id="body">
+          <section id="background" class="flex flex-column gap-xs">
+            <div class="mat-headline-5">Objective</div>
+            <div
+              ><span [class.missing]="!data.background">{{
+                data.background || "None yet"
+              }}</span>
+              <ng-container *ngIf="data.backgroundResources?.length">
+                <span>&nbsp;See the following resources to learn more:</span>
+                <ol>
+                  <li *ngFor="let resource of data.backgroundResources">
+                    {{ resource }}
+                  </li>
+                </ol>
+              </ng-container>
+            </div>
+
+            <div
+              *ngIf="data.engImpact"
+              id="eng-impact"
+              class="flex flex-column gap-sm marg-top-md">
+              <span class="mat-headline-6">Impact on stack</span>
+              <span>{{ data.engImpact }}</span>
+            </div>
+
+            <div
+              *ngIf="data.userImpact"
+              id="user-impact"
+              class="flex flex-column gap-sm marg-top-md">
+              <span class="mat-headline-6">Impact on users</span>
+              <span>{{ data.userImpact }}</span>
+            </div>
+          </section>
+        </section>
+      </ng-container>
+      <h1></h1>
+    </div>
+  </div>
+</div>

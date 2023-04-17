@@ -1,0 +1,140 @@
+@use "./style-theme/custom-material" as mat;
+@use "patches.scss" as *;
+@use "app/atoms.scss" as *;
+@include mat.core();
+@import "~quill/dist/quill.snow.css";
+
+$dt-primary: mat.define-palette(mat.$grey-palette, 900);
+$dt-accent: mat.define-palette(mat.$grey-palette, 900);
+$dt-warn: mat.define-palette(mat.$red-palette);
+
+// Typography-level args are: (font-size, line-height, font-weight).
+$dt-typography: mat.define-typography-config(
+  $font-family: 'Geneva, "Helvetica Neue", sans-serif',
+  $headline-1: mat.define-typography-level(32px, 32px, 400),
+  $headline-2: mat.define-typography-level(24px, 24px, 400),
+  $headline-3: mat.define-typography-level(20px, 24px, 400),
+  $headline-5: mat.define-typography-level(18px, 24px, 400),
+  $headline-6:
+    mat.define-typography-level(16px, 24px, 500, $font-family: "Roboto"),
+  $subtitle-1: mat.define-typography-level(16px, 16px, 400),
+  $subtitle-2:
+    mat.define-typography-level(15px, 16px, 500, $font-family: "Roboto"),
+  $body-1: mat.define-typography-level(15px, 140%, 200, $font-family: "Geneva"),
+  $body-2: mat.define-typography-level(14px, 140%, 200, $font-family: "Geneva"),
+  $caption: mat.define-typography-level(14px, 16px, 300),
+);
+
+$dt-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $dt-primary,
+      accent: $dt-accent,
+      warn: $dt-warn,
+    ),
+    typography: $dt-typography,
+    density: 0,
+  )
+);
+
+@include mat.all-component-themes($dt-theme);
+@include mat.all-component-typographies($dt-typography);
+
+html,
+body {
+  margin: 0;
+  // background-color: #fcfdff;
+  background-color: white;
+  color: #333;
+}
+
+html {
+  overflow: hidden;
+  height: 100vh;
+}
+
+body {
+  height: 100%;
+  overflow: auto;
+
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+body::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+.mat-mdc-snack-bar-container {
+  --mat-mdc-snack-bar-button-color: black;
+  --mdc-snackbar-container-color: white;
+  --mdc-snackbar-supporting-text-color: #222;
+}
+
+.mat-select-trigger {
+  min-width: 80vw;
+}
+
+.mat-select-panel {
+  max-height: 80vh !important;
+}
+
+// .pin-scrollbar ::-webkit-scrollbar {
+//   -webkit-appearance: none;
+//   width: 7px;
+// }
+
+// .pin-scrollbar ::-webkit-scrollbar-thumb {
+//   border-radius: 4px;
+//   background-color: rgba(0, 0, 0, 0.3);
+//   box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+// }
+
+@media print {
+  * {
+    overflow: visible !important;
+  }
+  body mat-sidenav,
+  app-compose-trail,
+  #bugfix-trail,
+  app-compose-topbar {
+    display: none !important;
+  }
+  body mat-sidenav-content {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  body * {
+    visibility: hidden;
+  }
+
+  #show-in-print {
+    height: 100%;
+    width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    .page {
+      height: 100%;
+      width: 100%;
+      margin: 0 !important;
+      padding: 0 !important;
+      * {
+        visibility: visible;
+      }
+    }
+  }
+}
+
+@page {
+  size: auto;
+  margin-top: 0.7in;
+  margin-bottom: 0.5in;
+  margin-left: 1in;
+  margin-right: 1in;
+}
+@page :footer {
+  display: none;
+}
+
+@page :header {
+  display: none;
+}

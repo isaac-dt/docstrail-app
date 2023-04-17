@@ -1,0 +1,28 @@
+syntax = "proto3";
+package operation.bundle;
+
+import "google/protobuf/wrappers.proto";
+import "operation/bundle/bundle.proto";
+import "operation/template/template.proto";
+
+/* Next Id: 5 */
+ message WriteBundleRequest {
+  google.protobuf.StringValue name = 1;
+  google.protobuf.StringValue description = 2;
+  oneof parent {
+    string client_id = 3;
+    string root_id = 4;
+  }
+}
+
+/* Next Id: 3 */
+message GetBundleResponse {
+  operation.bundle.Bundle bundle = 1;
+  repeated operation.template.Template templates = 2;
+}
+
+/* Next Id: 3 */
+message ListBundleResponse {
+  repeated operation.bundle.Bundle bundles = 1;
+  int32 match_count = 2;
+}

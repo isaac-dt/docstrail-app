@@ -1,0 +1,27 @@
+<div
+  class="flex flex-align-center flex-justify-space-between pad-bottom-md pad-right-lg">
+  <div class="flex gap-lg flex-align-center">
+    <button dt-default>
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="flex flex-align-center gap-sm">
+      <mat-icon *ngIf="icon" class="material-symbols-outlined">{{
+        icon
+      }}</mat-icon>
+      <span class="mat-headline-5">{{ title }}</span>
+    </div>
+  </div>
+  <div class="flex flex-align-center gap-sm">
+    <span class="mat-subtitle-2">Completed</span>
+    <span class="mat-subtitle-2">0%</span>
+    <button
+      (click)="trailNavController.toggleIsDocVisible()"
+      class="doc-toggle"
+      [class.is-doc-visible]="trailNavController.isDocVisible"
+      dt-button>
+      <mat-icon>
+        {{ trailNavController.isDocVisible ? "chevron_right" : "chevron_left" }}
+      </mat-icon>
+    </button>
+  </div>
+</div>

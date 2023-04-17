@@ -1,0 +1,186 @@
+<div class="bg-white full-height full-width flex-column align-items-stretch">
+  <div
+    class="flex flex-justify-space-between pad-lg flex-align-center border-bottom gap-lg">
+    <div class="flex gap-lg flex-align-center">
+      <!-- <button mat-icon-button (click)="navToPackageList()">
+        <mat-icon>arrow_back</mat-icon>
+      </button> -->
+      <span class="mat-headline-3">Get Started</span>
+    </div>
+    <!-- <button mat-icon-button (click)="navToPackageList()">
+      <mat-icon>close</mat-icon>
+      All Employees
+    </button> -->
+  </div>
+  <div class="flex-column gap-2xl pad-right-lg flex-1 overflow-auto">
+    <mat-drawer-container
+      class="bg-white full-width full-height"
+      [hasBackdrop]="false">
+      <mat-drawer [opened]="true" position="end" #drawer mode="side">
+        <ng-template [ngTemplateOutlet]="formSummary"></ng-template>
+      </mat-drawer>
+      <mat-drawer-content class="bg-white">
+        <ng-template [ngTemplateOutlet]="mainArea"></ng-template>
+      </mat-drawer-content>
+    </mat-drawer-container>
+  </div>
+</div>
+
+<ng-template #mainArea>
+  <div class="flex full-height">
+    <div
+      class="filters pad-left-md pad-top-lg flex-column gap-lg flex-justify-space-between pad-bottom-sm">
+      <div>
+        <span class="pad-left-md mat-subtitle-1">Allowed</span>
+        <table>
+          <tr *ngFor="let category of categories" class="cursor-pointer">
+            <td>
+              <div class="flex flex-align-center gap-sm">
+                <mat-icon class="sm">check_box</mat-icon>
+                <span>{{ category | titlecase }}</span>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="price-filter border">
+        <div class="flex flex-align-center flex-justify-space-between">
+          <span class="pad-left-md mat-subtitle-1">Price</span>
+        </div>
+        <div class="flex flex-align-center money-slider">
+          <div class="flex flex-align-center">
+            <mat-icon class="money">attach_money</mat-icon>
+          </div>
+          <mat-slider disableRipple [min]="0" [max]="12" [step]="2">
+            <input matSliderThumb [value]="6" />
+          </mat-slider>
+          <div class="multiple-money flex flex-align-center">
+            <mat-icon>attach_money</mat-icon>
+            <mat-icon>attach_money</mat-icon>
+            <mat-icon>attach_money</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-justify-center flex-grow-1">
+      <div class="flex-column gap-xl pad-h-md pad-v-lg overflow-scroll">
+        <div class="flex flex-justify-space-between flex-align-center gap-xl">
+          <app-trigger-selector></app-trigger-selector>
+        </div>
+        <div class="flex flex-align-center cursor-pointer ship-to">
+          <div class="flex flex-align-center gap-xs">
+            <mat-icon class="material-symbols-outlined sm">group_work</mat-icon>
+            <div class="flex flex-align-center">
+              <span>Ship to</span>
+              <mat-icon class="sm">horizontal_rule</mat-icon>
+              <span class="mat-body-strong">All Employees</span>
+            </div>
+          </div>
+          <mat-icon class="">arrow_drop_down</mat-icon>
+        </div>
+        <div class="flex-column gap-lg pad-top-sm">
+          <div class="flex gap-md flex-justify-end">
+            <button dt-button>
+              <div class="package-button flex flex-center gap-xs border">
+                <mat-icon class="sm">replay</mat-icon>
+                <span>Back</span>
+              </div>
+            </button>
+            <button dt-button>
+              <div class="package-button flex flex-center gap-xs border">
+                <mat-icon class="sm">refresh</mat-icon>
+                <span class="white-space-nowrap">Rebuild Package</span>
+              </div>
+            </button>
+          </div>
+          <div class="products flex flex-wrap gap-md">
+            <div
+              *ngFor="let coreDef of coreDefinitions"
+              class="product flex-align-self-start flex-column gap-xs">
+              <div
+                class="image border-bottom flex flex-justify-space-between pad-xs">
+                <span>No image</span>
+              </div>
+              <div
+                class="pad-sm flex-column gap-sm flex-align-center flex-grow-1">
+                <span class="name mat-body-strong">{{ coreDef.name }}</span>
+                <span class="description">{{ coreDef.description }}</span>
+                <div
+                  class="gap-xs flex-grow-1 flex flex-align-end flex-justify-space-between">
+                  <div class="price">
+                    <span class="currency">$</span>
+                    <span class="amount mat-subtitle-2">
+                      <!-- {{ coreDef.price?.amount }} -->
+                      100
+                    </span>
+                    <span class="cents">
+                      <!-- {{ coreDef.price?.amount }} -->
+                      23
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex gap-sm pad-top-lg flex-justify-end">
+          <button dt-black-button>
+            <span>Save event</span>
+          </button>
+          <button dt-white-button>
+            <span>Delete</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<!-- Package form summary  -->
+<ng-template #formSummary>
+  <div class="form-summary bg-white flex-column pad-left-lg gap-xl full-height">
+    <div class="flex pad-top-lg">
+      <span
+        class="mat-subtitle-2 flex flex-align-center flex-justify-space-between flex-grow-1 gap-md">
+        <span>Total Summary</span>
+        <span class="mat-body-2">Per Employee</span>
+      </span>
+    </div>
+    <div class="flex-column gap-sm">
+      <div class="flex flex-justify-space-between">
+        <span class="mat-body-2">Items</span>
+        <span class="mat-body-2">{{ "18" | currency }}</span>
+      </div>
+      <div class="flex flex-justify-space-between">
+        <span class="mat-body-2">Shipping & handling</span>
+        <span class="mat-body-2">{{ "7" | currency }}</span>
+      </div>
+      <hr />
+      <div class="flex flex-justify-space-between">
+        <span class="mat-body-2">Total before tax</span>
+        <span class="mat-body-2">{{ "39" | currency }}</span>
+      </div>
+      <div class="flex flex-justify-space-between">
+        <span class="mat-body-2">Estimated tax</span>
+        <span class="mat-body-2">{{ "2" | currency }}</span>
+      </div>
+      <hr />
+      <div class="flex flex-justify-space-between">
+        <span class="mat-body-2 flex flex-align-center gap-md">
+          <span>Cost total</span>
+          <!-- <span class="text-gray">(Year)</span> -->
+        </span>
+        <span class="mat-subtitle-2">{{ "41" | currency }}</span>
+      </div>
+      <button
+        class="marg-top-lg"
+        dt-black-button
+        (click)="submitPackageForm()"
+        style="opacity: 0.3">
+        Create template
+      </button>
+    </div>
+  </div>
+</ng-template>

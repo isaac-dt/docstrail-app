@@ -1,0 +1,16 @@
+syntax = "proto3";
+package join;
+
+import "operation/target/target.proto";
+import "account/user/user.proto";
+
+/* Next Id: 3 */
+message JoinTargetUserRequest {
+  string target_id = 1;
+  string user_id = 2;
+}
+/* Next Id: 3 */
+message JoinTargetUserResponse {
+  operation.target.Target target = 1;
+  account.user.User user = 2;
+}

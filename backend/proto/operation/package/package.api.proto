@@ -1,0 +1,28 @@
+syntax = "proto3";
+package operation.package;
+
+import "google/protobuf/wrappers.proto";
+import "operation/package/package.proto";
+import "catalog/open-definition/open-definition.proto";
+
+/* Next Id: 5 */
+ message WritePackageRequest {
+  google.protobuf.StringValue name = 1;
+  google.protobuf.StringValue description = 2;
+  oneof parent {
+    string client_id = 3;
+    string root_id = 4;
+  }
+}
+
+/* Next Id: 4 */
+message GetPackageResponse {
+  operation.package.Package package = 1;
+  repeated catalog.open_definition.OpenDefinition open_definitions = 3;
+}
+
+/* Next Id: 3 */
+message ListPackagesResponse {
+  repeated operation.package.Package packages = 1;
+  int32 match_count = 2;
+}

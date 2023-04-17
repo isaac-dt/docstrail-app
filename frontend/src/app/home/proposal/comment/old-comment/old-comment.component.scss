@@ -1,0 +1,72 @@
+@import "../../../../atoms.scss";
+
+.container {
+  box-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.05), 0 1px 4px hsla(0, 0%, 0%, 0.05),
+    0 2px 8px hsla(0, 0%, 0%, 0.05);
+  border-radius: 4px;
+}
+.container.active {
+  box-shadow: 0 1px 4px hsla(0, 0%, 0%, 0.09), 0 3px 8px hsla(0, 0%, 0%, 0.09),
+    0 4px 13px hsla(0, 0%, 0%, 0.13);
+  margin: 18px 0;
+  padding: $md $sm;
+}
+
+.screenshot {
+  height: 0px;
+  border-radius: 12px;
+}
+.screenshot.screenshot-height {
+  height: 150px;
+}
+
+.user-name {
+  margin-left: -16px;
+}
+
+.thread-chip {
+  font-family: arial;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 80px;
+  color: #444;
+  background-color: #f4f4f4;
+  font-size: 0.9em;
+  cursor: pointer;
+}
+
+button.clear-screenshot {
+  position: absolute;
+  margin-left: 230px;
+  margin-top: 50px;
+}
+
+.time {
+  font-size: 0.88em;
+}
+
+.message {
+  padding: 6px;
+  margin-top: 4px;
+  font-size: 0.95em;
+}
+
+.comment-menu {
+  --width: 100px;
+  background-color: white;
+  width: var(--width);
+  padding: 4px 8px;
+  button {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    font-size: 0.8em;
+  }
+}
+
+span.font-sm {
+  font-size: 0.85em;
+}
+
+span.font-md {
+  font-size: 0.92em;
+}

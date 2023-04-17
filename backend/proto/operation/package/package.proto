@@ -1,0 +1,19 @@
+syntax = "proto3";
+package operation.package;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+/* Aggregate of Open Definitions to be used in a Template.
+ * Next Id: 8 */
+ message Package {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  google.protobuf.StringValue name = 4;
+  google.protobuf.StringValue description = 5;
+  oneof parent {
+    string client_id = 6;
+    string root_id = 7;
+  }
+ }

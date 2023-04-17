@@ -1,0 +1,17 @@
+syntax = "proto3";
+package account.job_role;
+
+import "google/protobuf/timestamp.proto";
+
+/* The position/job-responsibility of a user in their company.
+ * Next Id: 7 */
+message JobRole {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  string name = 4;
+  oneof parent {
+    string client_id = 5;
+    string root_id = 6;
+  }
+}

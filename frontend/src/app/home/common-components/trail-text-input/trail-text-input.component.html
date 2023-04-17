@@ -1,0 +1,17 @@
+<div class="flex-collumn gap-sm full-width">
+  <!-- <span *ngIf="label" class="label">{{ label }}</span> -->
+  <form class="full-width" (submit)="$event.preventDefault(); save()">
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>{{ placeholder }}</mat-label>
+      <input
+        (keydown)="debouncedSave()"
+        [formControl]="inputDataControl"
+        [type]="type"
+        [ngStyle]="{
+          fontSize: fontSize
+        }"
+        autocomplete="off"
+        matInput />
+    </mat-form-field>
+  </form>
+</div>

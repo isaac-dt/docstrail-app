@@ -1,0 +1,30 @@
+:host {
+  // --header-height: 38px;
+  --header-height: 77px;
+}
+
+.container {
+  background-color: #f4f4f4;
+}
+
+.proposal-details {
+  background-color: white;
+  height: 50px;
+  z-index: 100;
+}
+
+.col-left .header {
+  height: var(--header-height);
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  background-color: white;
+}
+
+quill-editor {
+  height: 95%;
+}
+
+.canvas {
+  margin-top: 0px;
+  // background-color: white;
+}

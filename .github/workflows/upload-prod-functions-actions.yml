@@ -1,0 +1,17 @@
+name: prod-upload-functions
+run-name: Upload PROD changes
+on:
+  release:
+    types: [published]
+jobs:
+  upload-functions-to-prod:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "14"
+      - name: deploy microservices release-${{ github.ref_name }} to docstrail
+        run: npx firebase-tools deploy --only functions --project=prod --non-interactive
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

@@ -1,0 +1,18 @@
+{
+  "compilerOptions": { 
+    "target": "es2017",
+    "strict": true, 
+    "declaration": true,
+    "outDir": "./core",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "module": "commonjs",
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "sourceMap": true,
+  },
+  "exclude": [
+      "node_modules",
+      "./core/**/*"
+  ]
+}

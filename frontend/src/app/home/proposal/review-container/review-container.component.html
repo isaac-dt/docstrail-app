@@ -1,0 +1,290 @@
+<ng-container
+  *ngIf="{
+    isProposalReviewMode: isProposalReviewMode$ | async,
+    selectedProposalReviewsByUserId: selectedProposalReviewsByUserId$ | async,
+    hasOwnerEndedReview: hasOwnerEndedReview$ | async,
+    selectedProposalInfo: selectedProposalInfo$ | async,
+    isCurrentUserInOwners: isCurrentUserInOwners$ | async,
+    selectedProposalOwners: selectedProposalOwners$ | async,
+    currentUser: currentUser$ | async
+  } as asyncData">
+  <ng-container
+    *ngIf="selectedProposalInfo$ | async as proposalInfo; else whitePage">
+    <div
+      *ngIf="isProposalReviewMode$ | async"
+      class="review-container flex-column gap-lg pad-lg">
+      <div
+        class="flex-column gap-sm"
+        *ngIf="selectedProposalOwners$ | async as proposalOwners">
+        <div class="flex flex-align-center flex-justify-space-between">
+          <div class="flex flex-align-center gap-sm">
+            <span class="mat-subtitle-2">Owners</span>
+            <span>({{ proposalOwners.length }})</span>
+          </div>
+          <app-share-proposal
+            *ngIf="asyncData.isCurrentUserInOwners"
+            [default]="PermissionOp.ALL"
+            [useAddIcon]="true">
+          </app-share-proposal>
+        </div>
+        <div
+          *ngFor="let proposalOwner of proposalOwners"
+          [class.black-border]="
+            asyncData.selectedProposalReviewsByUserId?.get(proposalOwner.id)
+              ?.status === ReviewStatus.END_REVIEW
+          "
+          class="flex flex-align-center flex-justify-space-between reviewer-card pad-sm">
+          <div class="flex flex-align-center gap-sm">
+            <app-user-avatar [user]="proposalOwner!" [sizePx]="35">
+            </app-user-avatar>
+            <div
+              *ngIf="currentUser$ | async as currentUser"
+              class="flex-column gap-xs">
+              <span>
+                {{
+                  isMe(proposalOwner!, currentUser)
+                    ? "You"
+                    : (proposalOwner!.fullName | titlecase)
+                }}
+              </span>
+            </div>
+          </div>
+          <div class="flex gap-xs flex-align-center">
+            <div
+              [matTooltip]="
+                'Ended review. ' +
+                (asyncData.selectedProposalReviewsByUserId?.get(
+                  proposalOwner.id
+                )?.note ??
+                  '')
+              "
+              *ngIf="
+                asyncData.selectedProposalReviewsByUserId?.get(proposalOwner.id)
+                  ?.status === ReviewStatus.END_REVIEW
+              "
+              class="flex-column">
+              <span class="flex flex-align-center">
+                <!-- <app-notification-dot [still]="true"></app-notification-dot> -->
+                <!-- <span>Ended Review</span> -->
+                <mat-icon class="material-symbols-outlined sm"> lock </mat-icon>
+              </span>
+            </div>
+            <button
+              *ngIf="asyncData.isCurrentUserInOwners"
+              [matMenuTriggerData]="{
+                user: proposalOwner
+              }"
+              [matMenuTriggerFor]="ownerMenu"
+              dt-default>
+              <div class="flex flex-align-center">
+                <mat-icon class="xs">more_vert</mat-icon>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="flex-column gap-sm"
+        *ngIf="selectedProposalReviewers$ | async as proposalReviewers">
+        <div
+          *ngIf="proposalReviewers.length"
+          class="flex flex-align-center flex-justify-space-between">
+          <div class="flex flex-align-center gap-sm">
+            <span class="mat-subtitle-2">Reviewers</span>
+            <span>({{ proposalReviewers.length }})</span>
+          </div>
+          <app-share-proposal
+            [default]="PermissionOp.REVIEW"
+            [useAddIcon]="true">
+          </app-share-proposal>
+        </div>
+
+        <ng-container *ngFor="let proposalReviewer of proposalReviewers">
+          <div
+            [class.green-border]="
+              asyncData.selectedProposalReviewsByUserId?.get(
+                proposalReviewer.id
+              )?.status === ReviewStatus.LGTM
+            "
+            [class.red-border]="
+              asyncData.selectedProposalReviewsByUserId?.get(
+                proposalReviewer.id
+              )?.status === ReviewStatus.HOLD
+            "
+            class="flex flex-align-center flex-justify-space-between reviewer-card pad-sm">
+            <div class="flex flex-align-center gap-sm">
+              <app-user-avatar [user]="proposalReviewer!" [sizePx]="35">
+              </app-user-avatar>
+              <div
+                class="flex-column gap-xs"
+                *ngIf="currentUser$ | async as currentUser">
+                <span>
+                  {{
+                    isMe(proposalReviewer!, currentUser)
+                      ? "You"
+                      : (proposalReviewer!.fullName | titlecase)
+                  }}
+                </span>
+                <!-- <span class="text-gray font-sm">2d ago</span> -->
+              </div>
+            </div>
+            <div class="flex flex-align-center gap-xs">
+              <div>
+                <div
+                  [matTooltip]="
+                    'Hold off on this. ' +
+                    (asyncData.selectedProposalReviewsByUserId?.get(
+                      proposalReviewer.id
+                    )?.note ??
+                      '')
+                  "
+                  *ngIf="
+                    asyncData.selectedProposalReviewsByUserId?.get(
+                      proposalReviewer.id
+                    )?.status === ReviewStatus.HOLD
+                  "
+                  class="flex gap-md flex-align-center">
+                  <!-- <app-notification-dot
+                    [red]="true"
+                    [still]="true"></app-notification-dot> -->
+                  <!-- <span class="color-red">Hold</span> -->
+                  <mat-icon class="color-red sm"> block </mat-icon>
+                </div>
+                <div
+                  [matTooltip]="
+                    'Let\'s try it! ' +
+                    (asyncData.selectedProposalReviewsByUserId?.get(
+                      proposalReviewer.id
+                    )?.note ??
+                      '')
+                  "
+                  *ngIf="
+                    asyncData.selectedProposalReviewsByUserId?.get(
+                      proposalReviewer.id
+                    )?.status === ReviewStatus.LGTM
+                  "
+                  class="flex gap-md flex-align-center">
+                  <!-- <app-notification-dot [still]="true"></app-notification-dot> -->
+                  <mat-icon class="color-green sm">check_circle</mat-icon>
+                </div>
+
+                <div
+                  matTooltip="No review"
+                  *ngIf="
+                    asyncData.selectedProposalReviewsByUserId?.get(
+                      proposalReviewer.id
+                    )?.status === ReviewStatus.PENDING ||
+                    !asyncData.selectedProposalReviewsByUserId?.has(
+                      proposalReviewer.id
+                    )
+                  "
+                  class="flex gap-md flex-align-center">
+                  <!-- <span *ngIf="!asyncData.hasOwnerEndedReview">Pending</span> -->
+                  <mat-icon
+                    *ngIf="asyncData.hasOwnerEndedReview"
+                    class="sm material-symbols-outlined">
+                    do_not_disturb_on
+                  </mat-icon>
+                </div>
+              </div>
+              <button
+                *ngIf="
+                  asyncData.isCurrentUserInOwners ||
+                  isMe(proposalReviewer!, asyncData.currentUser)
+                "
+                [matMenuTriggerData]="{
+                  user: proposalReviewer
+                }"
+                #reviewerMenuTrigger="matMenuTrigger"
+                [matMenuTriggerFor]="reviewerMenu"
+                dt-default>
+                <div class="flex flex-align-center">
+                  <mat-icon class="xs">more_vert</mat-icon>
+                </div>
+              </button>
+            </div>
+          </div>
+        </ng-container>
+
+        <div
+          class="empty-state full-width flex flex-justify-space-between flex-align-center text-gray"
+          *ngIf="!proposalReviewers.length">
+          <span>No reviewers</span>
+          <app-share-proposal
+            (onEmitMenuTrigger)="saveShareForReviewTrigger($event)"
+            [useAddIcon]="true">
+          </app-share-proposal>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #whitePage>
+    <div
+      *ngIf="asyncData.isProposalReviewMode !== false"
+      class="review-container"></div>
+  </ng-template>
+
+  <mat-menu #ownerMenu="matMenu">
+    <ng-template matMenuContent let-user="user">
+      <div class="flex-column gap-md">
+        <button
+          [disabled]="asyncData.selectedProposalOwners?.length === 1"
+          class="text-align-left pad-v-xs"
+          (click)="
+            setPermission(
+              user,
+              PermissionOp.NONE,
+              asyncData.selectedProposalInfo!.proposal
+            )
+          "
+          dt-default>
+          <div class="flex flex-align-center gap-sm pad-right-lg">
+            <mat-icon class="xs material-symbols-outlined">delete</mat-icon>
+            <span class="font-sm">Remove</span>
+          </div>
+        </button>
+      </div>
+    </ng-template>
+  </mat-menu>
+
+  <mat-menu #reviewerMenu="matMenu">
+    <ng-template matMenuContent let-user="user">
+      <div class="flex-column gap-md">
+        <button
+          *ngIf="asyncData.isCurrentUserInOwners"
+          class="text-align-left pad-v-xs"
+          (click)="
+            setPermission(
+              user,
+              PermissionOp.ALL,
+              asyncData.selectedProposalInfo!.proposal
+            )
+          "
+          dt-default>
+          <div class="flex flex-align-center gap-sm pad-right-lg">
+            <mat-icon class="xs material-symbols-outlined">
+              arrow_upward
+            </mat-icon>
+            <span class="font-sm">Promote to owner</span>
+          </div>
+        </button>
+        <button
+          class="text-align-left pad-v-xs"
+          (click)="
+            setPermission(
+              user,
+              PermissionOp.NONE,
+              asyncData.selectedProposalInfo!.proposal
+            )
+          "
+          dt-default>
+          <div class="flex flex-align-center gap-sm pad-right-lg">
+            <mat-icon class="xs material-symbols-outlined">delete</mat-icon>
+            <span class="font-sm">Remove</span>
+          </div>
+        </button>
+      </div>
+    </ng-template>
+  </mat-menu>
+</ng-container>

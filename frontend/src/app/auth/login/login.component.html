@@ -1,0 +1,108 @@
+<div class="container full-height flex-column">
+  <div
+    class="header flex flex-justify-space-between flex-align-center pad-v-md pad-h-xl">
+    <div class="dt-logo flex flex-align-center gap-sm">
+      <img src="../../../assets/dt-logo.jpg" />
+      <span class="mat-headline-6">DocsTrail</span>
+    </div>
+    <div class="flex gap-md flex-align-center">
+      <span>Need an account?</span>
+      <button dt-black-button (click)="navigateToSingup()">Sign up</button>
+    </div>
+  </div>
+  <div class="full-width full-height flex flex-center gap-xl">
+    <div class="signup-card flex-column gap-2xl">
+      <div class="flex-column gap-md">
+        <span class="mat-headline-1">Sign In</span>
+      </div>
+      <form
+        id="signup-form"
+        [formGroup]="loginForm"
+        (ngSubmit)="submitLoginForm()"
+        (keydown.enter)="$event.preventDefault()">
+        <div class="flex-column gap-2xl">
+          <div class="flex-column gap-lg">
+            <button
+              dt-white-button
+              class="no-pad"
+              type="button"
+              (click)="loginWithGoogle()">
+              <div
+                class="google-signup-button flex flex-justify-space-between flex-align-center pad-md">
+                <img
+                  class="google-logo"
+                  src="../../../assets/google-logo.png" />
+                <span class="flex-justify-self-center flex-grow-1">
+                  Sign in with Google
+                </span>
+              </div>
+            </button>
+            <div class="or-separator full-width flex flex-justify-center">
+              OR
+            </div>
+            <!-- Form fields. -->
+            <div class="flex-column gap-sm full-width">
+              <div class="flex-column gap-md full-width">
+                <span class="white-space-nowrap mat-subtitle-1">Email</span>
+                <mat-form-field class="full-width" appearance="outline">
+                  <input
+                    type="email"
+                    matInput
+                    formControlName="email"
+                    placeholder="me@email.com" />
+                  <mat-error
+                    *ngIf="
+                      loginForm.hasError('email') &&
+                      !loginForm.hasError('required')
+                    ">
+                    Please enter a valid email address
+                  </mat-error>
+                  <mat-error *ngIf="loginForm.hasError('required')">
+                    <span>Email is&nbsp;</span>
+                    <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="flex-column gap-md full-width">
+                <span class="white-space-nowrap mat-subtitle-1">Password</span>
+                <mat-form-field class="full-width" appearance="outline">
+                  <input
+                    type="password"
+                    matInput
+                    formControlName="password"
+                    placeholder="Password" />
+                  <mat-error *ngIf="loginForm.hasError('required')">
+                    <span>Password is&nbsp;</span>
+                    <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <button
+              class="tall"
+              dt-black-button
+              type="button"
+              (click)="submitLoginForm()">
+              Sign in
+            </button>
+          </div>
+
+          <div class="flex flex-justify-space-between flex-align-center">
+            <div class="flex gap-xs">
+              <a class="form-link" href="https://docstrail.com#contact">
+                Forgot password?
+              </a>
+            </div>
+            <a
+              class="form-link"
+              routerLink="/signup"
+              [queryParams]="companySignupQueryParams">
+              <strong>Sign up</strong>
+            </a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

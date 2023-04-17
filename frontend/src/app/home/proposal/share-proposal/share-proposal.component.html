@@ -1,0 +1,84 @@
+<!-- <button
+  *ngIf="!useAddIcon"
+  #shareMenuTrigger="matMenuTrigger"
+  [matMenuTriggerFor]="shareMenu"
+  class="height-sm"
+  dt-round-fill-button>
+  <div class="flex flex-align-center gap-xs">
+    <mat-icon class="sm material-symbols-outlined">upload</mat-icon>
+    <span>Share</span>
+  </div>
+</button> -->
+<ng-container *ngIf="{ isReviewMode: isReviewMode$ | async } as asyncData">
+  <button
+    *ngIf="!useAddIcon"
+    #shareMenuTrigger="matMenuTrigger"
+    [matMenuTriggerFor]="shareMenu"
+    class="height-sm"
+    dt-square-button>
+    <div class="flex flex-align-center gap-xs">
+      <mat-icon class="sm material-symbols-outlined">upload</mat-icon>
+      <span>Share</span>
+    </div>
+  </button>
+
+  <button
+    *ngIf="useAddIcon"
+    #shareMenuTrigger="matMenuTrigger"
+    [matMenuTriggerFor]="shareMenu"
+    class="height-sm"
+    dt-button>
+    <div class="flex flex-align-center gap-xs">
+      <mat-icon class="material-symbols-outlined">add</mat-icon>
+    </div>
+  </button>
+
+  <mat-menu #shareMenu="matMenu">
+    <ng-container *ngIf="selectedProposalInfo$ | async as proposalInfo">
+      <div
+        (click)="$event.stopPropagation()"
+        class="share-menu flex-column gap-lg">
+        <span class="mat-subtitle-2 font-lg">Share proposal</span>
+        <div class="flex-column gap-sm">
+          <div class="flex-column gap-md">
+            <app-trail-dropdown
+              (onEmitContext)="saveDropdownContext($event)"
+              class="font-sm"
+              [default]="default ?? PermissionOp.REVIEW"
+              prefix="Add"
+              [optionsMap]="[
+                { label: 'Reviewer', value: PermissionOp.REVIEW },
+                { label: 'Owner', value: PermissionOp.ALL }
+              ]"></app-trail-dropdown>
+            <app-trail-text-input
+              (onEmitInputContext)="saveTextInputContext($event)"
+              placeholder="Email"
+              type="email">
+            </app-trail-text-input>
+          </div>
+          <div
+            *ngIf="
+              selectedProposalPermissions$
+                | async as selectedProposalPermissions
+            "
+            class="flex gap-xs flex-wrap">
+            <ng-container
+              *ngFor="let permission of selectedProposalPermissions">
+              <app-user-avatar
+                [matTooltip]="permission.user!.fullName | titlecase"
+                [user]="permission.user!"
+                [sizePx]="30">
+              </app-user-avatar>
+            </ng-container>
+          </div>
+        </div>
+        <button
+          [disabled]="!textInputContext?.control?.value"
+          (click)="submitNewReviewersRequest(proposalInfo.proposal)"
+          dt-square-fill-button>
+          <span class="font-sm">Send request</span>
+        </button>
+      </div>
+    </ng-container>
+  </mat-menu>
+</ng-container>

@@ -1,0 +1,136 @@
+<div class="container full-height flex-column">
+  <div
+    class="header flex flex-justify-space-between flex-align-center pad-v-md pad-h-xl">
+    <div class="dt-logo flex flex-align-center gap-sm">
+      <img src="../../../assets/dt-logo.jpg" />
+      <span class="mat-headline-6">DocsTrail</span>
+    </div>
+    <div class="flex gap-md flex-align-center">
+      <button
+        (click)="navigateToLearnMore()"
+        *ngIf="isCompanySignup"
+        dt-white-button
+        >Learn more</button
+      >
+      <span *ngIf="!isCompanySignup">Have an account?</span>
+      <button dt-black-button (click)="navigateToLogin()">Sign in</button>
+    </div>
+  </div>
+  <div class="full-width flex flex-justify-center gap-xl pad-top-68">
+    <div class="signup-card flex-column gap-2xl">
+      <div class="flex-column gap-md">
+        <span class="mat-headline-1">Sign Up</span>
+        <!-- <span class="mat-caption">Get started today</span> -->
+      </div>
+      <form
+        id="signup-form"
+        [formGroup]="signupForm"
+        (ngSubmit)="submitSignupForm()"
+        (keydown.enter)="$event.preventDefault()">
+        <div class="flex-column gap-lg">
+          <button
+            dt-white-button
+            class="no-pad"
+            (click)="signupWithGoogle()"
+            type="button">
+            <div
+              class="google-signup-button flex flex-justify-space-between flex-align-center pad-md">
+              <img class="google-logo" src="../../../assets/google-logo.png" />
+              <span class="flex-justify-self-center flex-grow-1">
+                Sign up with Google
+              </span>
+            </div>
+          </button>
+          <div class="or-separator full-width flex flex-justify-center">OR</div>
+          <!-- Form fields. -->
+          <div class="flex-column gap-sm full-width">
+            <div class="flex-column gap-md full-width">
+              <span class="white-space-nowrap mat-subtitle-1">Email</span>
+              <mat-form-field class="full-width" appearance="outline">
+                <input
+                  type="email"
+                  matInput
+                  formControlName="email"
+                  placeholder="me@email.com" />
+              </mat-form-field>
+            </div>
+            <div class="flex-column gap-md full-width">
+              <span class="white-space-nowrap mat-subtitle-1">
+                Create password
+              </span>
+              <mat-form-field class="full-width" appearance="outline">
+                <input
+                  type="password"
+                  matInput
+                  formControlName="password"
+                  placeholder="Password" />
+                <mat-error
+                  *ngIf="signupForm.get('password')?.hasError('minlength')">
+                  <span>Must be at least 8 characters long</span>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <button
+            *ngIf="!isCompanySignup"
+            class="tall"
+            dt-black-button
+            (click)="submitSignupForm()"
+            type="button">
+            Create account
+          </button>
+          <button
+            *ngIf="isCompanySignup"
+            class="tall"
+            dt-black-button
+            (click)="submitSignupForm()"
+            type="button">
+            Next
+          </button>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="isCompanySignup" class="information-card flex-column gap-2xl">
+      <div class="flex gap-sm flex-align-start">
+        <img class="gift" src="../../../assets/gift.png" />
+        <div class="flex-column gap-md">
+          <span class="mat-headline-6">Collaborate</span>
+          <div class="flex-column gap-xs">
+            <span>Build, share, and review proposals</span>
+            <span>without delays.</span>
+          </div>
+        </div>
+      </div>
+      <div class="flex-column gap-lg">
+        <span class="mat-headline-5">Organize reviews</span>
+        <div class="flex-column gap-md">
+          <div class="flex flex-align-start gap-md">
+            <mat-icon class="check sm">check</mat-icon>
+            <div class="flex-column">
+              <span>Build diagrams</span>
+            </div>
+          </div>
+          <div class="flex flex-align-center gap-md">
+            <mat-icon class="check sm">check</mat-icon>
+            <div class="flex-column">
+              <span>Collaborate with peers</span>
+            </div>
+          </div>
+          <div class="flex flex-align-center gap-md">
+            <mat-icon class="check sm">check</mat-icon>
+            <div class="flex-column">
+              <span>Share for review</span>
+            </div>
+          </div>
+          <div class="flex flex-align-center gap-md">
+            <mat-icon class="check sm">check</mat-icon>
+            <div class="flex-column">
+              <span>Get approvals</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+syntax = "proto3";
+package trail.comment;
+
+import "google/protobuf/wrappers.proto";
+import "trail/comment/message.proto";
+import "trail/comment/thread.proto";
+import "account/user/user.proto";
+
+/* Used for POST, PUT, and PATCH. */
+ message WriteCommentMessageRequest{
+  google.protobuf.StringValue comment_thread_id = 1;
+  google.protobuf.StringValue text = 2;
+}
+
+/* Used for fetching a single item. */
+message GetCommentMessageResponse {
+  trail.comment.CommentMessage comment_message = 1;
+  trail.comment.CommentThread comment_thread = 2;
+  account.user.User creator = 3;
+}
+
+/* Used for Listing items. */
+message ListCommentMessageResponse {
+  repeated trail.comment.CommentMessage comment_messages = 1;
+  repeated account.user.User creators = 2;
+  int32 match_count = 3;
+}

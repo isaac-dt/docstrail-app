@@ -1,0 +1,36 @@
+syntax = "proto3";
+package catalog.product;
+
+import "google/protobuf/wrappers.proto";
+import "catalog/open-definition/open-definition.proto";
+import "catalog/core-definition/core-definition.proto";
+import "catalog/distribution/distribution.proto";
+import "catalog/product/product.proto";
+import "catalog/inventory/batch.proto";
+import "shared.proto";
+
+/* Next Id: 8 */
+ message WriteProductRequest {
+  google.protobuf.StringValue name = 1;
+  google.protobuf.StringValue description = 2;
+  google.protobuf.StringValue web_link = 3;
+  google.protobuf.StringValue image_url = 4;
+  google.protobuf.StringValue distribution_outlet_id = 5;
+  google.protobuf.StringValue open_definition_id = 6;
+  shared.Price price = 7;
+}
+
+/* Next Id: 5 */
+message GetProductResponse {
+  catalog.product.Product product = 1;
+  catalog.open_definition.OpenDefinition open_definition = 2;
+  catalog.core_definition.CoreDefinition core_definition = 3;
+  catalog.distribution.DistributionOutlet distribution_outlet = 4;
+  repeated catalog.inventory.InventoryBatch inventory_batches = 5;
+}
+
+/* Next Id: 3 */
+message ListProductResponse {
+  catalog.product.Product products = 1;
+  int32 match_count = 2;
+}

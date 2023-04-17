@@ -1,0 +1,162 @@
+<ng-container
+  *ngIf="{
+    selectedThread: selectedCommentThread$ | async,
+    messages: selectedCommentThreadMessages$ | async,
+    dtUser: dtUser$ | async
+  } as asyncData">
+  <div
+    [class.active]="isSelected(asyncData.selectedThread)"
+    class="container flex-column gap-xs cursor-pointer pad-sm">
+    <div
+      (click)="toggleSelectedThread(asyncData.selectedThread)"
+      class="flex flex-align-center flex-justify-space-between">
+      <div class="flex flex-align-center gap-md">
+        <app-user-avatar [user]="creator"></app-user-avatar>
+        <div class="flex flex-column">
+          <span>{{ creator.fullName | titlecase }}</span>
+          <span class="mat-caption text-gray time">{{
+            getTime(thread.createdAt) | amTimeAgo
+          }}</span>
+        </div>
+      </div>
+      <div class="flex flex-align-center gap-xs">
+        <span
+          matTooltip="Question"
+          *ngIf="isType(CommentThreadType.QUESTION, thread)">
+          <mat-icon class="sm material-symbols-outlined">quiz</mat-icon>
+        </span>
+        <span
+          matTooltip="Suggestion"
+          *ngIf="isType(CommentThreadType.SUGGESTION, thread)">
+          <mat-icon class="sm material-symbols-outlined">
+            rate_review
+          </mat-icon>
+        </span>
+        <span matTooltip="Notes" *ngIf="isType(CommentThreadType.NOTE, thread)">
+          <mat-icon class="sm material-symbols-outlined">notes</mat-icon>
+        </span>
+
+        <div class="flex-column">
+          <button
+            [class.visibility-hidden]="
+              thread.createdBy !== asyncData.dtUser?.id
+            "
+            [disabled]="!isSelected(asyncData.selectedThread)"
+            dt-default
+            (click)="$event.stopPropagation()"
+            [matMenuTriggerFor]="commentThreadMenu">
+            <mat-icon class="xs">more_vert</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      [class.screenshot-height]="
+        !!thread.screenshot && isSelected(asyncData.selectedThread)
+      "
+      class="screenshot flex flex-center"
+      #screenshotEl>
+    </div>
+    <ng-container *ngIf="isSelected(asyncData.selectedThread)">
+      <div class="flex-column">
+        <ng-container
+          *ngFor="
+            let message of asyncData.messages;
+            let last = last;
+            let first = first;
+            let i = index
+          ">
+          <div class="message" *ngIf="message.commentThreadId === thread.id">
+            <div *ngIf="first">
+              {{ message.text }}
+            </div>
+            <div *ngIf="!first" class="flex-column gap-sm">
+              <div
+                *ngIf="usersRegistry$ | async as usersRegistry"
+                class="flex flex-align-center flex-justify-space-between">
+                <div
+                  *ngIf="
+                    getMessageCreator(message, usersRegistry) as messageCreator
+                  "
+                  class="flex flex-align-center gap-md">
+                  <app-user-avatar [sizePx]="25" [user]="messageCreator">
+                  </app-user-avatar>
+                  <div class="flex flex-column">
+                    <span>
+                      {{
+                        isMe(messageCreator, asyncData.dtUser)
+                          ? (messageCreator.fullName.split(" ")[0] | titlecase)
+                          : (messageCreator.fullName | titlecase)
+                      }}</span
+                    >
+                    <span class="mat-caption text-gray time">{{
+                      getTime(message.createdAt) | amTimeAgo
+                    }}</span>
+                  </div>
+                </div>
+                <div class="flex-column">
+                  <button
+                    [matMenuTriggerData]="{
+                      message: message,
+                      thread: asyncData.selectedThread
+                    }"
+                    [disabled]="!isSelected(asyncData.selectedThread)"
+                    *ngIf="message.createdBy === asyncData.dtUser?.id"
+                    dt-default
+                    [matMenuTriggerFor]="commentMessageMenu">
+                    <mat-icon class="xs">more_vert</mat-icon>
+                  </button>
+                </div>
+              </div>
+
+              <div class="pad-left-sm">
+                {{ message.text }}
+              </div>
+            </div>
+          </div>
+          <hr *ngIf="!last" />
+        </ng-container>
+      </div>
+
+      <app-trail-text-area
+        class="marg-top-sm"
+        (onEmitInputContext)="saveTextAreaContext($event)"
+        [shadow]="false"
+        placeholder="Reply..."></app-trail-text-area>
+      <div class="flex gap-md pad-top-sm">
+        <button dt-square-fill-button (click)="addMessage()"> Reply </button>
+        <button
+          dt-button
+          (click)="toggleSelectedThread(asyncData.selectedThread)">
+          Cancel
+        </button>
+      </div>
+    </ng-container>
+  </div>
+</ng-container>
+
+<mat-menu #commentThreadMenu="matMenu">
+  <div (click)="$event.stopPropagation()" class="comment-menu flex-column">
+    <!-- <button dt-default class="text-align-left">Edit</button> -->
+    <button dt-default class="text-align-left" (click)="deleteThread()">
+      Delete
+    </button>
+  </div>
+</mat-menu>
+
+<mat-menu #commentMessageMenu="matMenu">
+  <ng-template
+    matMenuContent
+    let-commentMessage="message"
+    let-commentThread="thread">
+    <div class="comment-menu flex-column">
+      <!-- <button dt-default class="text-align-left">Edit</button> -->
+      <button
+        dt-default
+        class="text-align-left"
+        (click)="deleteMessage(commentMessage, commentThread)">
+        Delete
+      </button>
+    </div>
+  </ng-template>
+</mat-menu>

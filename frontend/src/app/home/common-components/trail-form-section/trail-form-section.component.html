@@ -1,0 +1,32 @@
+<section
+  *ngIf="{
+    isVisible: trailNavController.isSectionVisible(section)
+  } as sectionMeta"
+  id="what-happened"
+  class="flex-column gap-md">
+  <button dt-default (click)="trailNavController.toggleSection(section)">
+    <div class="flex flex-align-center">
+      <mat-icon class="chevron">
+        {{ !sectionMeta.isVisible ? "chevron_right" : "expand_more" }}
+      </mat-icon>
+      <span class="mat-subtitle-2">{{ label }}</span>
+    </div>
+  </button>
+  <div
+    *ngIf="trailNavController.isSectionVisible(section)"
+    class="inputs flex-column gap-md">
+    <ng-content></ng-content>
+  </div>
+  <!-- <div
+    *ngIf="sectionMeta.isVisible"
+    class="action flex flex-align-center flex-justify-start">
+    <button dt-default (click)="trailNavController.moveToNextSection(section)">
+      <div class="flex flex-align-center gap-xs">
+        <span>Next</span>
+        <mat-icon class="sm material-symbols-outlined">
+          arrow_forward
+        </mat-icon>
+      </div>
+    </button>
+  </div> -->
+</section>

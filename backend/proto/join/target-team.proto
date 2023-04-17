@@ -1,0 +1,16 @@
+syntax = "proto3";
+package join;
+
+import "operation/target/target.proto";
+import "account/team/team.proto";
+
+/* Next Id: 3 */
+message JoinTargetTeamRequest {
+  string target_id = 1;
+  string team_id = 2;
+}
+/* Next Id: 3 */
+message JoinTargetTeamResponse {
+  operation.target.Target target = 1;
+  account.team.Team team = 2;
+}

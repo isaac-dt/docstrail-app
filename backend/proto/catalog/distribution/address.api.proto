@@ -1,0 +1,28 @@
+syntax = "proto3";
+package catalog.distribution;
+
+import "catalog/distribution/distribution.proto";
+import "catalog/distribution/address.proto";
+import "google/protobuf/wrappers.proto";
+
+/*  Next Id: 7 */
+message WriteOutletAddressRequest {
+  google.protobuf.StringValue street = 1;
+  google.protobuf.StringValue unit = 2;
+  google.protobuf.StringValue city = 3;
+  google.protobuf.StringValue zip = 4;
+  google.protobuf.Int32Value country_code = 5;
+  google.protobuf.StringValue distribution_outlet_id = 6;
+}
+
+/* Next Id: 3 */
+message GetOutletAddressResponse {
+  catalog.distribution.OutletAddress address = 1;
+  catalog.distribution.DistributionOutlet distribution_outlet = 2;
+}
+
+/* Next Id: 3 */
+message ListOutletAddressResponse {
+  repeated catalog.distribution.OutletAddress addresses = 1;
+  int32 match_count = 2;
+}

@@ -1,0 +1,37 @@
+<div class="container flex flex-column">
+  <div class="proposal-details border-bottom">
+    <app-editor-topbar></app-editor-topbar>
+  </div>
+  <div class="canvas flex">
+    <div class="col-left">
+      <div class="header"></div>
+      <app-editor-content-suggestion></app-editor-content-suggestion>
+    </div>
+    <div class="main-content flex-grow-1">
+      <!-- <editor
+        [apiKey]="tinyDocsApiKey"
+        [init]="{
+          tinycomments_author: 'author',
+          tinycomments_author_name: 'Name of the commenter',
+          tinycomments_mode: 'embedded',
+          branding: false,
+          elementpath: false,
+          statusbar: false,
+          menubar: false,
+          toolbar_sticky: true,
+          toolbar_persist: true,
+          toolbar_mode: 'wrap',
+          font_size_formats:
+            '8pt 9pt 10pt 11pt 12pt 14pt 16pt 18pt 24pt 36pt 48pt',
+          resize: false,
+          skin: 'borderless',
+          content_css: 'document',
+          height: '960px',
+          plugins: 'lists checklist pagebreak save powerpaste',
+          toolbar:
+            '| undo redo | styles | fontfamily fontsize bold italic underline forecolor backcolor 
+           | alignleft aligncenter alignright alignjustify | lineheight | checklist bullist numlist |  outdent indent | pagebreak print save'
+        }"></editor> -->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+syntax = "proto3";
+package join;
+
+import "account/job-role/job-role.proto";
+import "account/user/user.proto";
+
+/* Next Id: 3 */
+message JoinUserJobRoleRequest {
+  string user_id = 1;
+  string job_role_id = 2;
+}
+/* Next Id: 3 */
+message JoinUserJobRoleResponse {
+  account.job_role.JobRole job_role = 1;
+  account.user.User user = 2;
+}

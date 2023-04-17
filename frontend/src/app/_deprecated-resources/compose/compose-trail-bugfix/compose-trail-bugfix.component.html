@@ -1,0 +1,138 @@
+<div class="container flex-column">
+  <app-compose-topbar></app-compose-topbar>
+  <div class="flex flex-grow-1 overflow-y-scroll">
+    <ng-template [ngTemplateOutlet]="trail"></ng-template>
+    <app-compose-doc
+      [trailController]="trailController"
+      *ngIf="trailNavController.isDocVisible"
+      class="pin-scrollbar overflow-y-scroll">
+    </app-compose-doc>
+  </div>
+</div>
+
+<ng-template #trail>
+  <div
+    class="trail flex-grow-1 flex-column border-right-strong pad-top-lg pad-left-lg">
+    <app-trail-header
+      [trailNavController]="trailNavController"
+      title="Solution plan"
+      icon="deployed_code">
+    </app-trail-header>
+    <app-trail-form-tabs [trailNavController]="trailNavController">
+      <div [attr.tab]="Tab.BACKGROUND" label="Objective">
+        <ng-template [ngTemplateOutlet]="backgroundTab"></ng-template>
+      </div>
+      <div [attr.tab]="Tab.ANALYSIS" label="Solution">
+        <ng-template [ngTemplateOutlet]="analysisTab"></ng-template>
+      </div>
+      <div [attr.tab]="Tab.PEERS" label="Peers">
+        <ng-template [ngTemplateOutlet]="peersTab"></ng-template>
+      </div>
+    </app-trail-form-tabs>
+  </div>
+</ng-template>
+
+<ng-template #backgroundTab>
+  <div class="flex-column">
+    <app-trail-form-section
+      label="What are you solving?"
+      [trailNavController]="trailNavController"
+      [section]="Section.WHAT_HAPPENED">
+      <app-trail-text-area
+        [default]="trailController.getWhatHappenedDescription()"
+        (onSave)="trailController.setWhatHappenedDescription($event)"
+        label="Briefly describe your objective"
+        placeholder="Type here...">
+      </app-trail-text-area>
+      <app-trail-multi-entries
+        [default]="trailController.getWhatHappenedResources()"
+        (onAdd)="trailController.addWhatHappenedResource($event)"
+        (onRemove)="trailController.removeWhatHappenedResource($event)"
+        label="Any resources you want to add?"
+        placeholder="Insert link">
+      </app-trail-multi-entries>
+    </app-trail-form-section>
+
+    <app-trail-form-section
+      label="Where will your stack change"
+      [trailNavController]="trailNavController"
+      [section]="Section.WHAT_WAS_IMPACTED">
+      <app-trail-checkbox
+        *ngFor="let engService of trailList.engServices"
+        [default]="!!trailController.getEngServiceImpacted(engService[0])"
+        (onCheck)="trailController.addEngServiceImpacted(engService[0])"
+        (onUncheck)="trailController.removeEngServiceImpacted(engService[0])"
+        [label]="engService[1]">
+        <app-trail-dropdown
+          [default]="trailController.getHowSevere(engService[0])"
+          (onChange)="trailController.setHowSevere(engService[0], $event)"
+          [optionsPairs]="trailList.impactSeverities"
+          placeholder="How much change?">
+        </app-trail-dropdown>
+        <app-trail-text-area
+          [isToggle]="true"
+          [default]="
+            trailController.getEngServiceImpactedComment(engService[0])
+          "
+          (onSave)="
+            trailController.setEngServiceImpactedComment(engService[0], $event)
+          "
+          placeholder="Comments...">
+        </app-trail-text-area>
+      </app-trail-checkbox>
+    </app-trail-form-section>
+
+    <app-trail-form-section
+      label="Any users affected?"
+      [trailNavController]="trailNavController"
+      [section]="Section.USERS_AFFECTED">
+      <app-trail-dropdown
+        [default]="trailController.getAreAnyUsersAffected()"
+        (onChange)="trailController.setAreAnyUsersAffected($event)"
+        [optionsMap]="[
+          { value: true, label: 'Yes' },
+          { value: false, label: 'No' }
+        ]"
+        placeholder="Select"></app-trail-dropdown>
+      <app-trail-text-area
+        [isToggle]="true"
+        [default]="trailController.getAreAnyUsersAffectedComment()"
+        (onSave)="trailController.setAreAnyUsersAffectedComment($event)"
+        placeholder="Comments...">
+      </app-trail-text-area>
+    </app-trail-form-section>
+  </div>
+</ng-template>
+
+<ng-template #analysisTab>
+  <div class="flex-column">
+    <!-- <app-trail-form-section
+      label="What caused the issue?"
+      [trailNavController]="trailNavController"
+      [section]="Section.WHAT_CAUSED">
+      <app-trail-checkbox
+        *ngFor="let cause of trailList.bugCauses"
+        [label]="cause[1]">
+        <app-trail-text-area
+          [default]="trailController.getAreAnyUsersAffectedComment()"
+          (onSave)="trailController.setAreAnyUsersAffectedComment($event)"
+          placeholder="Comments..."></app-trail-text-area>
+        <app-trail-multi-entries
+          label="Any resources you want to add?"
+          placeholder="Insert link">
+        </app-trail-multi-entries>
+      </app-trail-checkbox>
+    </app-trail-form-section> -->
+  </div>
+</ng-template>
+
+<ng-template #peersTab>
+  <div class="flex-column">
+    <app-trail-form-section
+      label="Anyone who should review your proposal?"
+      [trailNavController]="trailNavController"
+      [section]="Section.REVIEWERS">
+      <app-trail-multi-entries placeholder="Email"></app-trail-multi-entries>
+    </app-trail-form-section>
+  </div>
+</ng-template>

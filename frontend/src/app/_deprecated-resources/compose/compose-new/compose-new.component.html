@@ -1,0 +1,55 @@
+<div class="container full-height full-width flex-column gap-2xl">
+  <div class="flex flex-justify-space-between pad-lg flex-align-center">
+    <button mat-icon-button (click)="navToDraftProposals()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+
+    <button mat-icon-button (click)="navToDraftProposals()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="flex-grow-1 flex main-content flex-column gap-2xl">
+    <div class="flex flex-center gap-md" style="margin-left: -90px">
+      <!-- <img class="gift" src="../../../assets/gift.png" /> -->
+      <app-account-details
+        [imageOnly]="true"
+        [sizePx]="50"></app-account-details>
+      <div class="flex-column gap-md flex-justify-center">
+        <span class="mat-headline-2">Create a new proposal</span>
+        <span class="mat-body-1">What is your goal?</span>
+      </div>
+    </div>
+
+    <div class="flex gap-xl flex-justify-center">
+      <div class="flex-column gap-md flex-center">
+        <div class="box flex flex-center" (click)="navToBugFix()">
+          <span class="flex flex-center">
+            <mat-icon class="material-symbols-outlined lg"
+              >deployed_code</mat-icon
+            >
+          </span>
+        </div>
+        <span class="mat-subtitle-2">Grow stack</span>
+        <span class="mat-caption text-gray">Groom solutions</span>
+      </div>
+      <!-- <div class="flex-column gap-md flex-center" (click)="navToBugFix()">
+        <div class="box flex flex-center">
+          <span class="flex flex-center favorite">
+            <mat-icon class="material-symbols-outlined lg">bug_report</mat-icon>
+          </span>
+        </div>
+        <span class="mat-subtitle-2">Bug fix</span>
+        <span class="mat-caption text-gray">Resolve issue</span>
+      </div> -->
+      <div class="flex-column gap-md flex-center" (click)="navToImprovement()">
+        <div class="box flex flex-center">
+          <span class="flex flex-center">
+            <mat-icon class="material-symbols-outlined lg">folder</mat-icon>
+          </span>
+        </div>
+        <span class="mat-subtitle-2">Gather assets</span>
+        <span class="mat-caption text-gray">Solicit peers</span>
+      </div>
+    </div>
+  </div>
+</div>

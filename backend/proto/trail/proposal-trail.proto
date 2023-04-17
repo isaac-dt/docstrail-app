@@ -1,0 +1,26 @@
+syntax = "proto3";
+package trail;
+
+import "google/protobuf/timestamp.proto";
+import "trail/bug-fix-proposal-trail.proto";
+import "google/protobuf/wrappers.proto";
+
+/* All information required to build a proposal.
+ * Next Id: 5 */
+ message ProposalTrail {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  DataType dataType = 4;
+  oneof data {
+    trail.BugFixTrail bug_fix = 5;
+  }
+  /* Type of the proposal data. */
+  enum DataType {
+    UNKNOWN_TYPE = 0;
+    FEATURE = 1;
+    BUG_FIX = 2;
+    NEW_TOOL = 3;
+    IMPROVEMENT = 4;
+  }
+}

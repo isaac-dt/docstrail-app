@@ -1,0 +1,31 @@
+syntax = "proto3";
+package catalog.open_definition;
+
+import "catalog/open-definition/open-definition.proto";
+import "catalog/core-definition/core-definition.proto";
+import "google/protobuf/wrappers.proto";
+
+/* Next Id: 8 */
+ message WriteOpenDefinitionRequest {
+  google.protobuf.StringValue name = 1;
+  google.protobuf.StringValue description = 2;
+  google.protobuf.StringValue image_url = 3;
+  oneof parent {
+    string client_id = 4;
+    string root_id = 5;
+  }
+  google.protobuf.StringValue core_definition_id = 6;
+  google.protobuf.BoolValue is_tangible = 7;
+}
+
+/* Next Id: 3 */
+message GetOpenDefinitionResponse {
+  catalog.open_definition.OpenDefinition open_definition = 1;
+  catalog.core_definition.CoreDefinition core_definition = 2;
+}
+
+/* Next Id: 3 */
+message ListOpenDefinitionResponse {
+  repeated catalog.open_definition.OpenDefinition open_definitions = 1;
+  int32 match_count = 2;
+}

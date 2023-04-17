@@ -1,0 +1,12 @@
+.review-container {
+  --header-heihgt: 109px;
+  position: absolute;
+  z-index: 1;
+  right: 0px;
+  top: var(--header-heihgt);
+  height: calc(100vh - var(--header-heihgt));
+  width: 350px;
+  background-color: white;
+  bottom: 0px;
+  border-left: 1px solid #eee;
+}

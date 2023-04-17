@@ -1,0 +1,80 @@
+@import "../../../atoms.scss";
+
+.title {
+  padding-left: 10px;
+  // span {
+  // background-color: #eee;
+  // padding: 5px 10px;
+  // border-radius: 80px;
+  // }
+  font-family: arial;
+  // font-weight: 900;
+  font-size: 1.1em;
+}
+
+.proposal-status {
+  span {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 4px;
+  }
+  font-size: 0.75em;
+}
+
+.pad-top-review-title {
+  padding-top: 17px;
+}
+
+.account-details {
+  margin-top: 16px; //11px;
+}
+
+button .proposal-view-mode {
+  // width: 50px;
+}
+
+.font-xs {
+  font-size: 0.75em;
+}
+
+.font-sm {
+  font-size: 0.85em;
+}
+
+.font-md {
+  font-size: 0.9em;
+}
+
+button[dt-square-button].review {
+  font-size: 0.9em;
+  border: 1.5px solid #007185;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.mat-menu {
+  background-color: white;
+  padding: 8px;
+  width: 300px;
+  // button {
+  //   padding-top: 6px;
+  //   padding-bottom: 6px;
+  //   font-size: 0.8em;
+  // }
+  span.font-sm {
+    font-size: 0.85em;
+  }
+  span.font-lg {
+    font-size: 1em;
+  }
+}
+
+input.title {
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  line-height: 1.2;
+  background: transparent;
+}
+input.title:focus {
+  border: 1px solid red;
+}

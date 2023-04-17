@@ -1,0 +1,12 @@
+syntax = "proto3";
+package account.root;
+
+import "google/protobuf/timestamp.proto";
+
+/* The most global construct; to which all global entities belong.
+ * Next Id: 4 */
+ message Root {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+}

@@ -1,0 +1,31 @@
+syntax = "proto3";
+package account.team;
+
+import "account/user/user.proto";
+import "account/team/team.proto";
+import "google/protobuf/wrappers.proto";
+
+/* Used for POST, PUT, and PATCH. 
+ * Next Id: 4 */
+ message WriteTeamRequest {
+  google.protobuf.StringValue name = 1;
+  oneof parent {
+    string client_id = 2;
+    string team_id = 3;
+  }
+}
+
+/* Used for fetching a single team. 
+ * Next Id: 4 */
+message GetTeamResponse {
+  account.team.Team team = 1;
+  repeated account.team.Team children_teams = 2;
+  repeated account.user.User users = 3;
+}
+
+/* Used for Listing teams. 
+ * Next Id: 3 */
+message ListTeamResponse {
+  repeated account.team.Team teams = 1;
+  int32 match_count = 2;
+}

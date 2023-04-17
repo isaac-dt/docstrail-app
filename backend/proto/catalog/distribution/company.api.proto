@@ -1,0 +1,25 @@
+syntax = "proto3";
+package catalog.distribution;
+
+import "catalog/distribution/distribution.proto";
+import "catalog/distribution/company.proto";
+import "google/protobuf/wrappers.proto";
+
+/* Next Id: 4 */
+message WriteCompanyRequest {
+  google.protobuf.StringValue root_id = 1;
+  google.protobuf.StringValue legal_name = 2;
+  google.protobuf.StringValue web_address = 3;
+}
+
+/* Next Id: 3 */
+message GetCompanyResponse {
+  catalog.distribution.Company company = 1;
+  repeated catalog.distribution.DistributionOutlet distribution_outlets = 2;
+}
+
+/* Next Id: 3 */
+message ListCompanyResponse {
+  repeated catalog.distribution.Company companies = 1;
+  int32 match_count = 2;
+}

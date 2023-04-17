@@ -1,0 +1,17 @@
+syntax = "proto3";
+package catalog.inventory;
+
+import "google/protobuf/timestamp.proto";
+import "shared.proto";
+
+/** Represents a single purchase order for an inventory.
+ * Next Id: 4 */
+message InventoryBatch {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  google.protobuf.Timestamp date = 4;
+  string product_id = 5;
+  int32 quatity = 6;
+  shared.Price price = 7;
+}

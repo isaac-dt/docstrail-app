@@ -1,0 +1,206 @@
+<div
+  [class.small-size]="isMinWidth"
+  [class.regular-size]="!isMinWidth"
+  class="full-height flex-column flex-justify-space-between">
+  <div class="flex-column gap-md" [class.flex-center]="isMinWidth">
+    <div
+      (click)="navigateToHomepage()"
+      [class.pad-lg]="!isMinWidth"
+      [class.pad-v-lg]="isMinWidth"
+      class="dt-logo flex flex-align-center gap-sm cursor-pointer">
+      <img src="../../../assets/dt-logo.jpg" />
+      <span *ngIf="!isMinWidth" class="mat-headline-6">DocsTrail</span>
+    </div>
+
+    <div class="sidenav-item-container flex-column">
+      <div class="flex-column gap-md">
+        <div
+          [class.flex-center]="isMinWidth"
+          [class.pad-left-lg]="!isMinWidth"
+          class="flex flex-align-center gap-md full-width create-button-container">
+          <button
+            [class.min-width]="isMinWidth"
+            dt-button
+            (click)="navigateToCompose()">
+            <div
+              [class.flex-justify-center]="isMinWidth"
+              class="create flex flex-align-center gap-sm">
+              <mat-icon class="">add</mat-icon>
+              <span *ngIf="!isMinWidth">Compose</span>
+            </div>
+          </button>
+        </div>
+
+        <!-- Links -->
+        <div class="flex-column">
+          <!-- Inbox -->
+          <div hidden class="shadow-inbox-links">
+            <a
+              [routerLink]="['/inbox/all']"
+              routerLinkActive="active"
+              #inboxAllRLA="routerLinkActive"></a>
+            <a
+              [routerLink]="['/inbox/new']"
+              routerLinkActive="active"
+              #inboxNewRLA="routerLinkActive"></a>
+            <a
+              [routerLink]="['/inbox/mentioned']"
+              routerLinkActive="active"
+              #inboxMentionedRLA="routerLinkActive"></a>
+            <a
+              [routerLink]="['/inbox/approved']"
+              routerLinkActive="active"
+              #inboxApprovedRLA="routerLinkActive"></a>
+          </div>
+
+          <!-- Proposal -->
+          <div hidden class="shadow-proposal-links">
+            <a
+              [routerLink]="['/proposal/all']"
+              routerLinkActive="active"
+              #proposalAllRLA="routerLinkActive"></a>
+            <a
+              [routerLink]="['/proposal/draft']"
+              routerLinkActive="active"
+              #proposalDraftRLA="routerLinkActive"></a>
+            <a
+              [routerLink]="['/proposal/shared']"
+              routerLinkActive="active"
+              #proposalSharedRLA="routerLinkActive"></a>
+            <!-- <a
+              [routerLink]="['/compose']"
+              routerLinkActive="active"
+              #composeRLA="routerLinkActive"></a> -->
+          </div>
+
+          <a
+            [class.small-size]="isMinWidth"
+            class="pad-h-lg"
+            [routerLink]="['/dashboard']"
+            routerLinkActive="active"
+            #archivedRLA="routerLinkActive">
+            <div
+              matTooltip="Dashboard"
+              matTooltipPosition="right"
+              [matTooltipShowDelay]="750"
+              [class.flex-justify-center]="isMinWidth"
+              class="sidenav-item flex flex-align-center gap-md">
+              <mat-icon
+                [class.material-symbols-outlined]="!archivedRLA.isActive"
+                class="sm">
+                home
+              </mat-icon>
+              <span *ngIf="!isMinWidth">Dashboard</span>
+            </div>
+          </a>
+          <a
+            [class.small-size]="isMinWidth"
+            class="pad-h-lg"
+            [routerLink]="['/proposal/all']"
+            [ngClass]="{
+              active:
+                proposalAllRLA.isActive ||
+                proposalDraftRLA.isActive ||
+                proposalSharedRLA.isActive
+            }">
+            <div
+              matTooltip="My Proposals"
+              matTooltipPosition="right"
+              [matTooltipShowDelay]="750"
+              [class.flex-justify-center]="isMinWidth"
+              class="sidenav-item flex flex-align-center gap-md">
+              <mat-icon
+                [ngClass]="{
+                  'material-symbols-outlined':
+                    !proposalAllRLA.isActive &&
+                    !proposalDraftRLA.isActive &&
+                    !proposalSharedRLA.isActive
+                }"
+                class="sm">
+                folder
+              </mat-icon>
+              <span *ngIf="!isMinWidth">My Proposals</span>
+            </div>
+          </a>
+
+          <a
+            [class.small-size]="isMinWidth"
+            class="pad-h-lg"
+            [routerLink]="['/inbox/all']"
+            [ngClass]="{
+              active:
+                inboxAllRLA.isActive ||
+                inboxNewRLA.isActive ||
+                inboxMentionedRLA.isActive ||
+                inboxApprovedRLA.isActive
+            }">
+            <div
+              matTooltip="Shared with me"
+              matTooltipPosition="right"
+              [matTooltipShowDelay]="750"
+              [class.flex-justify-center]="isMinWidth"
+              class="sidenav-item flex flex-align-center gap-md">
+              <mat-icon
+                [ngClass]="{
+                  'material-symbols-outlined':
+                    !inboxAllRLA.isActive &&
+                    !inboxNewRLA.isActive &&
+                    !inboxMentionedRLA.isActive &&
+                    !inboxApprovedRLA.isActive
+                }"
+                class="sm">
+                inbox
+              </mat-icon>
+              <span *ngIf="!isMinWidth">Shared with me</span>
+            </div>
+          </a>
+          <!-- <a
+            [class.small-size]="isMinWidth"
+            class="pad-h-lg"
+            [routerLink]="['/archived']"
+            routerLinkActive="active"
+            #archivedRLA="routerLinkActive">
+            <div
+              [class.flex-justify-center]="isMinWidth"
+              class="sidenav-item flex flex-align-center gap-md">
+              <mat-icon
+                [class.material-symbols-outlined]="!archivedRLA.isActive"
+                class="sm">
+                inventory_2
+              </mat-icon>
+              <span *ngIf="!isMinWidth">Archived</span>
+            </div>
+          </a> -->
+          <!-- <a
+            [class.small-size]="isMinWidth"
+            class="pad-h-lg"
+            [routerLink]="['/trash']"
+            routerLinkActive="active"
+            #trashRLA="routerLinkActive">
+            <div
+              [class.flex-justify-center]="isMinWidth"
+              class="sidenav-item flex flex-align-center gap-md">
+              <mat-icon
+                [class.material-symbols-outlined]="!trashRLA.isActive"
+                class="sm">
+                delete
+              </mat-icon>
+              <span *ngIf="!isMinWidth">Trash</span>
+            </div>
+          </a> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="help-link-container flex flex-center">
+    <a
+      matTooltip="Help and resources"
+      matTooltipPosition="right"
+      [matTooltipShowDelay]="750">
+      <div class="flex flex-align-center gap-xs">
+        <mat-icon class="material-symbols-outlined">help</mat-icon>
+        <span *ngIf="!isMinWidth">Help and resources</span>
+      </div>
+    </a>
+  </div>
+</div>

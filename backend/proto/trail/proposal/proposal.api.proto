@@ -1,0 +1,46 @@
+syntax = "proto3";
+package trail.proposal;
+
+import "google/protobuf/wrappers.proto";
+import "account/user/user.proto";
+import "trail/proposal/proposal.proto";
+import "permission.proto";
+
+/* Used for POST, PUT, and PATCH. */
+ message WriteProposalRequest {
+  google.protobuf.StringValue name = 1;
+  google.protobuf.StringValue diagramXml = 2;
+}
+
+/* Used for fetching a single item. */
+message GetProposalResponse {
+  trail.proposal.Proposal proposal = 1;
+  repeated ProposalPermission all_permissions_on_proposal = 2;
+}
+
+/* Used to fetch the response after sharing a proposal. */
+message WriteShareProposalRequest {
+  google.protobuf.StringValue accessor_email = 1;
+  google.protobuf.StringValue proposal_id = 2;
+  permission.PermissionOp operation = 3;
+}
+
+/* Used to fetch the response after sharing a proposal. */
+message GetShareProposalResponse {
+  account.user.User accessor = 1;
+  permission.Permission permission = 2;
+}
+
+/* Used for Listing items. */
+message ListProposalResponse {
+  repeated trail.proposal.Proposal proposals = 1;
+  repeated ProposalPermission requestor_permissions_on_proposals = 2;
+  int32 match_count = 3;
+}
+
+/* Permissions associated to an item. */
+message ProposalPermission {
+  google.protobuf.StringValue proposal_id = 1;
+  account.user.User user = 2;
+  permission.Permission permission = 3;
+}

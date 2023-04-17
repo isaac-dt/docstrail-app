@@ -1,0 +1,16 @@
+syntax = "proto3";
+package join;
+
+import "catalog/core-definition/core-definition.proto";
+import "catalog/distribution/distribution.proto";
+
+/* Next Id: 3 */
+message JoinCoreDefDistOutletRequest {
+  string core_definition_id = 1;
+  string distribution_outlet_id = 2;
+}
+/* Next Id: 3 */
+message JoinCoreDefDistOutletResponse {
+  catalog.core_definition.CoreDefinition core_definition = 1;
+  catalog.distribution.DistributionOutlet distribution_outlet = 2;
+}

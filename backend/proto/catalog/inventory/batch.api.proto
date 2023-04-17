@@ -1,0 +1,28 @@
+syntax = "proto3";
+package catalog.inventory;
+
+import "google/protobuf/wrappers.proto";
+import "catalog/inventory/batch.proto";
+import "catalog/product/product.proto";
+import "google/protobuf/timestamp.proto";
+import "shared.proto";
+
+/* Next Id: 5 */
+message WriteInventoryBatchRequest {
+  google.protobuf.Timestamp date = 1;
+  google.protobuf.StringValue product_id = 2;
+  google.protobuf.Int32Value quatity = 3;
+  shared.Price price = 4;
+}
+
+/* Next Id: 3 */
+message GetInventoryBatchResponse {
+  catalog.product.Product product = 1;
+  catalog.inventory.InventoryBatch inventory_batch = 2;
+}
+
+/* Next Id: 3 */
+message ListInventoryBatchResponse {
+  repeated catalog.inventory.InventoryBatch inventoryBatches = 1;
+  int32 match_count = 2;
+}

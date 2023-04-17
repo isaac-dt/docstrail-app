@@ -1,0 +1,39 @@
+<!-- <mat-form-field appearance="outline">
+  <mat-label>{{ placeholder }}</mat-label>
+  <mat-select
+    (selectionChange)="onChange()"
+    [formControl]="selectionControl"
+    disableRipple>
+    <mat-option *ngFor="let option of optionsMap" [value]="option.value">
+      {{ option.label }}
+    </mat-option>
+  </mat-select>
+</mat-form-field> -->
+
+<div class="container flex-column" (click)="toggleIsContentVisible()">
+  <div class="input-area flex flex-justify-space-between flex-align-center">
+    <div class="flex-column">
+      <span class="placeholder text-gray" *ngIf="selectedLabel">
+        {{ placeholder }}
+      </span>
+      <!-- <span >{{ selectedLabel || placeholder }}</span> -->
+      <span>{{ prefix ? prefix + " " + selectedLabel : selectedLabel }}</span>
+    </div>
+    <mat-icon>arrow_drop_down</mat-icon>
+  </div>
+
+  <ng-container *ngIf="isContentVisible">
+    <ng-template [ngTemplateOutlet]="content"></ng-template>
+  </ng-container>
+</div>
+
+<ng-template #content>
+  <div class="content flex-column">
+    <span
+      class="option"
+      *ngFor="let option of optionsMap"
+      (click)="selectionControl.setValue(option.value); onChange()">
+      {{ option.label }}
+    </span>
+  </div>
+</ng-template>

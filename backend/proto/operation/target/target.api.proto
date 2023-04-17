@@ -1,0 +1,35 @@
+syntax = "proto3";
+package operation.target;
+
+import "google/protobuf/wrappers.proto";
+import "operation/template/template.proto";
+import "operation/target/target.proto";
+import "account/client/client.proto";
+import "account/user/user.proto";
+import "account/team/team.proto";
+import "account/job-role/job-role.proto";
+
+/* Next Id: 3 */
+ message WriteTargetRequest {
+  google.protobuf.StringValue name = 1;
+  google.protobuf.StringValue client_id = 2;
+}
+
+/* Next Id: 8 */
+message GetTargetResponse {
+  operation.target.Target target = 1;
+  account.client.Client client = 2;
+  repeated operation.template.Template templates = 3;
+  repeated account.team.Team teams = 4;
+  repeated account.job_role.JobRole job_roles = 5;
+  // Users directly added to the target.
+  repeated account.user.User direct_users = 6;
+  // Includes directly added users and the ones extracted from teams and job roles.
+  repeated account.user.User final_user_set = 7;
+}
+
+/* Next Id: 3 */
+message ListTargetResponse {
+  repeated operation.target.Target targets = 1;
+  int32 match_count = 2;
+}

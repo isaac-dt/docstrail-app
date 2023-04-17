@@ -1,0 +1,27 @@
+syntax = "proto3";
+package operation.bundle;
+
+import "google/protobuf/wrappers.proto";
+import "operation/item/item.proto";
+import "catalog/product/product.proto";
+import "catalog/inventory/batch.proto";
+
+/* Next Id: 4 */
+ message WriteDeliveryItemRequest {
+  google.protobuf.Int32Value quantity = 1;
+  google.protobuf.StringValue product_id = 2;
+  google.protobuf.StringValue order_id = 3;
+}
+
+/* Next Id: 4 */
+message GetDeliveryItemResponse {
+  operation.item.DeliveryItem bundle = 1;
+  catalog.product.Product product = 2;
+  catalog.inventory.InventoryBatch inventory_batch = 3;
+}
+
+/* Next Id: 3 */
+message ListDeliveryItemResponse {
+  repeated operation.item.DeliveryItem delivery_items = 1;
+  int32 match_count = 2;
+}

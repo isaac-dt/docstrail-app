@@ -1,0 +1,20 @@
+syntax = "proto3";
+package operation.bundle;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+/* Grouping of Templates. Could be used to separate templates 
+ * between clients, teams, or budgets.
+ * Next Id: 8 */
+ message Bundle {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  string name = 4;
+  google.protobuf.StringValue description = 5;
+  oneof parent {
+    string client_id = 6;
+    string root_id = 7;
+  }
+}

@@ -1,0 +1,40 @@
+syntax = "proto3";
+package operation.order;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "operation/order/order.proto";
+import "operation/template/template.proto";
+import "operation/item/item.proto";
+import "operation/trigger/trigger.proto";
+import "account/user/address.proto";
+import "account/user/user.proto";
+
+/* Next Id: 11 */
+ message WriteOrderRequest {
+  operation.order.OrderStatus status = 1;
+  operation.order.OrderApproval approval = 2;
+  google.protobuf.StringValue tracking_number = 3;
+  google.protobuf.Timestamp expected_delivery_date = 4;
+  google.protobuf.Timestamp estimated_delivery_date = 5;
+  google.protobuf.Timestamp shipping_date = 6;
+  operation.trigger.Trigger trigger = 7;
+  account.user.UserAddress delivery_address = 8;
+  account.user.User user = 9;
+  google.protobuf.StringValue root_id = 10;
+}
+
+/* Next Id: 4 */
+message GetOrderResponse {
+  operation.order.Order order = 1;
+  // The template might have been modified after the order is created.
+  // The system should rely on the order field as source of truth.
+  operation.template.Template template = 2;
+  repeated operation.item.DeliveryItem items = 3;
+}
+
+/* Next Id: 3 */
+message ListOrderResponse {
+  repeated operation.order.Order orders = 1;
+  int32 match_count = 2;
+}

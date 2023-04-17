@@ -1,0 +1,17 @@
+<div class="container flex flex-align-center gap-sm pad-h-md">
+  <mat-icon>search</mat-icon>
+  <input
+    [formControl]="queryFormControl"
+    placeholder="Search Docs..."
+    matInput
+    type="text" />
+  <button
+    dt-button
+    [hidden]="!queryFormControl.value"
+    (click)="queryFormControl.reset()">
+    <mat-icon class="sm">close</mat-icon>
+  </button>
+  <button dt-button>
+    <mat-icon>tune</mat-icon>
+  </button>
+</div>

@@ -1,0 +1,29 @@
+syntax = "proto3";
+package operation.trigger;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "operation/trigger/trigger.proto";
+
+/* Next Id: 7 */
+ message WriteTriggerRequest {
+  google.protobuf.StringValue name = 1;
+  google.protobuf.StringValue description = 2;
+  google.protobuf.Timestamp expires_at = 3;
+  oneof expected_delivery_date {
+    operation.trigger.ScheduledEvent scheduled_event = 7;
+    operation.trigger.SpecialEvent special_event = 8;
+  }
+  google.protobuf.StringValue root_id = 6;
+}
+
+/* Next Id: 3 */
+message GetTriggerResponse {
+  operation.trigger.Trigger trigger = 1;
+}
+
+/* Next Id: 3 */
+message ListTriggerResponse {
+  repeated operation.trigger.Trigger triggers = 1;
+  int32 match_count = 2;
+}

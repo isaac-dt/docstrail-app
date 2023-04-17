@@ -1,0 +1,10 @@
+:host {
+  --checkbox-indent: 35px;
+}
+
+.checkbox mat-icon {
+  width: var(--checkbox-indent);
+}
+.ng-content {
+  padding-left: var(--checkbox-indent);
+}

@@ -1,0 +1,17 @@
+syntax = "proto3";
+package catalog.allow_list;
+
+import "google/protobuf/wrappers.proto";
+import "catalog/allow-list/allow-list.proto";
+import "account/client/client.proto";
+
+/* Next Id: 8 */
+ message WriteAllowListRequest {
+  google.protobuf.StringValue client_id = 1;
+}
+
+/* Next Id: 5 */
+message GetAllowListResponse {
+  catalog.allow_list.AllowList allow_list = 1;
+  account.client.Client client = 2;
+}

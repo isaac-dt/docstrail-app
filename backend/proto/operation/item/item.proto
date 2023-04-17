@@ -1,0 +1,16 @@
+syntax = "proto3";
+package operation.item;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+/* An item which is delivered via an order. 
+ * Next Id: 7 */
+ message DeliveryItem {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  google.protobuf.Int32Value quantity = 4;
+  string product_id = 5;
+  string order_id = 6;
+}

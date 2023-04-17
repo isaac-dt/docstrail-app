@@ -1,0 +1,47 @@
+<ng-container
+  *ngIf="{
+    dtUser: dtUser$ | async,
+    dtOrg: dtOrg$ | async,
+    fireAuthUserData: fireAuthUserData$ | async
+  } as asyncData">
+  <div class="flex-column pad-right-xl" [class.cursor-pointer]="!isImageOnly">
+    <div
+      [matMenuTriggerFor]="accountMenu"
+      id="account-menu-avatar"
+      [style.width.px]="sizePx"
+      [style.height.px]="sizePx"
+      class="avatar-container flex flex-center gap-lg">
+      <app-user-avatar
+        *ngIf="asyncData.dtUser"
+        [user]="asyncData.dtUser"
+        [sizePx]="sizePx">
+      </app-user-avatar>
+    </div>
+  </div>
+
+  <mat-menu #accountMenu="matMenu">
+    <div class="account-menu flex-column gap-md">
+      <div class="flex flex-align-center gap-sm">
+        <app-user-avatar
+          *ngIf="dtUser$ | async as dtUser"
+          [user]="dtUser"
+          [sizePx]="45"></app-user-avatar>
+        <div class="name flex-column gap-xs">
+          <span class="mat-body-1">
+            {{ asyncData.dtUser?.fullName | titlecase }}
+          </span>
+          <span class="mat-caption text-gray email">
+            {{ asyncData.fireAuthUserData?.email }}
+          </span>
+        </div>
+      </div>
+      <hr />
+      <button (click)="signOut()" dt-default>
+        <div class="action flex flex-align-center gap-md pad-md">
+          <mat-icon class="sm">logout</mat-icon>
+          <span>Logout</span>
+        </div>
+      </button>
+    </div>
+  </mat-menu>
+</ng-container>

@@ -1,0 +1,49 @@
+@use "../../../atoms.scss" as *;
+
+.container {
+  background-color: white;
+  min-width: 700px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.tabs {
+  color: #555;
+  .chip-round {
+    cursor: pointer;
+    color: #555;
+    border: 1px solid #777;
+  }
+
+  .active-chip {
+    color: rgb(0, 89, 222);
+    background-color: rgb(232, 240, 254, 0.5);
+    border: 1px solid rgb(0, 89, 222);
+  }
+
+  .tab {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    @extend .gap-xs;
+    padding-bottom: 4px;
+    span {
+      border-bottom: 2px solid transparent;
+    }
+  }
+  .tab:hover:not(.active-tab) {
+    span {
+      border-bottom: 2px solid #555;
+    }
+  }
+
+  .active-tab {
+    color: rgb(0, 89, 222);
+    span {
+      border-bottom: 2px solid rgb(0, 89, 222);
+    }
+  }
+}

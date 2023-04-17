@@ -1,0 +1,26 @@
+syntax = "proto3";
+package catalog.distribution;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+/* A full Description of a product distribution outlet.
+ * Example: Amazon.com website, or Target at Canton GA.
+ * Next Id: 10 */
+ message DistributionOutlet {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  string company_id = 4;
+  string physical_address_id = 5;
+  google.protobuf.StringValue web_address = 6;
+  google.protobuf.StringValue customer_service_phone_number = 7;
+  google.protobuf.StringValue customer_service_email = 8;
+  DistributionMethod distribution_method = 9;
+}
+
+/* Next Id: 3 */
+enum DistributionMethod {
+  DELIVERY = 0;
+  PICK_UP = 1;
+}

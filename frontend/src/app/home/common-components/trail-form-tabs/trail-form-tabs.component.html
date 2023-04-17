@@ -1,0 +1,18 @@
+<div
+  id="trail-form"
+  class="flex-column flex-grow-1 pin-scrollbar overflow-y-scroll">
+  <div id="tabs" class="tab-container flex marg-top-xl">
+    <div
+      *ngFor="let tabInfo of tabsInfos"
+      (click)="trailNavController.setTab(tabInfo.tab)"
+      class="tab"
+      [class.active]="trailNavController.isActiveTab(tabInfo.tab)">
+      {{ tabInfo.label }}
+    </div>
+  </div>
+  <div class="overflow-y-scroll">
+    <div #tabContent class="tab-content pad-top-lg flex-grow-1 pad-right-lg">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

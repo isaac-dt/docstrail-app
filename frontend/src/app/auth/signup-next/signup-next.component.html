@@ -1,0 +1,100 @@
+<ng-container
+  *ngIf="{ fireAuthUserData: fireAuthUserData$ | async } as asyncData">
+  <div class="container full-height flex-column">
+    <div
+      class="header flex flex-justify-space-between flex-align-center pad-v-md pad-h-xl">
+      <div class="dt-logo flex flex-align-center gap-sm">
+        <img src="../../../assets/dt-logo.jpg" />
+        <span class="mat-headline-6">DocsTrail</span>
+      </div>
+      <div class="flex gap-md flex-align-center">
+        <button dt-white-button (click)="signOut()">
+          <div class="flex flex-center gap-sm">
+            <mat-icon>chevron_left</mat-icon>
+            <span>Back to Login</span>
+          </div>
+        </button>
+      </div>
+    </div>
+    <div
+      *ngIf="asyncData.fireAuthUserData"
+      class="flex flex-justify-center pad-top-100">
+      <div class="signup-next-card flex-column gap-2xl">
+        <div class="flex gap-lg flex-align-end">
+          <img class="gift" src="../../../assets/gift.png" />
+          <div class="flex-column gap-md">
+            <span class="mat-headline-5">Let's get going..</span>
+            <span class="mat-caption subtitle">
+              You are logged in as
+              <u>{{ asyncData.fireAuthUserData.email }}</u>
+            </span>
+          </div>
+        </div>
+        <form
+          id="signup-form"
+          [formGroup]="signupNextForm"
+          (ngSubmit)="submitSignupNextForm(asyncData.fireAuthUserData)">
+          <div class="flex-column gap-sm full-width">
+            <div class="flex-column gap-md full-width">
+              <mat-form-field dense class="full-width" appearance="outline">
+                <mat-label>Full Name</mat-label>
+                <input
+                  type="text"
+                  matInput
+                  formControlName="fullName"
+                  placeholder="Full name" />
+                <mat-error
+                  *ngIf="
+                    signupNextForm.hasError('fullName') &&
+                    !signupNextForm.hasError('required')
+                  ">
+                  Please enter a valid full name
+                </mat-error>
+                <mat-error *ngIf="signupNextForm.hasError('required')">
+                  <span>Full name is&nbsp;</span>
+                  <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="flex-column gap-md full-width">
+              <!-- <mat-form-field dense class="full-width" appearance="outline">
+                <mat-label>Business Name</mat-label>
+                <input
+                  type="text"
+                  matInput
+                  formControlName="businessName"
+                  placeholder="Business name" />
+                <mat-error
+                  *ngIf="
+                    signupNextForm.hasError('businessName') &&
+                    !signupNextForm.hasError('required')
+                  ">
+                  Please enter a valid business name
+                </mat-error>
+                <mat-error *ngIf="signupNextForm.hasError('required')">
+                  <span>Business name is&nbsp;</span>
+                  <strong>required</strong>
+                </mat-error>
+              </mat-form-field> -->
+              <mat-checkbox
+                [class.error]="showTermsError"
+                (change)="clearErrors()"
+                formControlName="isTermAndConditionAgreed">
+                <span class="mat-caption">
+                  <span>I agree to the&nbsp;</span>
+                  <a dt-default target="_blank" [routerLink]="['/terms']">
+                    <strong>Terms & Conditions</strong>
+                  </a>
+                  <span>.</span>
+                </span>
+              </mat-checkbox>
+            </div>
+            <button class="tall marg-top-sm" dt-black-button type="submit">
+              Get started
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-container>

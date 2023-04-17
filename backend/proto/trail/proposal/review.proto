@@ -1,0 +1,25 @@
+syntax = "proto3";
+package trail.proposal;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+/* Proposal review. */
+ message ProposalReview {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  google.protobuf.Timestamp deleted_at = 4;
+  google.protobuf.StringValue proposal_id = 5;
+  google.protobuf.StringValue created_by = 6;
+  Status status = 7;
+  google.protobuf.StringValue note = 8;
+
+  enum Status {
+    UNKNOWN_TYPE = 0;
+    PENDING = 1;
+    HOLD = 2;
+    LGTM = 3;
+    END_REVIEW = 4;
+  }
+}

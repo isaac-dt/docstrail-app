@@ -1,0 +1,52 @@
+syntax = "proto3";
+package operation.order;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "operation/trigger/trigger.proto";
+import "account/user/address.proto";
+import "account/user/user.proto";
+
+/* An order to deliver items.
+* Next Id: 15 */
+message Order {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  google.protobuf.StringValue template_id = 4;
+  google.protobuf.Timestamp expected_delivery_date = 5;
+  google.protobuf.Timestamp estimated_delivery_date = 6;
+  google.protobuf.Timestamp shipping_date = 7;
+  google.protobuf.StringValue tracking_number = 8;
+  OrderStatus status = 9;
+  OrderApproval approval = 10;
+  operation.trigger.Trigger trigger = 11;
+  account.user.UserAddress delivery_address = 12;
+  account.user.User user = 13;
+  string root_id = 14;
+}
+
+/* Approval data for an order.
+ * Next Id: 5 */
+message OrderApproval {
+  google.protobuf.Timestamp time = 1;
+  string user_id = 2;
+  OrderApprovalStatus status = 3;
+  google.protobuf.StringValue note = 4;
+}
+
+/* Status of an order.
+* Next Id: 4 */
+  enum OrderStatus {
+  REQUESTED = 0;
+  IN_TRANSIT = 1;
+  DELIVERED = 2;
+  CANCELLED = 3;
+}
+
+/* Approval Status of an order.
+* Next Id: 2 */
+enum OrderApprovalStatus {
+  APPROVED = 0;
+  REJECTED = 1;
+}

@@ -1,0 +1,67 @@
+<ng-container *ngIf="isVisible">
+  <div
+    *ngIf="{ thread: thread$ | async, message: message$ | async } as asyncData"
+    class="container flex-column pad-sm overflow-y-scroll">
+    <div class="flex flex-align-center flex-justify-space-between full-width">
+      <div class="flex flex-align-center">
+        <app-account-details [imageOnly]="true"></app-account-details>
+        <span class="user-name" *ngIf="fireAuthUserData$ | async as userData">{{
+          userData.displayName
+        }}</span>
+      </div>
+      <button
+        *ngIf="asyncData.thread?.screenshot"
+        (click)="clearScreenshot(asyncData.thread)"
+        dt-button
+        class="clear-screenshot">
+        <!-- Style is absolute; see stylesheet. Flex is not applied. -->
+        <mat-icon class="sm">close</mat-icon>
+      </button>
+    </div>
+    <div>
+      <div
+        [class.screenshot-height]="asyncData.thread?.screenshot"
+        class="screenshot flex flex-center"
+        #screenshotEl>
+      </div>
+    </div>
+    <div class="thread-type flex gap-md marg-v-sm">
+      <div
+        (click)="setType(CommentThreadType.QUESTION, asyncData.thread)"
+        class="thread-chip flex flex-align-center font-sm mat-subtitle-2"
+        [class.active]="isType(CommentThreadType.QUESTION, asyncData.thread)">
+        <mat-icon class="xs material-symbols-outlined">quiz</mat-icon>
+        <span>Question</span>
+      </div>
+      <div
+        (click)="setType(CommentThreadType.SUGGESTION, asyncData.thread)"
+        class="thread-chip flex flex-align-center font-sm mat-subtitle-2"
+        [class.active]="isType(CommentThreadType.SUGGESTION, asyncData.thread)">
+        <mat-icon class="xs material-symbols-outlined">rate_review</mat-icon>
+        <span>Suggestion</span>
+      </div>
+      <div
+        (click)="setType(CommentThreadType.NOTE, asyncData.thread)"
+        class="thread-chip flex flex-align-center font-sm mat-subtitle-2"
+        [class.active]="isType(CommentThreadType.NOTE, asyncData.thread)">
+        <mat-icon class="xs material-symbols-outlined">notes</mat-icon>
+        <span>Note</span>
+      </div>
+    </div>
+    <div class="full-width">
+      <app-trail-text-area
+        (onEmitInputContext)="saveTextAreaContext($event)"
+        [default]="asyncData.message?.text ?? ''"
+        [shadow]="false"
+        [placeholder]="getPlaceholder(asyncData.thread)"></app-trail-text-area>
+    </div>
+    <div class="flex gap-md full-width pad-top-sm">
+      <button
+        dt-square-fill-button
+        (click)="submitThreadWithMessage(asyncData.thread)">
+        Comment
+      </button>
+      <button dt-button (click)="setIsVisible(false)">Cancel</button>
+    </div>
+  </div>
+</ng-container>

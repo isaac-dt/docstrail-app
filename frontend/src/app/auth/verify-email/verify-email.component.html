@@ -1,0 +1,56 @@
+<ng-container
+  *ngIf="{ fireAuthUserData: fireAuthUserData$ | async } as asyncData">
+  <div class="container full-height flex-column">
+    <div
+      class="header flex flex-justify-space-between flex-align-center pad-v-md pad-h-xl">
+      <div class="dt-logo flex flex-align-center gap-sm">
+        <img src="../../../assets/dt-logo.jpg" />
+        <span class="mat-headline-6">DocsTrail</span>
+      </div>
+      <div class="flex gap-md flex-align-center">
+        <button dt-white-button (click)="signOut()">
+          <div class="flex flex-center gap-sm">
+            <mat-icon>chevron_left</mat-icon>
+            <span>Back to Login</span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <div
+      *ngIf="asyncData.fireAuthUserData"
+      class="pad-top-100 flex flex-center">
+      <div class="flex-column flex-center gap-2xl">
+        <img class="gift" src="../../../assets/gift.png" />
+        <div class="flex-column gap-xl">
+          <span class="mat-headline-2">Please verify your email address</span>
+          <div class="flex-column flex-center gap-xl">
+            <div class="flex-column flex-center gap-md">
+              <span>We sent a verification email to</span>
+              <span class="mat-headline-6">
+                <strong>{{ asyncData.fireAuthUserData.email }}</strong>
+              </span>
+            </div>
+            <div class="flex-column flex-center gap-md">
+              <!-- <span>
+                Click on the link in that email to complete your signup.
+              </span> -->
+              <!-- <span>
+                You may need to
+                <span class="mat-headline-6">check your spam folder</span>
+              </span> -->
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!isEmailResent" class="flex-column flex-center gap-md">
+          <span>Can't find the email?</span>
+          <button
+            dt-white-button
+            (click)="sendEmailVerification(asyncData.fireAuthUserData)">
+            Resend email
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

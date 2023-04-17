@@ -1,0 +1,129 @@
+@use "../atoms.scss" as *;
+
+.container {
+  background-color: white;
+}
+
+table {
+  border-collapse: collapse;
+  column-gap: 400px;
+}
+
+tr.title-row {
+  th {
+    @extend .pad-v-md;
+    div {
+      @extend .flex-column;
+      @extend .flex-align-start;
+      @extend .gap-sm;
+      .mat-subtitle-1 {
+        // letter-spacing: 0.7px;
+        // scale: 0.95;
+      }
+      .mat-caption {
+        opacity: $opacity-disabled;
+        font-weight: bolder;
+        font-size: 0.9em;
+      }
+    }
+  }
+  th:not(.space-holder) {
+    @extend .border-bottom;
+  }
+}
+
+tr.template-list {
+  td {
+    @extend .border-top;
+    @extend .pad-v-md;
+  }
+}
+tr.template-list:hover {
+  background-color: rgba(238, 238, 238, 0.511);
+}
+
+td,
+th {
+  @extend .pad-h-md;
+}
+
+input.new-name {
+  width: 90%;
+}
+
+tr[empty] {
+  td {
+    height: 60px;
+  }
+}
+
+tr.title {
+  td,
+  th {
+    border: none;
+  }
+  .mat-caption {
+    opacity: $opacity-disabled;
+    font-weight: bolder;
+    font-size: 0.9em;
+  }
+}
+
+.marg-left-2 {
+  margin-left: 2px;
+}
+
+td.name {
+  width: 30%;
+  .action-buttons {
+    cursor: pointer;
+    display: none;
+  }
+}
+
+tr.template-list:hover {
+  .action-buttons {
+    display: flex;
+    .button {
+      color: $color-link;
+    }
+  }
+}
+
+.filter-chips {
+  color: #555;
+  .chip-round {
+    cursor: pointer;
+    color: #555;
+    border: 1px solid #777;
+  }
+
+  .active-chip {
+    color: rgb(0, 89, 222);
+    background-color: rgb(232, 240, 254, 0.5);
+    border: 1px solid rgb(0, 89, 222);
+  }
+
+  .tab {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    @extend .gap-xs;
+    padding-bottom: 4px;
+    span {
+      border-bottom: 2px solid transparent;
+    }
+  }
+  .tab:hover:not(.active-tab) {
+    span {
+      border-bottom: 2px solid #555;
+    }
+  }
+
+  .active-tab {
+    color: rgb(0, 89, 222);
+    span {
+      border-bottom: 2px solid rgb(0, 89, 222);
+    }
+  }
+}

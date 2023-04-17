@@ -1,0 +1,26 @@
+syntax = "proto3";
+package catalog.core_definition;
+
+import "catalog/core-definition/core-definition.proto";
+import "catalog/distribution/distribution.proto";
+import "google/protobuf/wrappers.proto";
+
+/* Next Id: 5 */
+ message WriteCoreDefinitionRequest {
+  google.protobuf.StringValue name = 1;
+  google.protobuf.StringValue description = 2;
+  catalog.core_definition.CoreDefinitionCategory category = 3;
+  google.protobuf.StringValue root_id = 4;
+}
+
+/* Next Id: 3 */
+message GetCoreDefinitionResponse {
+  catalog.core_definition.CoreDefinition core_definition = 1;
+  repeated catalog.distribution.DistributionOutlet distribution_outlets = 2;
+}
+
+/* Next Id: 3 */
+message ListCoreDefinitionResponse {
+  repeated catalog.core_definition.CoreDefinition core_definitions = 1;
+  int32 match_count = 2;
+}

@@ -1,0 +1,25 @@
+syntax = "proto3";
+package account.user;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+/* Individual user associated to a Dimetrail account. */
+message User {
+  string id = 1;
+  string full_name = 2;
+  google.protobuf.Timestamp created_at = 3;
+  google.protobuf.Timestamp updated_at = 4;
+  UserRole role = 7;
+  google.protobuf.StringValue team_id = 8;
+  google.protobuf.StringValue photoUrl = 9;
+  string email = 10;
+}
+
+/* Roles that a user can assume. */
+enum UserRole {
+  UNKNOWN_ROLE = 0;
+  EMPLOYEE = 1;
+  ORG_ADMIN = 2;
+  SYSTEM_ADMIN = 3;
+}

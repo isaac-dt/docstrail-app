@@ -1,0 +1,31 @@
+syntax = "proto3";
+package account.client;
+
+import "google/protobuf/wrappers.proto";
+import "account/job-role/job-role.proto";
+import "account/client/client.proto";
+import "account/team/team.proto";
+import "catalog/open-definition/open-definition.proto";
+
+/* Used for POST, PUT, and PATCH. 
+ * Next Id: 3 */
+ message WriteClientRequest {
+  google.protobuf.StringValue name = 1;
+  google.protobuf.StringValue root_id = 2;
+}
+
+/* Used for fetching a single client. 
+ * Next Id: 5 */
+message GetClientResponse {
+  account.client.Client client = 1;
+  repeated account.team.Team children_teams = 2;
+  repeated account.job_role.JobRole job_roles = 3;
+  repeated catalog.open_definition.OpenDefinition open_definitions = 4;
+}
+
+/* Used for Listing clients. 
+ * Next Id: 3 */
+message ListClientResponse {
+  repeated account.client.Client clients = 1;
+  int32 match_count = 2;
+}

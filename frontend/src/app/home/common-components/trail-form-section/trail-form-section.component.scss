@@ -1,0 +1,18 @@
+:host {
+  --chevron-indent: 30px;
+}
+
+mat-icon.chevron {
+  width: var(--chevron-indent);
+}
+.inputs {
+  padding-left: var(--chevron-indent);
+}
+section {
+  padding: 8px;
+}
+
+.action {
+  padding-left: var(--chevron-indent);
+  padding-bottom: 14px;
+}

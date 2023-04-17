@@ -1,0 +1,16 @@
+syntax = "proto3";
+package join;
+
+import "operation/trigger/trigger.proto";
+import "operation/template/template.proto";
+
+/* Next Id: 3 */
+message JoinTemplateTriggerRequest {
+  string template_id = 1;
+  string trigger_id = 2;
+}
+/* Next Id: 3 */
+message JoinTemplateTriggerResponse {
+  operation.template.Template template =1;
+  operation.trigger.Trigger trigger = 2;
+}

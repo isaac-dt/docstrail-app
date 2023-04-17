@@ -1,0 +1,44 @@
+<app-loading></app-loading>
+<ng-container *ngIf="{ dtUser: dtUser$ | async } as asyncData">
+  <ng-container *ngIf="!(isJGraphComposePathActive$ | async)">
+    <div class="ng2-canvas">
+      <router-outlet *ngIf="!asyncData.dtUser"></router-outlet>
+      <mat-sidenav-container class="full-height" *ngIf="asyncData.dtUser">
+        <mat-sidenav mode="side" [opened]="true">
+          <app-sidenav [small]="true"></app-sidenav>
+        </mat-sidenav>
+        <mat-sidenav-content>
+          <router-outlet></router-outlet>
+        </mat-sidenav-content>
+      </mat-sidenav-container>
+    </div>
+  </ng-container>
+
+  <ng-container>
+    <div id="jgraph-mask" class="mask" *ngIf="!(dtUser$ | async)">
+      <!-- Covers the jgraph root tag with a white page. Necessary on loading. -->
+    </div>
+
+    <div
+      #dtOutlet
+      class="geSidebarContainer dt-outlet border-right-strong overflow-hidden">
+      <!-- The graph render has its own copy of the app sidenav. -->
+      <app-sidenav [small]="true"></app-sidenav>
+    </div>
+
+    <div #proposalTitle class="display-none mat-subtitle-1">
+      <app-jgraph-title-row></app-jgraph-title-row>
+    </div>
+
+    <ng-container>
+      <!-- Order matters to preserve overlay functionality.-->
+      <div #jGraphCanvas id="jgraph-canvas"></div>
+      <app-jgraph-review-container>
+        <!-- This is the review-mode left side section. -->
+      </app-jgraph-review-container>
+      <app-jgraph-comment-container>
+        <!-- This is the review-mode right side section. -->
+      </app-jgraph-comment-container>
+    </ng-container>
+  </ng-container>
+</ng-container>

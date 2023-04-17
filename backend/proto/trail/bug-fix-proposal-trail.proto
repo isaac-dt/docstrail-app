@@ -1,0 +1,135 @@
+syntax = "proto3";
+package trail;
+
+import "trail/common.proto";
+import "google/protobuf/wrappers.proto";
+
+/* All information required to build a bug-fix proposal.
+ * Next Id: 5 */
+ message BugFixTrail {
+  BugTicket ticket = 1;
+  BugImpact impact = 2;
+  BugOrigin origin = 3;
+  repeated trail.Peer peers = 4;
+  BugSolution solution = 5;
+  repeated BugSolution alternatives = 6;
+}
+
+/* Bug ticket informration. */
+message BugTicket {
+  google.protobuf.StringValue ticket_url = 1;
+  google.protobuf.StringValue ticket_description = 2;
+  google.protobuf.StringValue comment = 3;
+  repeated string resources_urls = 4;
+}
+
+/* Impact of the bug. */
+message BugImpact {
+  repeated EngServiceImpact eng_services_impact = 1;
+  ImpactOnUsers impact_on_users = 2;
+  /* Impact of the bug on users. */
+  message ImpactOnUsers {
+    google.protobuf.BoolValue are_users_affected = 1;
+    google.protobuf.StringValue comment = 2;
+}
+  /* Impact details on an engineering service. */
+  message EngServiceImpact {
+    Service service = 1;
+    Severity severity = 2;
+    google.protobuf.StringValue comment = 3;
+    /* Engineering services that constitute a system. */
+    enum Service {
+      UNKNOWN_SERVICE = 0;
+      OTHER_SERVICE = 1;
+      UX = 2;
+      BACKEND = 3;
+      DATABASE = 4;
+      INFRASTRUCTURE = 5;
+    }
+    /* Severity of impact on an engineering service. */ 
+    enum Severity {
+      // Temporarily updated to instead show quantity of change.
+      UNKNOWN_SCALE = 0;
+      MOST = 1;
+      SOME = 2;
+      NEGLIGEABLE = 3;
+    }
+  }
+}
+
+/* Details on what caused the bug. */
+message BugOrigin {
+  /* List of individual causes that led to the bug. */
+  repeated Cause causes = 1;
+  /* Comments on the overall origin of the bug. */
+  google.protobuf.StringValue comment = 2;
+  /* a cause (event) that led to the bug. */
+  message Cause {
+    Type type = 1;
+    /* Details on the cause (event) that led to the bug. */
+    google.protobuf.StringValue comment = 2;
+    repeated string attachment_ids = 3;
+    /* Possible origins of a bug. */
+    enum Type {
+      UNKNOWN_TYPE = 0;
+      OTHER_TYPE = 1;
+      BAD_NEW_CODE = 2;
+      LIBRARY_MALFUNCTION = 3;
+      EDGE_CASE = 4;
+      DEPENDENCY_FAILURE = 5;
+      POOR_PLANNING = 6;
+      SIDE_EFFECTS_FROM_OTHER_CODES = 7;
+      DEPRECATION_FALLOUT = 8;
+      VENDOR_FAILURE = 9;
+    }
+  }
+}
+
+/* The solution aimed at resolving the bug. */
+message BugSolution {
+  repeated Revision revision = 1;
+  /* Comments on a particular solution/approach. */
+  google.protobuf.StringValue comment = 2;
+  /* The alterations applied to a target. */
+  message Revision {
+    /* Aspect of the system which could be touched by the solution. */
+    SystemTarget system_target = 1;
+    /* A set of changes that share the same functionality. */
+    repeated ChangeList change_list = 2;
+    /* Comments on the goals associated to a revision. */
+    google.protobuf.StringValue comment = 3;
+    /* A set of changes that share the same functionality. */
+    message ChangeList {
+      google.protobuf.StringValue goal = 1;
+      /* Parts of the system where units/atoms of work reside. */
+      repeated WorkUnit work_units = 2;
+      /* Parts of the system where a unit/atom of work could reside. */
+      message WorkUnit {
+        Type type = 1;
+        google.protobuf.StringValue details = 2;
+        repeated string attachment_ids = 3;
+        repeated trail.Peer targeted_peers = 4;
+        enum Type {
+          UNKNOWN_TYPE = 0;
+          OTHER_TYPE = 1;
+          HTML_CSS_JS = 2;
+          TYPES_OR_STRUCT = 3;
+          API_PROVIDED = 4;
+          API_CONSUMED = 5;
+          LIBRARY = 6;
+          BACKEND_LOGIC = 7;
+        }
+      }
+    }
+  }
+  /* Aspect of the system which could be touched by the solution. */
+  enum SystemTarget {
+    UNKNOWN_TARGET = 0;
+    OTHER_TARGET = 1;
+    CODE = 2;
+    DB_DATA = 3;
+    INFRASTRUCTURE = 4;
+    VENDOR = 5;
+    DEPENDENCIES = 6;
+  }
+}

@@ -1,0 +1,15 @@
+<div class="flex-column">
+  <div class="flex">
+    <div
+      (click)="toggleSelect()"
+      class="checkbox cursor-pointer flex flex-align-center pad-right-lg">
+      <mat-icon>
+        {{ isSelected ? "check_box" : "check_box_outline_blank" }}
+      </mat-icon>
+      <span>{{ label }}</span>
+    </div>
+  </div>
+  <div *ngIf="isSelected" class="ng-content flex-column gap-md">
+    <ng-content></ng-content>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+syntax = "proto3";
+package trail;
+import "account/user/user.proto";
+
+/* Info of user associated to a proposal as a reviewer. */
+message Peer {
+  repeated account.user.User user = 1;
+  repeated Role roles = 2;
+  bool is_manager = 3;
+  bool is_tech_lead = 4;
+  /* Whether the user should provide permission to execute the proposal. */
+  bool should_provide_approval = 5;
+  /* Role of the peer on the proposal. */
+  enum Role {
+    UNKNOWN_ROLE = 0;
+    OTHER_ROLE = 1;
+    ENG = 2;
+    UX = 3;
+    PRODUCT = 4;
+  }
+}

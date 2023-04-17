@@ -1,0 +1,39 @@
+<div class="flex gap-sm flex-align-start full-width">
+  <div *ngIf="isVisible" class="flex flex-column gap-md full-width">
+    <span *ngIf="label" class="label">{{ label }}</span>
+    <form class="full-width" (submit)="$event.preventDefault(); save()">
+      <textarea
+        [class.required-error]="
+          inputDataControl.errors && inputDataControl.errors['required']
+        "
+        [class.shadow]="hasShadow"
+        [class.input-border]="!hasShadow"
+        #textArea
+        (keydown)="debouncedSave()"
+        [id]="uid"
+        class="trail-textarea"
+        [ngStyle]="{
+          minHeight: heightPx + 'px',
+          height: heightPx + 'px',
+          fontSize: fontSize
+        }"
+        [placeholder]="placeholder"
+        [formControl]="inputDataControl"></textarea>
+    </form>
+  </div>
+  <button *ngIf="isToggle" (click)="toggleIsVisible()" dt-default>
+    <mat-icon
+      class="material-symbols-outlined"
+      *ngIf="!!inputDataControl.value && !isVisible">
+      chat
+    </mat-icon>
+    <mat-icon
+      class="material-symbols-outlined"
+      *ngIf="!inputDataControl.value && !isVisible">
+      add_comment
+    </mat-icon>
+    <mat-icon *ngIf="isVisible" class="sm material-symbols-outlined">
+      indeterminate_check_box
+    </mat-icon>
+  </button>
+</div>

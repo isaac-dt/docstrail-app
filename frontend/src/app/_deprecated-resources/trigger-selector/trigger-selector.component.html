@@ -1,0 +1,190 @@
+<div class="flex gap-lg flex-align-start">
+  <div class="flex flex-align-center gap-sm width-70">
+    <mat-icon class="sm">schedule</mat-icon>
+    <span class="white-space-nowrap mat-body-strong">Event</span>
+  </div>
+  <div class="flex gap-md flex-align-center">
+    <ng-template [ngTemplateOutlet]="showRead"></ng-template>
+    <ng-template
+      *ngIf="isEditModeOpen()"
+      [ngTemplateOutlet]="showEdit"></ng-template>
+    <div
+      class="flex"
+      [class.flex-align-center]="!trigger.expectedDeliveryDate"
+      [class.flex-align-center]="trigger.expectedDeliveryDate">
+      <button
+        class="marg-left-md"
+        *ngIf="!isEditModeOpen()"
+        dt-button
+        (click)="openEditMode()">
+        <span>Edit</span>
+      </button>
+      <mat-icon class="hidden">schedule</mat-icon>
+    </div>
+  </div>
+</div>
+
+<!-- Read triggers -->
+<ng-template #showRead>
+  <div>
+    <span
+      *ngIf="!trigger.expectedDeliveryDate; else triggerEvent"
+      class="no-trigger text-gray">
+      None
+    </span>
+    <ng-template #triggerEvent>
+      <div
+        *ngIf="
+          trigger.expectedDeliveryDate?.$case === 'scheduledEvent';
+          else specialEvent
+        ">
+        <span class="flex gap-xs flex-align-center">
+          <mat-icon class="sm">event_repeat</mat-icon>
+          <span>Every</span>
+          <span class="mat-subtitle-2">
+            {{ pendingTriggerForm.get("scheduledMonth")?.value }}
+          </span>
+          <span class="mat-subtitle-2">
+            {{ pendingTriggerForm.get("scheduledDay")?.value }}
+          </span>
+        </span>
+      </div>
+      <ng-template #specialEvent>
+        <u
+          *ngIf="
+            pendingTriggerForm.get('eventType')?.value ===
+            SpecialEvent.BIRTH_MONTH
+          "
+          class="flex flex-align-center gap-xs">
+          <mat-icon class="sm material-symbols-outlined">celebration</mat-icon>
+          Birth month
+        </u>
+        <u
+          *ngIf="
+            pendingTriggerForm.get('eventType')?.value === SpecialEvent.NEW_HIRE
+          "
+          class="flex flex-align-center gap-xs">
+          <mat-icon class="sm material-symbols-outlined">celebration</mat-icon>
+          New hire
+        </u>
+        <u
+          *ngIf="
+            pendingTriggerForm.get('eventType')?.value ===
+            SpecialEvent.WORK_ANNIVERSARY
+          "
+          class="flex flex-align-center gap-xs">
+          <mat-icon class="sm material-symbols-outlined">celebration</mat-icon>
+          Work anniversary
+        </u>
+      </ng-template>
+    </ng-template>
+  </div>
+</ng-template>
+
+<!-- Edit triggers -->
+<ng-template #showEdit>
+  <form
+    class="edit"
+    [formGroup]="pendingTriggerForm"
+    (onSubmit)="$event.preventDefault()">
+    <div class="border pad-v-md width-200">
+      <mat-radio-group
+        formControlName="eventType"
+        aria-label="Select an option"
+        class="flex-column">
+        <div class="calendar-container">
+          <mat-radio-button value="scheduledEvent">
+            <div class="flex-column gap-md">
+              <span class="title">Date</span>
+              <div class="marg-bottom-md flex gap-sm">
+                <select #monthInput formControlName="scheduledMonth">
+                  <option
+                    *ngFor="let month of getMonthsInYear()"
+                    [ngValue]="month">
+                    {{ month }}
+                  </option>
+                </select>
+                <select #dayInput formControlName="scheduledDay">
+                  <option
+                    *ngFor="let day of getDaysInTriggerMonth()"
+                    [ngValue]="day">
+                    {{ day }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </mat-radio-button>
+        </div>
+
+        <mat-radio-button [value]="SpecialEvent.BIRTH_MONTH">
+          Birth month
+        </mat-radio-button>
+        <mat-radio-button [value]="SpecialEvent.NEW_HIRE">
+          New hire
+        </mat-radio-button>
+        <mat-radio-button [value]="SpecialEvent.WORK_ANNIVERSARY">
+          Work anniversary
+        </mat-radio-button>
+      </mat-radio-group>
+      <hr />
+      <div
+        class="flex flex-align-center gap-md flex-justify-space-between pad-h-md">
+        <button
+          *ngIf="isEditModeOpen()"
+          dt-button
+          (click)="closeEditMode(); clearTriggerSection()">
+          Cancel
+        </button>
+        <button dt-button (click)="saveTrigger(); closeEditMode()">
+          <div class="flex flex-align-center">
+            <span>Save</span>
+          </div>
+        </button>
+      </div>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #packageEditSection>
+  <div>event edit section</div>
+</ng-template>
+
+<ng-template #targetsEditSection>
+  <div>targets edit section</div>
+</ng-template>
+
+<!-- Template form summary  -->
+<ng-template #formSummary>
+  <div class="form-summary bg-white full-height flex-column pad-left-lg gap-xl">
+    <div class="flex pad-top-lg">
+      <span class="mat-subtitle-2 flex flex-align-center gap-md">
+        <span>Template Summary</span>
+        <!-- <span class="text-gray">(Year)</span> -->
+      </span>
+    </div>
+    <div class="flex-column gap-md">
+      <div class="flex flex-justify-space-between">
+        <span class="mat-body-2">Items in Package</span>
+        <span class="mat-body-2">0</span>
+      </div>
+      <div class="flex flex-justify-space-between">
+        <span class="mat-body-2">Addresses</span>
+        <span class="mat-body-2">0</span>
+      </div>
+      <hr />
+      <div class="flex flex-justify-space-between">
+        <span class="mat-body-2 flex flex-align-center gap-md">
+          <span>Cost total</span>
+          <!-- <span class="text-gray">(Year)</span> -->
+        </span>
+        <span class="mat-subtitle-2">$ 0.00</span>
+      </div>
+      <button
+        class="marg-top-lg"
+        dt-black-button
+        (click)="submitTemplateForm()">
+        Create template
+      </button>
+    </div>
+  </div>
+</ng-template>

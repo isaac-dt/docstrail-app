@@ -1,0 +1,29 @@
+@import "../../../atoms.scss";
+.container {
+  height: 100vh;
+}
+
+.trail {
+  background-color: white;
+}
+
+.tab-container {
+  --thickness: 3px;
+  border-bottom: var(--thickness) solid #eee;
+  .tab {
+    font-weight: 900;
+    color: #777;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: calc(-1 * var(--thickness));
+    padding: 8px 12px;
+  }
+  .tab.active {
+    color: #444;
+    border-bottom: var(--thickness) solid #444;
+  }
+}
+
+.tab-content {
+  max-width: 800px;
+}
