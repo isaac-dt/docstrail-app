@@ -1,8 +1,8 @@
 {
   "projects": {
-    "default": "docstrail-dev",
-    "prod": "docstrail",
-    "dev": "docstrail-dev"
+    "default": "docstrail-inc-dev",
+    "prod": "docstrail-inc",
+    "dev": "docstrail-inc-dev"
   },
   "targets": {},
   "etags": {}
