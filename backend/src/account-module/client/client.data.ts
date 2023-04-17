@@ -1,4 +1,4 @@
-import {Injectable} from "@dimetrail/firebase/core/utils";
+import {Injectable} from "../../../framework/core/utils";
 import {Client} from "../../generated/types/account/client/client.pb";
 import {getDataParsers} from "../../shared/database/firestore-utils";
 import {getFirestore, FieldValue, DocumentData} from "firebase-admin/firestore";
