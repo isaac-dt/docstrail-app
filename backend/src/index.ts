@@ -37,10 +37,6 @@ app.use(
 );
 app.use(cors({origin: true}));
 
-app.get("/ping", (req: any, res: any) => {
-  res.status(200).send("ok");
-});
-
 const db = firestore.firestore();
 db.settings({ignoreUndefinedProperties: true});
 

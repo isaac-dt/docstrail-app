@@ -1,3 +1,4 @@
+/// <reference types="express" />
 import * as functions from "firebase-functions";
 export declare type Request = functions.https.Request;
 export declare type Response = functions.Response;
