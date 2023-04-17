@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "docstrail-inc": {
+      "hosting": {
+        "frontend": [
+          "docstrail-inc"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "docstrail-inc"
+  }
+}

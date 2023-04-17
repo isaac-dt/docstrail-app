@@ -9,7 +9,7 @@
       <app-account-details></app-account-details>
     </div>
     <div class="flex-column gap-md">
-      <table>
+      <table *ngIf="asyncData.proposalInfos?.length">
         <tr>
           <th class="created-col">Created</th>
           <th>Name</th>
@@ -40,7 +40,7 @@
         </tr>
       </table>
 
-      <span *ngIf="asyncData.proposalInfos?.length === 0">
+      <span *ngIf="asyncData.proposalInfos?.length === 0" class="pad-left-sm">
         You have no proposals.
       </span>
     </div>

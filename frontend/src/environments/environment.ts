@@ -3,6 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  firebase: {
+    projectId: 'docstrail-inc',
+    appId: '1:776072270661:web:84321a88b91a969e54642c',
+    storageBucket: 'docstrail-inc.appspot.com',
+    locationId: 'us-central',
+    apiKey: 'AIzaSyCwKfmuuLoPpOMS8pRMsxcKRlkMPf8CHmA',
+    authDomain: 'docstrail-inc.firebaseapp.com',
+    messagingSenderId: '776072270661',
+    measurementId: 'G-L9LYTR5GZE',
+  },
   production: false,
   firebaseConfig: {
     apiKey: 'AIzaSyCwKfmuuLoPpOMS8pRMsxcKRlkMPf8CHmA',
@@ -14,7 +24,7 @@ export const environment = {
     measurementId: 'G-L9LYTR5GZE',
   },
   dimetrailApi: {
-    url: 'http://localhost:5001/dimetrail-dev/us-central1/main',
+    url: 'https://us-central1-docstrail-inc.cloudfunctions.net/main',
   },
 };
 

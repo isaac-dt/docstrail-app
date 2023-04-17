@@ -101,6 +101,8 @@ import { JGraphDataEffects } from './store/app.effects/jgraph.data.effects';
 import { TrailTextInputComponent } from './home/common-components/trail-text-input/trail-text-input.component';
 import { TermsAndConditionsComponent } from './terms/terms-and-conditions/terms-and-conditions.component';
 import { ErrorComponent } from './error/error.component';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { MobileComponent } from './error/mobile/mobile.component';
 
 @NgModule({
   declarations: [
@@ -159,6 +161,7 @@ import { ErrorComponent } from './error/error.component';
     NotificationDotComponent,
     TermsAndConditionsComponent,
     ErrorComponent,
+    MobileComponent,
   ],
   imports: [
     MatSelectModule,
@@ -211,6 +214,7 @@ import { ErrorComponent } from './error/error.component';
     ]),
     StoreRouterConnectingModule.forRoot(),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
+    provideAuth(() => getAuth()),
   ],
   providers: [
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 10000 } },

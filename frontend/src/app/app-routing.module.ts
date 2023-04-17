@@ -24,6 +24,7 @@ import { JgraphWhiteBackgroundComponent } from './home/proposal/jgraph-white-bac
 import { COMPOSE_PATH } from './store/app.reducer';
 import { TermsAndConditionsComponent } from './terms/terms-and-conditions/terms-and-conditions.component';
 import { ErrorComponent } from './error/error.component';
+import { MobileComponent } from './error/mobile/mobile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -81,6 +82,7 @@ const routes: Routes = [
   },
   { path: 'terms', component: TermsAndConditionsComponent },
   { path: 'error', component: ErrorComponent },
+  { path: 'mobile', component: MobileComponent },
   { path: '**', redirectTo: 'audit', pathMatch: 'full' },
 ];
 

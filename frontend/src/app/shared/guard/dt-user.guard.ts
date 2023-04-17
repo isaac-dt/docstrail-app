@@ -37,9 +37,9 @@ export class DtUserGuard implements CanActivate {
       withLatestFrom(this.store.select(selectFireAuthUserData)),
       map(([dtUser, fireAuthUserData]) => {
         if (dtUser) return true;
-        if (!fireAuthUserData?.emailVerified)
-          this.router.navigate(['signup/next']);
-        else this.router.navigate(['error']);
+        // if (!fireAuthUserData?.emailVerified)
+        this.router.navigate(['signup/next']);
+        // else this.router.navigate(['error']);
         return false;
       })
     );

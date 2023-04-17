@@ -20,6 +20,7 @@ export class AppComponent implements AfterViewInit {
   readonly isJGraphComposePathActive$ = new ReplaySubject<boolean>();
 
   constructor(private readonly store: Store, private readonly router: Router) {
+    this.checkIsMobile();
     this.trackPathChange();
   }
 
@@ -82,5 +83,12 @@ export class AppComponent implements AfterViewInit {
       // Safety turn-off switch.
       clearInterval(interval);
     }, 4000);
+  }
+
+  checkIsMobile() {
+    const isMobile: boolean = (window as any).mobileCheck();
+    if (isMobile) {
+      this.router.navigateByUrl('/mobile');
+    }
   }
 }
