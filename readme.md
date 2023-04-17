@@ -1,4 +1,4 @@
-# Dimetrail App
+# Docstrail App
 
 - Firebase services under `backend`.
 - Angular (GCP-deployed) frontend under `frontend`.
