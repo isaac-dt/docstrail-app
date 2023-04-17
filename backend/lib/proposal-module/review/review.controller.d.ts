@@ -1,4 +1,4 @@
-import { Request, Response } from "@dimetrail/firebase/core/https";
+import { Request, Response } from "../../../framework/core/https";
 import { ProposalPermissionService } from "../../proposal-module/proposal/proposal.permission";
 import { ProposalDataService } from "../../proposal-module/proposal/proposal.data";
 import { UserDataService } from "../../account-module/user/user.data";

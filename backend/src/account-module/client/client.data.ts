@@ -12,9 +12,6 @@ import {Team} from "../../generated/types/account/team/team.pb";
 import {WriteClientRequest} from "../../generated/types/account/client/client.api.pb";
 import {JOB_ROLE_COLLECTION_NAME} from "../job-role/job-role.schema";
 import {JobRole} from "../../generated/types/account/job-role/job-role.pb";
-import {OpenDefinition} from "../../generated/types/catalog/open-definition/open-definition.pb";
-import {OPEN_DEFINITION_COLLECTION_NAME} from "../../_deprecated/catalog-module/open-definition/open-definition.schema";
-import {AllowListDataService} from "../../_deprecated/catalog-module/allow-list/allow-list.data";
 import {TeamDataService} from "../team/team.data";
 
 /**
@@ -24,10 +21,7 @@ import {TeamDataService} from "../team/team.data";
 export class ClientDataService {
   readonly db = getFirestore();
 
-  constructor(
-    private readonly allowListDataService: AllowListDataService,
-    private readonly teamDataService: TeamDataService
-  ) {}
+  constructor(private readonly teamDataService: TeamDataService) {}
 
   async getClient(args: {clientId: string}): Promise<Client | AppError> {
     const clientSnap = await this.db
@@ -103,22 +97,6 @@ export class ClientDataService {
     return jobRoles;
   }
 
-  async getOpenDefinitions(args: {
-    clientId: string;
-  }): Promise<readonly OpenDefinition[]> {
-    const data = await this.db
-      .collection(OPEN_DEFINITION_COLLECTION_NAME)
-      .where("parent.clientId", "==", args.clientId)
-      .get();
-    const openDefinitions = data.docs.map((doc) =>
-      OpenDefinition.fromPartial({
-        ...(doc.data() as Partial<OpenDefinition>),
-        id: doc.id,
-      })
-    );
-    return openDefinitions;
-  }
-
   async createClient(args: {
     clientData: Partial<Client>;
   }): Promise<Client | AppError> {
@@ -152,15 +130,10 @@ export class ClientDataService {
       .add(WriteClientRequest.toJSON(sanitizedClientData) as DocumentData);
 
     const clientPromise = this.getClient({clientId: clientRef.id});
-    const allowListPromise = this.allowListDataService.createAllowList({
-      allowListData: {clientId: clientRef.id},
-    });
 
     const client = await clientPromise;
-    const allowList = await allowListPromise;
 
-    if (!client || !allowList)
-      return AppError.fromPartial({errorCode: ErrorCode.UNKNOWN});
+    if (!client) return AppError.fromPartial({errorCode: ErrorCode.UNKNOWN});
     return client;
   }
 

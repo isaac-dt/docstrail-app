@@ -4,8 +4,8 @@ import {
   post,
   Request,
   Response,
-} from "@dimetrail/firebase/core/https";
-import {Controller} from "@dimetrail/firebase/core/utils";
+} from "../../../framework/core/https";
+import {Controller} from "../../../framework/core/utils";
 import {getFirestore} from "firebase-admin/firestore";
 import {
   GetUserAddressResponse,

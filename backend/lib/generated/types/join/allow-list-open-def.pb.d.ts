@@ -18,12 +18,12 @@ export declare const JoinAllowListOpenDefinitionRequest: {
     fromJSON(object: any): JoinAllowListOpenDefinitionRequest;
     toJSON(message: JoinAllowListOpenDefinitionRequest): unknown;
     fromPartial<I extends {
-        allowListId?: string | undefined;
         openDefinitionId?: string | undefined;
+        allowListId?: string | undefined;
     } & {
-        allowListId?: string | undefined;
         openDefinitionId?: string | undefined;
-    } & { [K in Exclude<keyof I, "$type" | "allowListId" | "openDefinitionId">]: never; }>(object: I): JoinAllowListOpenDefinitionRequest;
+        allowListId?: string | undefined;
+    } & { [K in Exclude<keyof I, "$type" | "openDefinitionId" | "allowListId">]: never; }>(object: I): JoinAllowListOpenDefinitionRequest;
 };
 export declare const JoinAllowListOpenDefinitionResponse: {
     $type: "join.JoinAllowListOpenDefinitionResponse";

@@ -14,9 +14,6 @@ export declare class TeamDataService {
     getTeamsFromIds(args: {
         teamIds: string[];
     }): Promise<readonly Team[]>;
-    getTeamsOfTarget(args: {
-        targetId: string;
-    }): Promise<readonly Team[]>;
     createTeam(args: {
         teamData: Partial<Team>;
     }): Promise<Team | AppError>;

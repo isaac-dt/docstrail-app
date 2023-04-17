@@ -62,9 +62,9 @@ export declare const GetInventoryBatchResponse: {
             createdAt?: Date | undefined;
             updatedAt?: Date | undefined;
             imageUrl?: string | undefined;
-            openDefinitionId?: string | undefined;
             distributionOutletId?: string | undefined;
             webLink?: string | undefined;
+            openDefinitionId?: string | undefined;
             price?: {
                 currency?: import("../../shared.pb").Currency | undefined;
                 date?: Date | undefined;
@@ -92,9 +92,9 @@ export declare const GetInventoryBatchResponse: {
             createdAt?: Date | undefined;
             updatedAt?: Date | undefined;
             imageUrl?: string | undefined;
-            openDefinitionId?: string | undefined;
             distributionOutletId?: string | undefined;
             webLink?: string | undefined;
+            openDefinitionId?: string | undefined;
             price?: {
                 currency?: import("../../shared.pb").Currency | undefined;
                 date?: Date | undefined;
@@ -107,9 +107,9 @@ export declare const GetInventoryBatchResponse: {
             createdAt?: Date | undefined;
             updatedAt?: Date | undefined;
             imageUrl?: string | undefined;
-            openDefinitionId?: string | undefined;
             distributionOutletId?: string | undefined;
             webLink?: string | undefined;
+            openDefinitionId?: string | undefined;
             price?: ({
                 currency?: import("../../shared.pb").Currency | undefined;
                 date?: Date | undefined;
@@ -119,7 +119,7 @@ export declare const GetInventoryBatchResponse: {
                 date?: Date | undefined;
                 amount?: number | undefined;
             } & { [K in Exclude<keyof I["product"]["price"], "currency" | "date" | "$type" | "amount">]: never; }) | undefined;
-        } & { [K_1 in Exclude<keyof I["product"], "id" | "name" | "description" | "createdAt" | "$type" | "updatedAt" | "imageUrl" | "openDefinitionId" | "distributionOutletId" | "webLink" | "price">]: never; }) | undefined;
+        } & { [K_1 in Exclude<keyof I["product"], "id" | "name" | "description" | "createdAt" | "$type" | "updatedAt" | "imageUrl" | "distributionOutletId" | "webLink" | "openDefinitionId" | "price">]: never; }) | undefined;
         inventoryBatch?: ({
             id?: string | undefined;
             date?: Date | undefined;

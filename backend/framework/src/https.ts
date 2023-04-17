@@ -14,7 +14,7 @@ export const HTTP_DECORATOR_KEYS = {
   post: "httpsPostCloudFunction",
   put: "httpsPutCloudFunction",
   patch: "httpsPatchCloudFunction",
-  delete:"httpsDeleteCloudFunction"
+  delete: "httpsDeleteCloudFunction",
 };
 
 /** Decorator; marks a method as a GET https cloud function. */
@@ -82,7 +82,10 @@ export function patch(data: {path: string; runHttpAfter?: ExpressHandler[]}) {
 }
 
 /** Decorator; marks a method as a DELETE https cloud function. */
-export function dtDelete(data: {path: string; runHttpAfter?: ExpressHandler[]}) {
+export function dtDelete(data: {
+  path: string;
+  runHttpAfter?: ExpressHandler[];
+}) {
   return function (
     target: any,
     propertyKey: string,

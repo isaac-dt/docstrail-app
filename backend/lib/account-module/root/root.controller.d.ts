@@ -1,4 +1,4 @@
-import { Request, Response } from "@dimetrail/firebase/core/https";
+import { Request, Response } from "../../../framework/core/https";
 import { RootDataService } from "../../account-module/root/root.data";
 import { RootPermissionService } from "../../account-module/root/root.permission";
 /** Controller for Root. */

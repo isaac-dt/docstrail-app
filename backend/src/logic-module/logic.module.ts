@@ -1,4 +1,4 @@
-import {DtModule} from "@dimetrail/firebase/core/utils";
+import {DtModule} from "../../framework/core/utils";
 import {OrgSignupController} from "./org-signup/org-signup.controller";
 
 /**

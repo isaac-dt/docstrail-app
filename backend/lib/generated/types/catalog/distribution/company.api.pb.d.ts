@@ -39,14 +39,6 @@ export declare const GetCompanyResponse: {
     fromJSON(object: any): GetCompanyResponse;
     toJSON(message: GetCompanyResponse): unknown;
     fromPartial<I extends {
-        company?: {
-            id?: string | undefined;
-            createdAt?: Date | undefined;
-            updatedAt?: Date | undefined;
-            rootId?: string | undefined;
-            legalName?: string | undefined;
-            webAddress?: string | undefined;
-        } | undefined;
         distributionOutlets?: readonly {
             id?: string | undefined;
             createdAt?: Date | undefined;
@@ -58,22 +50,15 @@ export declare const GetCompanyResponse: {
             customerServiceEmail?: string | undefined;
             distributionMethod?: import("./distribution.pb").DistributionMethod | undefined;
         }[] | undefined;
+        company?: {
+            id?: string | undefined;
+            createdAt?: Date | undefined;
+            updatedAt?: Date | undefined;
+            rootId?: string | undefined;
+            legalName?: string | undefined;
+            webAddress?: string | undefined;
+        } | undefined;
     } & {
-        company?: ({
-            id?: string | undefined;
-            createdAt?: Date | undefined;
-            updatedAt?: Date | undefined;
-            rootId?: string | undefined;
-            legalName?: string | undefined;
-            webAddress?: string | undefined;
-        } & {
-            id?: string | undefined;
-            createdAt?: Date | undefined;
-            updatedAt?: Date | undefined;
-            rootId?: string | undefined;
-            legalName?: string | undefined;
-            webAddress?: string | undefined;
-        } & { [K in Exclude<keyof I["company"], "id" | "createdAt" | "$type" | "updatedAt" | "rootId" | "legalName" | "webAddress">]: never; }) | undefined;
         distributionOutlets?: (readonly {
             id?: string | undefined;
             createdAt?: Date | undefined;
@@ -104,7 +89,7 @@ export declare const GetCompanyResponse: {
             customerServicePhoneNumber?: string | undefined;
             customerServiceEmail?: string | undefined;
             distributionMethod?: import("./distribution.pb").DistributionMethod | undefined;
-        } & { [K_1 in Exclude<keyof I["distributionOutlets"][number], "id" | "createdAt" | "$type" | "updatedAt" | "webAddress" | "companyId" | "physicalAddressId" | "customerServicePhoneNumber" | "customerServiceEmail" | "distributionMethod">]: never; })[] & { [K_2 in Exclude<keyof I["distributionOutlets"], "$type" | keyof readonly {
+        } & { [K in Exclude<keyof I["distributionOutlets"][number], "id" | "createdAt" | "$type" | "updatedAt" | "webAddress" | "companyId" | "physicalAddressId" | "customerServicePhoneNumber" | "customerServiceEmail" | "distributionMethod">]: never; })[] & { [K_1 in Exclude<keyof I["distributionOutlets"], "$type" | keyof readonly {
             id?: string | undefined;
             createdAt?: Date | undefined;
             updatedAt?: Date | undefined;
@@ -115,7 +100,22 @@ export declare const GetCompanyResponse: {
             customerServiceEmail?: string | undefined;
             distributionMethod?: import("./distribution.pb").DistributionMethod | undefined;
         }[]>]: never; }) | undefined;
-    } & { [K_3 in Exclude<keyof I, "$type" | "company" | "distributionOutlets">]: never; }>(object: I): GetCompanyResponse;
+        company?: ({
+            id?: string | undefined;
+            createdAt?: Date | undefined;
+            updatedAt?: Date | undefined;
+            rootId?: string | undefined;
+            legalName?: string | undefined;
+            webAddress?: string | undefined;
+        } & {
+            id?: string | undefined;
+            createdAt?: Date | undefined;
+            updatedAt?: Date | undefined;
+            rootId?: string | undefined;
+            legalName?: string | undefined;
+            webAddress?: string | undefined;
+        } & { [K_2 in Exclude<keyof I["company"], "id" | "createdAt" | "$type" | "updatedAt" | "rootId" | "legalName" | "webAddress">]: never; }) | undefined;
+    } & { [K_3 in Exclude<keyof I, "$type" | "distributionOutlets" | "company">]: never; }>(object: I): GetCompanyResponse;
 };
 export declare const ListCompanyResponse: {
     $type: "catalog.distribution.ListCompanyResponse";

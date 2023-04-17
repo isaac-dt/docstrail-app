@@ -1,5 +1,5 @@
-import {get, Request, Response} from "@dimetrail/firebase/core/https";
-import {Controller} from "@dimetrail/firebase/core/utils";
+import {get, Request, Response} from "../../../framework/core/https";
+import {Controller} from "../../../framework/core/utils";
 import {getFirestore} from "firebase-admin/firestore";
 import {RootDataService} from "../../account-module/root/root.data";
 import {RootPermissionService} from "../../account-module/root/root.permission";
@@ -53,20 +53,10 @@ export class RootController {
 
   private async buildGetRootResponse(root: Root): Promise<GetRootResponse> {
     const clients = this.rootDataService.getClients({rootId: root.id});
-    const companies = this.rootDataService.getCompanies({rootId: root.id});
     const jobRoles = this.rootDataService.getJobRoles({rootId: root.id});
-    const openDefinitions = this.rootDataService.getOpenDefinitions({
-      rootId: root.id,
-    });
-    const coreDefinitions = this.rootDataService.getCoreDefinitions({
-      rootId: root.id,
-    });
     const response = GetRootResponse.fromPartial({
       clients: await clients,
       jobRoles: await jobRoles,
-      companies: await companies,
-      openDefinitions: await openDefinitions,
-      coreDefinitions: await coreDefinitions,
     });
     return response;
   }

@@ -30,9 +30,6 @@ export declare class UserDataService {
     getUsersFromIds(args: {
         userIds: string[];
     }): Promise<readonly User[]>;
-    getUsersOfTarget(args: {
-        targetId: string;
-    }): Promise<readonly User[]>;
     getUsersOfJobRole(args: {
         jobRoleId: string;
     }): Promise<readonly User[]>;

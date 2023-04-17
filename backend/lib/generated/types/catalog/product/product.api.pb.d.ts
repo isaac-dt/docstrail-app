@@ -39,9 +39,9 @@ export declare const WriteProductRequest: {
         name?: string | undefined;
         description?: string | undefined;
         imageUrl?: string | undefined;
-        openDefinitionId?: string | undefined;
         distributionOutletId?: string | undefined;
         webLink?: string | undefined;
+        openDefinitionId?: string | undefined;
         price?: {
             currency?: import("../../shared.pb").Currency | undefined;
             date?: Date | undefined;
@@ -51,9 +51,9 @@ export declare const WriteProductRequest: {
         name?: string | undefined;
         description?: string | undefined;
         imageUrl?: string | undefined;
-        openDefinitionId?: string | undefined;
         distributionOutletId?: string | undefined;
         webLink?: string | undefined;
+        openDefinitionId?: string | undefined;
         price?: ({
             currency?: import("../../shared.pb").Currency | undefined;
             date?: Date | undefined;
@@ -63,32 +63,13 @@ export declare const WriteProductRequest: {
             date?: Date | undefined;
             amount?: number | undefined;
         } & { [K in Exclude<keyof I["price"], "currency" | "date" | "$type" | "amount">]: never; }) | undefined;
-    } & { [K_1 in Exclude<keyof I, "name" | "description" | "$type" | "imageUrl" | "openDefinitionId" | "distributionOutletId" | "webLink" | "price">]: never; }>(object: I): WriteProductRequest;
+    } & { [K_1 in Exclude<keyof I, "name" | "description" | "$type" | "imageUrl" | "distributionOutletId" | "webLink" | "openDefinitionId" | "price">]: never; }>(object: I): WriteProductRequest;
 };
 export declare const GetProductResponse: {
     $type: "catalog.product.GetProductResponse";
     fromJSON(object: any): GetProductResponse;
     toJSON(message: GetProductResponse): unknown;
     fromPartial<I extends {
-        openDefinition?: {
-            id?: string | undefined;
-            name?: string | undefined;
-            description?: string | undefined;
-            parent?: ({
-                clientId?: string | undefined;
-            } & {
-                $case: "clientId";
-            }) | ({
-                rootId?: string | undefined;
-            } & {
-                $case: "rootId";
-            }) | undefined;
-            createdAt?: Date | undefined;
-            updatedAt?: Date | undefined;
-            imageUrl?: string | undefined;
-            coreDefinitionId?: string | undefined;
-            isTangible?: boolean | undefined;
-        } | undefined;
         coreDefinition?: {
             id?: string | undefined;
             name?: string | undefined;
@@ -116,9 +97,9 @@ export declare const GetProductResponse: {
             createdAt?: Date | undefined;
             updatedAt?: Date | undefined;
             imageUrl?: string | undefined;
-            openDefinitionId?: string | undefined;
             distributionOutletId?: string | undefined;
             webLink?: string | undefined;
+            openDefinitionId?: string | undefined;
             price?: {
                 currency?: import("../../shared.pb").Currency | undefined;
                 date?: Date | undefined;
@@ -138,8 +119,7 @@ export declare const GetProductResponse: {
             productId?: string | undefined;
             quatity?: number | undefined;
         }[] | undefined;
-    } & {
-        openDefinition?: ({
+        openDefinition?: {
             id?: string | undefined;
             name?: string | undefined;
             description?: string | undefined;
@@ -157,31 +137,8 @@ export declare const GetProductResponse: {
             imageUrl?: string | undefined;
             coreDefinitionId?: string | undefined;
             isTangible?: boolean | undefined;
-        } & {
-            id?: string | undefined;
-            name?: string | undefined;
-            description?: string | undefined;
-            parent?: ({
-                clientId?: string | undefined;
-            } & {
-                $case: "clientId";
-            } & {
-                clientId?: string | undefined;
-                $case: "clientId";
-            } & { [K in Exclude<keyof I["openDefinition"]["parent"], "clientId" | "$type" | "$case">]: never; }) | ({
-                rootId?: string | undefined;
-            } & {
-                $case: "rootId";
-            } & {
-                rootId?: string | undefined;
-                $case: "rootId";
-            } & { [K_1 in Exclude<keyof I["openDefinition"]["parent"], "$type" | "$case" | "rootId">]: never; }) | undefined;
-            createdAt?: Date | undefined;
-            updatedAt?: Date | undefined;
-            imageUrl?: string | undefined;
-            coreDefinitionId?: string | undefined;
-            isTangible?: boolean | undefined;
-        } & { [K_2 in Exclude<keyof I["openDefinition"], "id" | "name" | "description" | "parent" | "createdAt" | "$type" | "updatedAt" | "imageUrl" | "coreDefinitionId" | "isTangible">]: never; }) | undefined;
+        } | undefined;
+    } & {
         coreDefinition?: ({
             id?: string | undefined;
             name?: string | undefined;
@@ -198,7 +155,7 @@ export declare const GetProductResponse: {
             category?: import("../core-definition/core-definition.pb").CoreDefinitionCategory | undefined;
             updatedAt?: Date | undefined;
             rootId?: string | undefined;
-        } & { [K_3 in Exclude<keyof I["coreDefinition"], "id" | "name" | "description" | "createdAt" | "category" | "$type" | "updatedAt" | "rootId">]: never; }) | undefined;
+        } & { [K in Exclude<keyof I["coreDefinition"], "id" | "name" | "description" | "createdAt" | "category" | "$type" | "updatedAt" | "rootId">]: never; }) | undefined;
         distributionOutlet?: ({
             id?: string | undefined;
             createdAt?: Date | undefined;
@@ -219,7 +176,7 @@ export declare const GetProductResponse: {
             customerServicePhoneNumber?: string | undefined;
             customerServiceEmail?: string | undefined;
             distributionMethod?: import("../distribution/distribution.pb").DistributionMethod | undefined;
-        } & { [K_4 in Exclude<keyof I["distributionOutlet"], "id" | "createdAt" | "$type" | "updatedAt" | "webAddress" | "companyId" | "physicalAddressId" | "customerServicePhoneNumber" | "customerServiceEmail" | "distributionMethod">]: never; }) | undefined;
+        } & { [K_1 in Exclude<keyof I["distributionOutlet"], "id" | "createdAt" | "$type" | "updatedAt" | "webAddress" | "companyId" | "physicalAddressId" | "customerServicePhoneNumber" | "customerServiceEmail" | "distributionMethod">]: never; }) | undefined;
         product?: ({
             id?: string | undefined;
             name?: string | undefined;
@@ -227,9 +184,9 @@ export declare const GetProductResponse: {
             createdAt?: Date | undefined;
             updatedAt?: Date | undefined;
             imageUrl?: string | undefined;
-            openDefinitionId?: string | undefined;
             distributionOutletId?: string | undefined;
             webLink?: string | undefined;
+            openDefinitionId?: string | undefined;
             price?: {
                 currency?: import("../../shared.pb").Currency | undefined;
                 date?: Date | undefined;
@@ -242,9 +199,9 @@ export declare const GetProductResponse: {
             createdAt?: Date | undefined;
             updatedAt?: Date | undefined;
             imageUrl?: string | undefined;
-            openDefinitionId?: string | undefined;
             distributionOutletId?: string | undefined;
             webLink?: string | undefined;
+            openDefinitionId?: string | undefined;
             price?: ({
                 currency?: import("../../shared.pb").Currency | undefined;
                 date?: Date | undefined;
@@ -253,8 +210,8 @@ export declare const GetProductResponse: {
                 currency?: import("../../shared.pb").Currency | undefined;
                 date?: Date | undefined;
                 amount?: number | undefined;
-            } & { [K_5 in Exclude<keyof I["product"]["price"], "currency" | "date" | "$type" | "amount">]: never; }) | undefined;
-        } & { [K_6 in Exclude<keyof I["product"], "id" | "name" | "description" | "createdAt" | "$type" | "updatedAt" | "imageUrl" | "openDefinitionId" | "distributionOutletId" | "webLink" | "price">]: never; }) | undefined;
+            } & { [K_2 in Exclude<keyof I["product"]["price"], "currency" | "date" | "$type" | "amount">]: never; }) | undefined;
+        } & { [K_3 in Exclude<keyof I["product"], "id" | "name" | "description" | "createdAt" | "$type" | "updatedAt" | "imageUrl" | "distributionOutletId" | "webLink" | "openDefinitionId" | "price">]: never; }) | undefined;
         inventoryBatches?: (readonly {
             id?: string | undefined;
             date?: Date | undefined;
@@ -292,10 +249,10 @@ export declare const GetProductResponse: {
                 currency?: import("../../shared.pb").Currency | undefined;
                 date?: Date | undefined;
                 amount?: number | undefined;
-            } & { [K_7 in Exclude<keyof I["inventoryBatches"][number]["price"], "currency" | "date" | "$type" | "amount">]: never; }) | undefined;
+            } & { [K_4 in Exclude<keyof I["inventoryBatches"][number]["price"], "currency" | "date" | "$type" | "amount">]: never; }) | undefined;
             productId?: string | undefined;
             quatity?: number | undefined;
-        } & { [K_8 in Exclude<keyof I["inventoryBatches"][number], "id" | "date" | "createdAt" | "$type" | "updatedAt" | "price" | "productId" | "quatity">]: never; })[] & { [K_9 in Exclude<keyof I["inventoryBatches"], "$type" | keyof readonly {
+        } & { [K_5 in Exclude<keyof I["inventoryBatches"][number], "id" | "date" | "createdAt" | "$type" | "updatedAt" | "price" | "productId" | "quatity">]: never; })[] & { [K_6 in Exclude<keyof I["inventoryBatches"], "$type" | keyof readonly {
             id?: string | undefined;
             date?: Date | undefined;
             createdAt?: Date | undefined;
@@ -308,7 +265,50 @@ export declare const GetProductResponse: {
             productId?: string | undefined;
             quatity?: number | undefined;
         }[]>]: never; }) | undefined;
-    } & { [K_10 in Exclude<keyof I, "$type" | "openDefinition" | "coreDefinition" | "distributionOutlet" | "product" | "inventoryBatches">]: never; }>(object: I): GetProductResponse;
+        openDefinition?: ({
+            id?: string | undefined;
+            name?: string | undefined;
+            description?: string | undefined;
+            parent?: ({
+                clientId?: string | undefined;
+            } & {
+                $case: "clientId";
+            }) | ({
+                rootId?: string | undefined;
+            } & {
+                $case: "rootId";
+            }) | undefined;
+            createdAt?: Date | undefined;
+            updatedAt?: Date | undefined;
+            imageUrl?: string | undefined;
+            coreDefinitionId?: string | undefined;
+            isTangible?: boolean | undefined;
+        } & {
+            id?: string | undefined;
+            name?: string | undefined;
+            description?: string | undefined;
+            parent?: ({
+                clientId?: string | undefined;
+            } & {
+                $case: "clientId";
+            } & {
+                clientId?: string | undefined;
+                $case: "clientId";
+            } & { [K_7 in Exclude<keyof I["openDefinition"]["parent"], "clientId" | "$type" | "$case">]: never; }) | ({
+                rootId?: string | undefined;
+            } & {
+                $case: "rootId";
+            } & {
+                rootId?: string | undefined;
+                $case: "rootId";
+            } & { [K_8 in Exclude<keyof I["openDefinition"]["parent"], "$type" | "$case" | "rootId">]: never; }) | undefined;
+            createdAt?: Date | undefined;
+            updatedAt?: Date | undefined;
+            imageUrl?: string | undefined;
+            coreDefinitionId?: string | undefined;
+            isTangible?: boolean | undefined;
+        } & { [K_9 in Exclude<keyof I["openDefinition"], "id" | "name" | "description" | "parent" | "createdAt" | "$type" | "updatedAt" | "imageUrl" | "coreDefinitionId" | "isTangible">]: never; }) | undefined;
+    } & { [K_10 in Exclude<keyof I, "$type" | "coreDefinition" | "distributionOutlet" | "product" | "inventoryBatches" | "openDefinition">]: never; }>(object: I): GetProductResponse;
 };
 export declare const ListProductResponse: {
     $type: "catalog.product.ListProductResponse";
@@ -323,9 +323,9 @@ export declare const ListProductResponse: {
             createdAt?: Date | undefined;
             updatedAt?: Date | undefined;
             imageUrl?: string | undefined;
-            openDefinitionId?: string | undefined;
             distributionOutletId?: string | undefined;
             webLink?: string | undefined;
+            openDefinitionId?: string | undefined;
             price?: {
                 currency?: import("../../shared.pb").Currency | undefined;
                 date?: Date | undefined;
@@ -341,9 +341,9 @@ export declare const ListProductResponse: {
             createdAt?: Date | undefined;
             updatedAt?: Date | undefined;
             imageUrl?: string | undefined;
-            openDefinitionId?: string | undefined;
             distributionOutletId?: string | undefined;
             webLink?: string | undefined;
+            openDefinitionId?: string | undefined;
             price?: {
                 currency?: import("../../shared.pb").Currency | undefined;
                 date?: Date | undefined;
@@ -356,9 +356,9 @@ export declare const ListProductResponse: {
             createdAt?: Date | undefined;
             updatedAt?: Date | undefined;
             imageUrl?: string | undefined;
-            openDefinitionId?: string | undefined;
             distributionOutletId?: string | undefined;
             webLink?: string | undefined;
+            openDefinitionId?: string | undefined;
             price?: ({
                 currency?: import("../../shared.pb").Currency | undefined;
                 date?: Date | undefined;
@@ -368,7 +368,7 @@ export declare const ListProductResponse: {
                 date?: Date | undefined;
                 amount?: number | undefined;
             } & { [K in Exclude<keyof I["products"]["price"], "currency" | "date" | "$type" | "amount">]: never; }) | undefined;
-        } & { [K_1 in Exclude<keyof I["products"], "id" | "name" | "description" | "createdAt" | "$type" | "updatedAt" | "imageUrl" | "openDefinitionId" | "distributionOutletId" | "webLink" | "price">]: never; }) | undefined;
+        } & { [K_1 in Exclude<keyof I["products"], "id" | "name" | "description" | "createdAt" | "$type" | "updatedAt" | "imageUrl" | "distributionOutletId" | "webLink" | "openDefinitionId" | "price">]: never; }) | undefined;
     } & { [K_2 in Exclude<keyof I, "$type" | "matchCount" | "products">]: never; }>(object: I): ListProductResponse;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;

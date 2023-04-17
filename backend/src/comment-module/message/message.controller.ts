@@ -1,4 +1,4 @@
-import {Controller} from "@dimetrail/firebase/core/utils";
+import {Controller} from "../../../framework/core/utils";
 import {
   get,
   patch,
@@ -6,7 +6,7 @@ import {
   Response,
   post,
   dtDelete,
-} from "@dimetrail/firebase/core/https";
+} from "../../../framework/core/https";
 import {guard} from "../../shared/authentication/auth";
 import {getFirestore} from "firebase-admin/firestore";
 import {AppError, AuthData, ErrorCode} from "../../generated/types/common.pb";

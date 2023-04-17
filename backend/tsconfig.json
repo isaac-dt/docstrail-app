@@ -10,8 +10,9 @@
     "target": "es2017",
     "declaration": true,
     "emitDecoratorMetadata": true,
-    "suppressImplicitAnyIndexErrors": true,
+    "suppressImplicitAnyIndexErrors": true
   },
   "compileOnSave": true,
-  "include": ["src", "src/.generated"]
+  "include": ["src", "src/.generated"],
+  "exclude": ["../.trash/_deprecated"]
 }

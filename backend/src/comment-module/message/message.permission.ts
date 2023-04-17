@@ -1,4 +1,4 @@
-import {Injectable} from "@dimetrail/firebase/core/utils";
+import {Injectable} from "../../../framework/core/utils";
 import {UserDataService} from "../../account-module/user/user.data";
 import {AppError} from "../../generated/types/common.pb";
 import {

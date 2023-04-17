@@ -29,9 +29,9 @@ export declare const Product: {
         createdAt?: Date | undefined;
         updatedAt?: Date | undefined;
         imageUrl?: string | undefined;
-        openDefinitionId?: string | undefined;
         distributionOutletId?: string | undefined;
         webLink?: string | undefined;
+        openDefinitionId?: string | undefined;
         price?: {
             currency?: import("../../shared.pb").Currency | undefined;
             date?: Date | undefined;
@@ -44,9 +44,9 @@ export declare const Product: {
         createdAt?: Date | undefined;
         updatedAt?: Date | undefined;
         imageUrl?: string | undefined;
-        openDefinitionId?: string | undefined;
         distributionOutletId?: string | undefined;
         webLink?: string | undefined;
+        openDefinitionId?: string | undefined;
         price?: ({
             currency?: import("../../shared.pb").Currency | undefined;
             date?: Date | undefined;
@@ -56,7 +56,7 @@ export declare const Product: {
             date?: Date | undefined;
             amount?: number | undefined;
         } & { [K in Exclude<keyof I["price"], "currency" | "date" | "$type" | "amount">]: never; }) | undefined;
-    } & { [K_1 in Exclude<keyof I, "id" | "name" | "description" | "createdAt" | "$type" | "updatedAt" | "imageUrl" | "openDefinitionId" | "distributionOutletId" | "webLink" | "price">]: never; }>(object: I): Product;
+    } & { [K_1 in Exclude<keyof I, "id" | "name" | "description" | "createdAt" | "$type" | "updatedAt" | "imageUrl" | "distributionOutletId" | "webLink" | "openDefinitionId" | "price">]: never; }>(object: I): Product;
 };
 declare type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 export declare type DeepPartial<T> = T extends Builtin ? T : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>> : T extends {

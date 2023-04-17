@@ -1,4 +1,4 @@
-import {DtModule} from "@dimetrail/firebase/core/utils";
+import {DtModule} from "../../framework/core/utils";
 import {CommentMessageController} from "./message/message.controller";
 import {CommentMessageDataService} from "./message/message.data";
 import {CommentMessagePermissionService} from "./message/message.permission";

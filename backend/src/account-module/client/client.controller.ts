@@ -4,8 +4,8 @@ import {
   post,
   Request,
   Response,
-} from "@dimetrail/firebase/core/https";
-import {Controller} from "@dimetrail/firebase/core/utils";
+} from "../../../framework/core/https";
+import {Controller} from "../../../framework/core/utils";
 import {getFirestore} from "firebase-admin/firestore";
 import {GetClientResponse} from "../../generated/types/account/client/client.api.pb";
 import {Client} from "../../generated/types/account/client/client.pb";
@@ -197,14 +197,10 @@ export class ClientController {
     const childrenTeams = this.clientDataService.getChildrenTeams({
       parentClientId: client.id,
     });
-    const openDefinitions = this.clientDataService.getOpenDefinitions({
-      clientId: client.id,
-    });
     return GetClientResponse.fromPartial({
       client,
       childrenTeams: await childrenTeams,
       jobRoles: await jobRoles,
-      openDefinitions: await openDefinitions,
     });
   }
 }

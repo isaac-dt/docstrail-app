@@ -7,22 +7,15 @@ import {
   DtModule,
   bootstrapModule,
   getExpressInstance,
-} from "@dimetrail/firebase/core/utils";
+} from "../framework/core/utils";
 import * as firestore from "firebase-admin";
 import {ProposalModule} from "./proposal-module/proposal.module";
-import {CatalogModule} from "./_deprecated/catalog-module/catalog.module";
 import {CommentModule} from "./comment-module/comment.module";
 import {LogicModule} from "./logic-module/logic.module";
 
 /** The module loaded by Firbase as the root. */
 @DtModule({
-  imports: [
-    AccountModule,
-    CatalogModule,
-    ProposalModule,
-    CommentModule,
-    LogicModule,
-  ],
+  imports: [AccountModule, ProposalModule, CommentModule, LogicModule],
   runHttpAfter: [readPath],
 })
 class RootModule {}

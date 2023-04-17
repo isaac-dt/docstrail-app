@@ -1,4 +1,4 @@
-import { Request, Response } from "@dimetrail/firebase/core/https";
+import { Request, Response } from "../../../framework/core/https";
 import { CommentMessageDataService } from "./message.data";
 import { CommentMessagePermissionService } from "./message.permission";
 import { CommentThreadPermissionService } from "../thread/thread.permission";

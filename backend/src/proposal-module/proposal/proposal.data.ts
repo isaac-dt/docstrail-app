@@ -1,4 +1,4 @@
-import {Injectable} from "@dimetrail/firebase/core/utils";
+import {Injectable} from "../../../framework/core/utils";
 import {getDataParsers} from "../../shared/database/firestore-utils";
 import {getFirestore, DocumentData} from "firebase-admin/firestore";
 import {AppError, ErrorCode} from "../../generated/types/common.pb";

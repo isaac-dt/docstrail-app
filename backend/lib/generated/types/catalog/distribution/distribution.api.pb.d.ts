@@ -66,14 +66,6 @@ export declare const GetDistributionOutletResponse: {
             updatedAt?: Date | undefined;
             rootId?: string | undefined;
         }[] | undefined;
-        company?: {
-            id?: string | undefined;
-            createdAt?: Date | undefined;
-            updatedAt?: Date | undefined;
-            rootId?: string | undefined;
-            legalName?: string | undefined;
-            webAddress?: string | undefined;
-        } | undefined;
         distributionOutlet?: {
             id?: string | undefined;
             createdAt?: Date | undefined;
@@ -84,6 +76,14 @@ export declare const GetDistributionOutletResponse: {
             customerServicePhoneNumber?: string | undefined;
             customerServiceEmail?: string | undefined;
             distributionMethod?: DistributionMethod | undefined;
+        } | undefined;
+        company?: {
+            id?: string | undefined;
+            createdAt?: Date | undefined;
+            updatedAt?: Date | undefined;
+            rootId?: string | undefined;
+            legalName?: string | undefined;
+            webAddress?: string | undefined;
         } | undefined;
         physicalAddress?: {
             id?: string | undefined;
@@ -103,9 +103,9 @@ export declare const GetDistributionOutletResponse: {
             createdAt?: Date | undefined;
             updatedAt?: Date | undefined;
             imageUrl?: string | undefined;
-            openDefinitionId?: string | undefined;
             distributionOutletId?: string | undefined;
             webLink?: string | undefined;
+            openDefinitionId?: string | undefined;
             price?: {
                 currency?: import("../../shared.pb").Currency | undefined;
                 date?: Date | undefined;
@@ -146,21 +146,6 @@ export declare const GetDistributionOutletResponse: {
             updatedAt?: Date | undefined;
             rootId?: string | undefined;
         }[]>]: never; }) | undefined;
-        company?: ({
-            id?: string | undefined;
-            createdAt?: Date | undefined;
-            updatedAt?: Date | undefined;
-            rootId?: string | undefined;
-            legalName?: string | undefined;
-            webAddress?: string | undefined;
-        } & {
-            id?: string | undefined;
-            createdAt?: Date | undefined;
-            updatedAt?: Date | undefined;
-            rootId?: string | undefined;
-            legalName?: string | undefined;
-            webAddress?: string | undefined;
-        } & { [K_2 in Exclude<keyof I["company"], "id" | "createdAt" | "$type" | "updatedAt" | "rootId" | "legalName" | "webAddress">]: never; }) | undefined;
         distributionOutlet?: ({
             id?: string | undefined;
             createdAt?: Date | undefined;
@@ -181,7 +166,22 @@ export declare const GetDistributionOutletResponse: {
             customerServicePhoneNumber?: string | undefined;
             customerServiceEmail?: string | undefined;
             distributionMethod?: DistributionMethod | undefined;
-        } & { [K_3 in Exclude<keyof I["distributionOutlet"], "id" | "createdAt" | "$type" | "updatedAt" | "webAddress" | "companyId" | "physicalAddressId" | "customerServicePhoneNumber" | "customerServiceEmail" | "distributionMethod">]: never; }) | undefined;
+        } & { [K_2 in Exclude<keyof I["distributionOutlet"], "id" | "createdAt" | "$type" | "updatedAt" | "webAddress" | "companyId" | "physicalAddressId" | "customerServicePhoneNumber" | "customerServiceEmail" | "distributionMethod">]: never; }) | undefined;
+        company?: ({
+            id?: string | undefined;
+            createdAt?: Date | undefined;
+            updatedAt?: Date | undefined;
+            rootId?: string | undefined;
+            legalName?: string | undefined;
+            webAddress?: string | undefined;
+        } & {
+            id?: string | undefined;
+            createdAt?: Date | undefined;
+            updatedAt?: Date | undefined;
+            rootId?: string | undefined;
+            legalName?: string | undefined;
+            webAddress?: string | undefined;
+        } & { [K_3 in Exclude<keyof I["company"], "id" | "createdAt" | "$type" | "updatedAt" | "rootId" | "legalName" | "webAddress">]: never; }) | undefined;
         physicalAddress?: ({
             id?: string | undefined;
             unit?: string | undefined;
@@ -210,9 +210,9 @@ export declare const GetDistributionOutletResponse: {
             createdAt?: Date | undefined;
             updatedAt?: Date | undefined;
             imageUrl?: string | undefined;
-            openDefinitionId?: string | undefined;
             distributionOutletId?: string | undefined;
             webLink?: string | undefined;
+            openDefinitionId?: string | undefined;
             price?: {
                 currency?: import("../../shared.pb").Currency | undefined;
                 date?: Date | undefined;
@@ -225,9 +225,9 @@ export declare const GetDistributionOutletResponse: {
             createdAt?: Date | undefined;
             updatedAt?: Date | undefined;
             imageUrl?: string | undefined;
-            openDefinitionId?: string | undefined;
             distributionOutletId?: string | undefined;
             webLink?: string | undefined;
+            openDefinitionId?: string | undefined;
             price?: {
                 currency?: import("../../shared.pb").Currency | undefined;
                 date?: Date | undefined;
@@ -240,9 +240,9 @@ export declare const GetDistributionOutletResponse: {
             createdAt?: Date | undefined;
             updatedAt?: Date | undefined;
             imageUrl?: string | undefined;
-            openDefinitionId?: string | undefined;
             distributionOutletId?: string | undefined;
             webLink?: string | undefined;
+            openDefinitionId?: string | undefined;
             price?: ({
                 currency?: import("../../shared.pb").Currency | undefined;
                 date?: Date | undefined;
@@ -252,23 +252,23 @@ export declare const GetDistributionOutletResponse: {
                 date?: Date | undefined;
                 amount?: number | undefined;
             } & { [K_5 in Exclude<keyof I["products"][number]["price"], "currency" | "date" | "$type" | "amount">]: never; }) | undefined;
-        } & { [K_6 in Exclude<keyof I["products"][number], "id" | "name" | "description" | "createdAt" | "$type" | "updatedAt" | "imageUrl" | "openDefinitionId" | "distributionOutletId" | "webLink" | "price">]: never; })[] & { [K_7 in Exclude<keyof I["products"], "$type" | keyof readonly {
+        } & { [K_6 in Exclude<keyof I["products"][number], "id" | "name" | "description" | "createdAt" | "$type" | "updatedAt" | "imageUrl" | "distributionOutletId" | "webLink" | "openDefinitionId" | "price">]: never; })[] & { [K_7 in Exclude<keyof I["products"], "$type" | keyof readonly {
             id?: string | undefined;
             name?: string | undefined;
             description?: string | undefined;
             createdAt?: Date | undefined;
             updatedAt?: Date | undefined;
             imageUrl?: string | undefined;
-            openDefinitionId?: string | undefined;
             distributionOutletId?: string | undefined;
             webLink?: string | undefined;
+            openDefinitionId?: string | undefined;
             price?: {
                 currency?: import("../../shared.pb").Currency | undefined;
                 date?: Date | undefined;
                 amount?: number | undefined;
             } | undefined;
         }[]>]: never; }) | undefined;
-    } & { [K_8 in Exclude<keyof I, "$type" | "coreDefinitions" | "company" | "distributionOutlet" | "physicalAddress" | "products">]: never; }>(object: I): GetDistributionOutletResponse;
+    } & { [K_8 in Exclude<keyof I, "$type" | "coreDefinitions" | "distributionOutlet" | "company" | "physicalAddress" | "products">]: never; }>(object: I): GetDistributionOutletResponse;
 };
 export declare const ListDistributionOutletResponse: {
     $type: "catalog.distribution.ListDistributionOutletResponse";

@@ -15,9 +15,6 @@ export declare class JobRoleDataService {
     getJobRolesFromIds(args: {
         jobRoleIds: string[];
     }): Promise<readonly JobRole[]>;
-    getJobRolesOfTarget(args: {
-        targetId: string;
-    }): Promise<readonly JobRole[]>;
     createJobRole(args: {
         jobRoleData: Partial<JobRole>;
     }): Promise<JobRole | AppError>;

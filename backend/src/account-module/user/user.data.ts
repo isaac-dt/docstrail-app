@@ -1,4 +1,4 @@
-import {Injectable} from "@dimetrail/firebase/core/utils";
+import {Injectable} from "../../../framework/core/utils";
 import {User} from "../../generated/types/account/user/user.pb";
 import {getDataParsers} from "../../shared/database/firestore-utils";
 import {getFirestore, FieldValue, DocumentData} from "firebase-admin/firestore";
@@ -16,8 +16,6 @@ import {
 } from "../../generated/types/join/user-job-role.pb";
 import {UserAddress} from "../../generated/types/account/user/address.pb";
 import {ADDRESS_COLLECTION_NAME} from "../address/address.schema";
-import {JOIN_TARGET_USER_COLLECTION_NAME} from "../../_deprecated/operation-module/target/target.schema";
-import {JoinTargetUserRequest} from "../../generated/types/join/target-user.pb";
 import {JobRoleDataService} from "../job-role/job-role.data";
 import {getContentById} from "../../shared/https/firebase-patch";
 import {getDateFromFireTimestamp} from "../../shared/utils";
@@ -114,24 +112,6 @@ export class UserDataService {
         updatedAt: getDateFromFireTimestamp(user.updatedAt),
       })
     );
-  }
-
-  async getUsersOfTarget(args: {targetId: string}): Promise<readonly User[]> {
-    const data = await this.db
-      .collection(JOIN_TARGET_USER_COLLECTION_NAME)
-      .where("targetId", "==", args.targetId)
-      .get();
-    if (data.empty) return [];
-    const joins = data.docs.map((doc) =>
-      JoinTargetUserRequest.fromPartial({
-        ...(doc.data() as Partial<JoinTargetUserRequest>),
-      })
-    );
-    const userIds = joins.map((join) => join.userId);
-    const users = await this.getUsersFromIds({
-      userIds,
-    });
-    return users;
   }
 
   async getUsersOfJobRole(args: {jobRoleId: string}): Promise<readonly User[]> {

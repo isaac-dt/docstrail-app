@@ -1,5 +1,5 @@
-import {post, Request, Response} from "@dimetrail/firebase/core/https";
-import {Controller} from "@dimetrail/firebase/core/utils";
+import {post, Request, Response} from "../../../framework/core/https";
+import {Controller} from "../../../framework/core/utils";
 import {ClientDataService} from "../../account-module/client/client.data";
 import {TeamDataService} from "../../account-module/team/team.data";
 import {UserDataService} from "../../account-module/user/user.data";

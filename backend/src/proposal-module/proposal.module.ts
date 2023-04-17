@@ -1,4 +1,4 @@
-import {DtModule} from "@dimetrail/firebase/core/utils";
+import {DtModule} from "../../framework/core/utils";
 import {ProposalController} from "./proposal/proposal.controller";
 import {ProposalDataService} from "./proposal/proposal.data";
 import {ProposalPermissionService} from "./proposal/proposal.permission";

@@ -1,4 +1,4 @@
-import {Injectable} from "@dimetrail/firebase/core/utils";
+import {Injectable} from "../../../framework/core/utils";
 import {getDataParsers} from "../../shared/database/firestore-utils";
 import {
   getFirestore,
@@ -13,8 +13,6 @@ import {
   JOB_ROLE_COLLECTION_SCHEMA,
 } from "./job-role.schema";
 import {WriteJobRoleRequest} from "../../generated/types/account/job-role/job-role.api.pb";
-import {JOIN_TARGET_JOB_ROLE_COLLECTION_NAME} from "../../_deprecated/operation-module/target/target.schema";
-import {JoinTargetJobRoleRequest} from "../../generated/types/join/target-job-role.pb";
 
 /**
  * Manages operations on job role data.
@@ -61,26 +59,6 @@ export class JobRoleDataService {
     const jobRoles = data.docs.map((doc) =>
       JobRole.fromPartial({...(doc.data() as Partial<JobRole>), id: doc.id})
     );
-    return jobRoles;
-  }
-
-  async getJobRolesOfTarget(args: {
-    targetId: string;
-  }): Promise<readonly JobRole[]> {
-    const data = await this.db
-      .collection(JOIN_TARGET_JOB_ROLE_COLLECTION_NAME)
-      .where("targetId", "==", args.targetId)
-      .get();
-    if (data.empty) return [];
-    const joins = data.docs.map((doc) =>
-      JoinTargetJobRoleRequest.fromPartial({
-        ...(doc.data() as Partial<JoinTargetJobRoleRequest>),
-      })
-    );
-    const jobRoleIds = joins.map((join) => join.jobRoleId);
-    const jobRoles = await this.getJobRolesFromIds({
-      jobRoleIds,
-    });
     return jobRoles;
   }
 

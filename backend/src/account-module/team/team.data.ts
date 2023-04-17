@@ -1,4 +1,4 @@
-import {Injectable} from "@dimetrail/firebase/core/utils";
+import {Injectable} from "../../../framework/core/utils";
 import {Team} from "../../generated/types/account/team/team.pb";
 import {getDataParsers} from "../../shared/database/firestore-utils";
 import {
@@ -10,8 +10,6 @@ import {
 import {TEAM_COLLECTION_NAME, TEAM_COLLECTION_SCHEMA} from "./team.schema";
 import {AppError, ErrorCode} from "../../generated/types/common.pb";
 import {WriteTeamRequest} from "../../generated/types/account/team/team.api.pb";
-import {JOIN_TARGET_TEAM_COLLECTION_NAME} from "../../_deprecated/operation-module/target/target.schema";
-import {JoinTargetTeamRequest} from "../../generated/types/join/target-team.pb";
 
 const DEFAULT_TEAM_NAME = "default";
 
@@ -60,24 +58,6 @@ export class TeamDataService {
         id: doc.id,
       })
     );
-    return teams;
-  }
-
-  async getTeamsOfTarget(args: {targetId: string}): Promise<readonly Team[]> {
-    const data = await this.db
-      .collection(JOIN_TARGET_TEAM_COLLECTION_NAME)
-      .where("targetId", "==", args.targetId)
-      .get();
-    if (data.empty) return [];
-    const joins = data.docs.map((doc) =>
-      JoinTargetTeamRequest.fromPartial({
-        ...(doc.data() as Partial<JoinTargetTeamRequest>),
-      })
-    );
-    const teamIds = joins.map((join) => join.teamId);
-    const teams = await this.getTeamsFromIds({
-      teamIds,
-    });
     return teams;
   }
 
