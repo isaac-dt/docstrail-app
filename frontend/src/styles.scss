@@ -138,3 +138,10 @@ body::-webkit-scrollbar {
 @page :header {
   display: none;
 }
+
+.geDiagramContainer {
+  font: initial;
+}
+.mxCellEditor {
+  display: inherit;
+}

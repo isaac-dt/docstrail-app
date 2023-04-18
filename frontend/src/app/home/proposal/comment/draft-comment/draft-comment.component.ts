@@ -64,6 +64,7 @@ export class DraftCommentComponent implements AfterViewInit {
   readonly destroyed = new ReplaySubject<void>();
 
   messageTextAreaContext!: TextAreaContext;
+  hasScreenshot: boolean = false;
   isVisible: boolean = false;
 
   constructor(readonly store: Store) {}
@@ -137,11 +138,13 @@ export class DraftCommentComponent implements AfterViewInit {
 
     this.screenshotEl.nativeElement.innerHTML = '';
     this.screenshotEl.nativeElement.appendChild(containerOuterEl);
+    this.hasScreenshot = true;
   }
 
   clearScreenshotElement() {
     if (this.screenshotEl) {
       this.screenshotEl.nativeElement.innerHTML = '';
+      this.hasScreenshot = false;
     }
   }
 
@@ -150,6 +153,7 @@ export class DraftCommentComponent implements AfterViewInit {
     this.store.dispatch(
       setDraftCommentThread({ thread: { ...thread, screenshot: undefined } })
     );
+    this.hasScreenshot = false;
   }
 
   submitThreadWithMessage(thread: WriteCommentThreadRequest | null) {

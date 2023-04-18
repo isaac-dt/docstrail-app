@@ -48,6 +48,7 @@ export class JGraphDataEffects {
           (Window as any).jgraphChannel.subscribe((event: any, data: any) => {
             switch (event) {
               case (Window as any).jgraphChannel.JEvent.SAVE: {
+                if (!data) return;
                 const proposal = WriteProposalRequest.fromPartial({
                   name: data.name,
                   diagramXml: data.xml,

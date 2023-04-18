@@ -1,0 +1,65 @@
+@use "../atoms.scss" as atom;
+
+$form-width: 420px;
+$form-min-width: 400px;
+
+.container {
+  background-color: white;
+}
+
+.signup-card {
+  background-color: atom.$background-color;
+  border: 1px solid atom.$border-color;
+  border-radius: atom.$xs;
+  width: $form-width;
+  min-width: $form-min-width;
+  padding: atom.$xl;
+}
+
+.information-card {
+  background-color: atom.$background-color;
+  border-radius: atom.$xs;
+  padding: atom.$xl;
+}
+
+form {
+  width: $form-width;
+  min-width: $form-min-width;
+}
+
+.google-signup-button {
+  font-weight: 400;
+}
+
+img.google-logo {
+  height: 30px;
+  width: 30px;
+}
+
+.dt-logo {
+  span {
+    font-family: "Geneva";
+    letter-spacing: 2px;
+  }
+  img {
+    height: auto;
+    width: 30px;
+  }
+}
+
+img.gift {
+  height: 70px;
+  width: 70px;
+}
+
+.or-separator {
+  color: #888;
+}
+
+mat-icon.sm.check {
+  transform: scale(0.75) translateY(-2px);
+}
+
+.form-link {
+  color: black;
+}

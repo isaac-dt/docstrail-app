@@ -1,6 +1,6 @@
-@use 'sass:map';
-@use 'typography-utils';
-@use '../theming/theming';
+@use "sass:map";
+@use "typography-utils";
+@use "../theming/theming";
 
 /// Defines a typography level from the Material Design spec.
 /// @param {String} $font-size The font-size for this level.
@@ -14,8 +14,8 @@
   $line-height: $font-size,
   $font-weight: 400,
   $font-family: null,
-  $letter-spacing: normal) {
-
+  $letter-spacing: normal
+) {
   @return (
     font-size: $font-size,
     line-height: $line-height,
@@ -50,51 +50,67 @@
 /// @deprecated Use `mat.define-typography-config` instead. See https://material.angular.io/guide/mdc-migration for information about migrating.
 /// @breaking-change 17.0.0
 @function define-legacy-typography-config(
-  $font-family:   'Roboto, "Helvetica Neue", sans-serif',
-  $display-4:     define-typography-level(112px, 112px, 300, $letter-spacing: -0.05em),
-  $display-3:     define-typography-level(56px, 56px, 400, $letter-spacing: -0.02em),
-  $display-2:     define-typography-level(45px, 48px, 400, $letter-spacing: -0.005em),
-  $display-1:     define-typography-level(34px, 40px, 400),
-  $headline:      define-typography-level(24px, 32px, 400),
-  $title:         define-typography-level(20px, 32px, 500),
-  $subheading-2:  define-typography-level(16px, 28px, 400),
-  $subheading-1:  define-typography-level(15px, 24px, 400),
-  $body-2:        define-typography-level(14px, 24px, 500),
-  $body-1:        define-typography-level(14px, 20px, 400),
-  $caption:       define-typography-level(12px, 20px, 400),
-  $button:        define-typography-level(14px, 14px, 500),
+  $font-family: 'Roboto, "Helvetica Neue", sans-serif',
+  $display-4:
+    define-typography-level(112px, 112px, 300, $letter-spacing: -0.05em),
+  $display-3: define-typography-level(56px, 56px, 400, $letter-spacing: -0.02em),
+  $display-2:
+    define-typography-level(45px, 48px, 400, $letter-spacing: -0.005em),
+  $display-1: define-typography-level(34px, 40px, 400),
+  $headline: define-typography-level(24px, 32px, 400),
+  $title: define-typography-level(20px, 32px, 500),
+  $subheading-2: define-typography-level(16px, 28px, 400),
+  $subheading-1: define-typography-level(15px, 24px, 400),
+  $body-2: define-typography-level(14px, 24px, 500),
+  $body-1: define-typography-level(14px, 20px, 400),
+  $caption: define-typography-level(12px, 20px, 400),
+  $button: define-typography-level(14px, 14px, 500),
   // Line-height must be unit-less fraction of the font-size.
-  $input:         define-typography-level(inherit, 1.125, 400)
+  $input: define-typography-level(inherit, 1.125, 400)
 ) {
-
   // Declare an initial map with all of the levels.
   $config: (
-    display-4:      $display-4,
-    display-3:      $display-3,
-    display-2:      $display-2,
-    display-1:      $display-1,
-    headline:       $headline,
-    title:          $title,
-    subheading-2:   $subheading-2,
-    subheading-1:   $subheading-1,
-    body-2:         $body-2,
-    body-1:         $body-1,
-    caption:        $caption,
-    button:         $button,
-    input:          $input,
+    display-4: $display-4,
+    display-3: $display-3,
+    display-2: $display-2,
+    display-1: $display-1,
+    headline: $headline,
+    title: $title,
+    subheading-2: $subheading-2,
+    subheading-1: $subheading-1,
+    body-2: $body-2,
+    body-1: $body-1,
+    caption: $caption,
+    button: $button,
+    input: $input,
   );
 
   // Loop through the levels and set the `font-family` of the ones that don't have one to the base.
   // Note that Sass can't modify maps in place, which means that we need to merge and re-assign.
   @each $key, $level in $config {
     @if map.get($level, font-family) == null {
-      $new-level: map.merge($level, (font-family: $font-family));
-      $config: map.merge($config, ($key: $new-level));
+      $new-level: map.merge(
+        $level,
+        (
+          font-family: $font-family,
+        )
+      );
+      $config: map.merge(
+        $config,
+        (
+          $key: $new-level,
+        )
+      );
     }
   }
 
   // Add the base font family to the config.
-  @return map.merge($config, (font-family: $font-family));
+  @return map.merge(
+    $config,
+    (
+      font-family: $font-family,
+    )
+  );
 }
 
 // Whether a config is for the Material Design 2018 typography system.
@@ -120,23 +136,28 @@
   }
   @if not private-typography-is-2014-config($config) {
     $args: (
-        display-4: map.get($config, headline-1),
-        display-3: map.get($config, headline-2),
-        display-2: map.get($config, headline-3),
-        display-1: map.get($config, headline-4),
-        headline: map.get($config, headline-5),
-        title: map.get($config, headline-6),
-        subheading-2: map.get($config, subtitle-1),
-        subheading-1: map.get($config, subtitle-2),
-        body-2: map.get($config, body-1),
-        body-1: map.get($config, body-2),
-        button: map.get($config, button),
-        caption: map.get($config, caption),
+      display-4: map.get($config, headline-1),
+      display-3: map.get($config, headline-2),
+      display-2: map.get($config, headline-3),
+      display-1: map.get($config, headline-4),
+      headline: map.get($config, headline-5),
+      title: map.get($config, headline-6),
+      subheading-2: map.get($config, subtitle-1),
+      subheading-1: map.get($config, subtitle-2),
+      body-2: map.get($config, body-1),
+      body-1: map.get($config, body-2),
+      button: map.get($config, button),
+      caption: map.get($config, caption),
     );
     $non-null-args: ();
     @each $key, $value in $args {
       @if $value != null {
-        $non-null-args: map.merge($non-null-args, ($key: $value));
+        $non-null-args: map.merge(
+          $non-null-args,
+          (
+            $key: $value,
+          )
+        );
       }
     }
     @return define-legacy-typography-config($non-null-args...);
@@ -154,25 +175,26 @@
   }
   @if not private-typography-is-2018-config($config) {
     @return (
-        headline-1: map.get($config, display-4),
-        headline-2: map.get($config, display-3),
-        headline-3: map.get($config, display-2),
-        headline-4: map.get($config, display-1),
-        headline-5: map.get($config, headline),
-        headline-6: map.get($config, title),
-        subtitle-1: map.get($config, subheading-2),
-
-        // These mappings are odd, but body-2 in the 2014 system actually looks closer to subtitle-2
-        // in the 2018 system, and subeading-1 in the 2014 system looks more like body-1 in the 2018
-        // system.
-        subtitle-2: map.get($config, body-2),
-        body-1: map.get($config, subheading-1),
-
-        body-2: map.get($config, body-1),
-        button: map.get($config, button),
-        caption: map.get($config, caption),
-        overline: if(map.get($config, overline), map.get($config, overline),
-            define-typography-level(12px, 32px, 500)
+      headline-1: map.get($config, display-4),
+      headline-2: map.get($config, display-3),
+      headline-3: map.get($config, display-2),
+      headline-4: map.get($config, display-1),
+      headline-5: map.get($config, headline),
+      headline-6: map.get($config, title),
+      subtitle-1: map.get($config, subheading-2),
+      // These mappings are odd, but body-2 in the 2014 system actually looks closer to subtitle-2
+      // in the 2018 system, and subeading-1 in the 2014 system looks more like body-1 in the 2018
+      // system.
+      subtitle-2: map.get($config, body-2),
+      body-1: map.get($config, subheading-1),
+      body-2: map.get($config, body-1),
+      button: map.get($config, button),
+      caption: map.get($config, caption),
+      overline:
+        if(
+          map.get($config, overline),
+          map.get($config, overline),
+          define-typography-level(12px, 32px, 500)
         )
     );
   }
@@ -183,8 +205,10 @@
 /// @param {Map} $config-or-theme A typography config for an entire theme.
 /// @param {String} $selector Ancestor selector under which native elements, such as h1, will
 ///     be styled.
-@mixin typography-hierarchy($config-or-theme, $selector: '.mat-typography') {
-  $config: private-typography-to-2018-config(theming.get-typography-config($config-or-theme));
+@mixin typography-hierarchy($config-or-theme, $selector: ".mat-typography") {
+  $config: private-typography-to-2018-config(
+    theming.get-typography-config($config-or-theme)
+  );
 
   // Note that it seems redundant to prefix the class rules with the `$selector`, however it's
   // necessary if we want to allow people to overwrite the tag selectors. This is due to
@@ -228,7 +252,7 @@
   #{$selector} .mat-h5,
   #{$selector} h5 {
     @include typography-utils.font-shorthand(
-       // calc is used here to support css variables
+      // calc is used here to support css variables
       calc(#{typography-utils.font-size($config, body-2)} * 0.83),
       typography-utils.font-weight($config, body-2),
       typography-utils.line-height($config, body-2),
@@ -240,7 +264,7 @@
   #{$selector} .mat-h6,
   #{$selector} h6 {
     @include typography-utils.font-shorthand(
-       // calc is used here to support css variables
+      // calc is used here to support css variables
       calc(#{typography-utils.font-size($config, body-2)} * 0.67),
       typography-utils.font-weight($config, body-2),
       typography-utils.line-height($config, body-2),
@@ -261,7 +285,6 @@
   #{$selector} .mat-body-2,
   #{$selector} {
     @include typography-utils.typography-level($config, body-2);
-
   }
 
   .mat-small,
@@ -298,8 +321,13 @@
 ///     be styled.
 /// @deprecated Use `mat.typography-hierarchy` instead. See https://material.angular.io/guide/mdc-migration for information about migrating.
 /// @breaking-change 17.0.0
-@mixin legacy-typography-hierarchy($config-or-theme, $selector: '.mat-typography') {
-  $config: private-typography-to-2014-config(theming.get-typography-config($config-or-theme));
+@mixin legacy-typography-hierarchy(
+  $config-or-theme,
+  $selector: ".mat-typography"
+) {
+  $config: private-typography-to-2014-config(
+    theming.get-typography-config($config-or-theme)
+  );
 
   // Note that it seems redundant to prefix the class rules with the `$selector`, however it's
   // necessary if we want to allow people to overwrite the tag selectors. This is due to
@@ -343,26 +371,24 @@
   #{$selector} .mat-h5,
   #{$selector} h5 {
     @include typography-utils.font-shorthand(
-       // calc is used here to support css variables
+      // calc is used here to support css variables
       calc(#{typography-utils.font-size($config, body-1)} * 0.83),
       typography-utils.font-weight($config, body-1),
       typography-utils.line-height($config, body-1),
       typography-utils.font-family($config, body-1)
     );
-
   }
 
   .mat-h6,
   #{$selector} .mat-h6,
   #{$selector} h6 {
     @include typography-utils.font-shorthand(
-       // calc is used here to support css variables
+      // calc is used here to support css variables
       calc(#{typography-utils.font-size($config, body-1)} * 0.67),
       typography-utils.font-weight($config, body-1),
       typography-utils.line-height($config, body-1),
       typography-utils.font-family($config, body-1)
     );
-
   }
 
   .mat-body-strong,

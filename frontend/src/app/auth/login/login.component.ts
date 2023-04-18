@@ -21,7 +21,9 @@ export class LoginComponent implements OnInit {
 
   readonly companySignupQueryParams = getCompanySignupQueryParams();
 
-  constructor(readonly store: Store, readonly router: Router) {}
+  constructor(readonly store: Store, readonly router: Router) {
+    this.checkIsMobile();
+  }
 
   ngOnInit(): void {}
 
@@ -46,5 +48,12 @@ export class LoginComponent implements OnInit {
 
   loginWithGoogle() {
     this.store.dispatch(submitLoginWithGoogle());
+  }
+
+  checkIsMobile() {
+    const isMobile: boolean = (window as any).mobileCheck();
+    if (isMobile) {
+      this.router.navigateByUrl('/mobile');
+    }
   }
 }

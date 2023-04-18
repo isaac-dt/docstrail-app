@@ -29,6 +29,7 @@ export class SignupComponent implements OnInit {
     readonly router: Router,
     readonly activatedRoute: ActivatedRoute
   ) {
+    this.checkIsMobile();
     this.isCompanySignup =
       String(SignupType.USER) !==
       this.activatedRoute.snapshot.queryParamMap.get(
@@ -63,5 +64,12 @@ export class SignupComponent implements OnInit {
 
   navigateToLearnMore() {
     location.href = 'https://docstrail.com';
+  }
+
+  checkIsMobile() {
+    const isMobile: boolean = (window as any).mobileCheck();
+    if (isMobile) {
+      this.router.navigateByUrl('/mobile');
+    }
   }
 }

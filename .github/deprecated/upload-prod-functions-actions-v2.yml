@@ -14,8 +14,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "14"
-      - name: install npm dependencies
-        run: npm install
       - name: deploy microservices release-${{ github.ref_name }} to docstrail
         run: npx firebase-tools deploy --only functions --project=prod --non-interactive
         env:
